@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>MONO DOOM | Il Database N.1 per Monopattini Elettrici in Italia</title>
+    <meta name="description" content="L'unico punto di riferimento in Italia per la riparazione, la diagnostica forense, l'hacking e le dichiarazioni di conformità dei monopattini elettrici.">
+    <meta name="keywords" content="monopattini elettrici, riparazione monopattini, dichiarazione conformità, ctu monopattini, hacking firmware, dualtron, xiaomi, kaabo">
+    <meta name="geo.region" content="IT" />
+    <meta name="geo.placename" content="Italia" />
+    
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#050505">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800&display=swap');
+
+        :root {
+            --bg-color: #050505;
+            --text-color: #e0e0e0;
+            --white: #ffffff;
+            --danger: #ff003c;
+            --accent-blue: #00e5ff;
+            --store-green: #00ff66;
+            --store-gold: #ffcc00;
+            --forensic-gold: #d4af37;
+            --card-bg: rgba(13, 13, 13, 0.85);
+            /* Colori Brandizzati Garage */
+            --brand-xiaomi: #ff6600;
+            --brand-ninebot: #00e5ff;
+            --brand-kaabo: #ff003c;
+            --brand-kukirin: #ffcc00;
+            --brand-dualtron: #00ff66;
+            --brand-ducati: #ff0022;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: #050505; 
+        }
+
+        /* TESCHIO FISSO IN BACKGROUND - ANCORA PIU' IN BASSO */
+        .fixed-skull-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fixed-skull-img {
+            width: 90vw;
+            max-width: 450px;
+            height: 75vh; 
+            max-height: 480px;
+            background-image: url('img/teschio.png'); 
+            background-position: center; 
+            background-size: contain; 
+            background-repeat: no-repeat;
+            animation: heartbeat-fixed 3s infinite linear;
+            opacity: 0.6;
+            margin-top: 12vh; /* Abbassato ulteriormente per staccarlo dall'header */
+        }
+
+        @keyframes heartbeat-fixed {
+            0% { transform: scale(1); filter: brightness(1); }
+            14% { transform: scale(1.05); filter: brightness(1.2) drop-shadow(0 0 20px rgba(255, 0, 60, 0.6)); }
+            28% { transform: scale(1); filter: brightness(1); }
+            42% { transform: scale(1.05); filter: brightness(1.2) drop-shadow(0 0 20px rgba(0, 229, 255, 0.6)); }
+            70% { transform: scale(1); filter: brightness(1); }
+        }
+
+        /* HEADER INTACT & STICKY */
+        header {
+            background-color: rgba(0, 0, 0, 0.95);
+            border-bottom: 2px solid var(--danger);
+            padding: 12px 0;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-header {
+            height: 65px;
+            width: auto;
+            display: block;
+            margin: 0 auto 5px auto;
+            filter: drop-shadow(0 0 8px rgba(255, 0, 60, 0.4));
+        }
+
+        .claim {
+            color: var(--white);
+            font-weight: 900;
+            font-style: italic;
+            letter-spacing: 5px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* HERO SECTION */
+        .hero-section {
+            text-align: center;
+            margin-top: 8vh;
+            margin-bottom: 10vh;
+        }
+
+        .hero-content h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 1.2;
+            margin: 0;
+            text-shadow: 
+                2px 2px 0px #000, 
+               -2px -2px 0px #000, 
+                2px -2px 0px #000, 
+               -2px 2px 0px #000, 
+                0px 10px 25px rgba(0,0,0,0.9);
+        }
+
+        .hero-content h1 .gold-text { color: var(--store-gold); }
+        .hero-content h1 .red-text { color: var(--danger); }
+
+        /* GRIDS B2C */
+        .section-title {
+            font-size: 1.6rem;
+            color: var(--white);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+            text-shadow: 0 2px 5px #000;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 70px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #1a1a1a;
+            padding: 30px 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            text-align: center;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Effetti Hover Brandizzati per Garage */
+        .card:hover {
+            transform: translateY(-5px);
+            background: rgba(17, 17, 17, 0.95);
+        }
+        .card-xiaomi:hover { border-color: var(--brand-xiaomi); box-shadow: 0 10px 25px rgba(255, 102, 0, 0.15); }
+        .card-ninebot:hover { border-color: var(--brand-ninebot); box-shadow: 0 10px 25px rgba(0, 229, 255, 0.15); }
+        .card-kaabo:hover { border-color: var(--brand-kaabo); box-shadow: 0 10px 25px rgba(255, 0, 60, 0.15); }
+        .card-kukirin:hover { border-color: var(--brand-kukirin); box-shadow: 0 10px 25px rgba(255, 204, 0, 0.15); }
+        .card-dualtron:hover { border-color: var(--brand-dualtron); box-shadow: 0 10px 25px rgba(0, 255, 102, 0.15); }
+        .card-ducati:hover { border-color: var(--brand-ducati); box-shadow: 0 10px 25px rgba(255, 0, 34, 0.15); }
+
+        .card-dashed {
+            border-style: dashed;
+            opacity: 0.6;
+            cursor: default;
+        }
+
+        .card-dashed:hover {
+            transform: none;
+            border-color: #333;
+            box-shadow: none;
+            background: var(--card-bg);
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+
+        .card p { color: #888; font-size: 0.95rem; }
+
+        /* MONO DOOM FORENSICS (ACCORDION/APRIBILE) */
+        .forensics-section { margin-bottom: 60px; }
+        
+        details.forensics-details {
+            background: rgba(10, 10, 10, 0.95);
+            border: 1px solid #222;
+            border-top: 3px solid var(--forensic-gold);
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.1);
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        details.forensics-details[open] { padding-bottom: 40px; }
+
+        summary.forensics-summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            color: var(--forensic-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        summary.forensics-summary::-webkit-details-marker { display: none; }
+        summary.forensics-summary:hover { background: rgba(212, 175, 55, 0.05); border-radius: 12px; }
+        .summary-icon { font-size: 1.5rem; transition: transform 0.3s ease; }
+        details.forensics-details[open] .summary-icon { transform: rotate(180deg); }
+
+        .forensics-content { padding: 0 30px; animation: fadeIn 0.4s ease-in-out; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .forensics-header { text-align: center; margin-bottom: 40px; border-top: 1px dashed #333; padding-top: 30px;}
+        .forensics-header p { color: #ccc; font-size: 1.1rem; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+
+        .forensics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .forensic-card { background: #050505; border: 1px solid #1c1c1c; border-left: 4px solid var(--forensic-gold); padding: 25px; border-radius: 6px; }
+        .forensic-card h3 { font-size: 1.2rem; color: var(--white); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
+        .forensic-card p { color: #888; font-size: 0.85rem; line-height: 1.5; text-align: justify; }
+        .forensic-badge { display: inline-block; font-size: 0.7rem; font-weight: 900; text-transform: uppercase; color: var(--forensic-gold); background: rgba(212, 175, 55, 0.1); padding: 4px 10px; border-radius: 3px; margin-top: 15px; letter-spacing: 1px; border: 1px solid rgba(212, 175, 55, 0.3); }
+
+        .b2b-cta-container { text-align: center; padding-top: 30px; border-top: 1px dashed #333; }
+        .btn-gold { display: inline-block; background: var(--forensic-gold); color: #000; padding: 18px 45px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-radius: 5px; transition: 0.3s; font-size: 1.1rem; margin-bottom: 10px; }
+        .btn-gold:hover { background: #fff; box-shadow: 0 0 20px rgba(212, 175, 55, 0.6); }
+
+        /* CONFORMITA' CE */
+        .conformita-box {
+            background: linear-gradient(145deg, rgba(10, 15, 20, 0.95), rgba(5, 5, 5, 0.95));
+            border: 1px dashed #444;
+            border-left: 4px solid var(--accent-blue);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 70px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .conformita-box h3 { color: var(--accent-blue); text-transform: uppercase; margin-bottom: 15px; font-size: 1.3rem; }
+        .conformita-box p { color: #aaa; font-size: 0.95rem; line-height: 1.5; max-width: 900px; margin: 0 auto; }
+        
+        /* SPECIAL CARDS LEGGE */
+        .card-targa { border-bottom: 4px solid var(--accent-blue); }
+        .card-targa:hover { border-color: var(--accent-blue); box-shadow: 0 10px 25px rgba(0, 229, 255, 0.15); }
+        .card-insurance { border-bottom: 4px solid var(--store-gold); }
+        .card-store { border-bottom: 4px solid var(--store-green); }
+        .alert-tag { font-size: 0.75rem; font-weight: 900; text-transform: uppercase; margin-top: 15px; padding: 5px; background: rgba(255, 255, 255, 0.05); border-radius: 4px; }
+
+        /* IL NETWORK MONO DOOM */
+        .network-box {
+            background: linear-gradient(145deg, rgba(17, 17, 17, 0.95), rgba(5, 5, 5, 0.95));
+            border: 1px solid #333;
+            border-left: 5px solid var(--store-green);
+            padding: 50px 40px;
+            border-radius: 10px;
+            margin-bottom: 60px;
+            box-shadow: 0 0 30px rgba(0, 255, 102, 0.05);
+            backdrop-filter: blur(8px);
+        }
+
+        .network-box h2 { font-size: 2.2rem; color: var(--white); text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; text-align: center; }
+        .network-box p { color: #ccc; margin-bottom: 30px; font-size: 1.1rem; max-width: 850px; margin-left: auto; margin-right: auto; line-height: 1.8; text-align: center;}
+        
+        .city-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 40px; }
+        .city-box { background: #080808; border: 1px solid #222; padding: 15px; border-radius: 5px; text-align: center; position: relative; overflow: hidden; }
+        .city-box::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: #444; }
+        .city-box strong { color: var(--white); display: block; font-size: 1rem; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 8px;}
+        .city-box span { font-size: 0.75rem; color: #888; text-transform: uppercase; font-weight: bold; margin-top: 5px; display: block;}
+        
+        /* Pallini lampeggianti per dare l'effetto "Ricerca Segnale" */
+        .radar-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
+        .dot-red { background: var(--danger); animation: pulse-dot 1.5s infinite; box-shadow: 0 0 8px var(--danger); }
+        .dot-gold { background: var(--store-gold); animation: pulse-dot 1.5s infinite 0.5s; box-shadow: 0 0 8px var(--store-gold); }
+        
+        @keyframes pulse-dot { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
+        .city-box-special::before { background: var(--store-gold); }
+        .city-box-special span { color: var(--store-gold); }
+
+        .network-buttons { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .btn-network { display: inline-block; color: #000; padding: 16px 35px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-radius: 5px; transition: 0.3s; font-size: 1rem; text-align: center; }
+        .btn-modder { background: var(--store-green); }
+        .btn-modder:hover { background: #fff; box-shadow: 0 0 20px rgba(0, 255, 102, 0.4); }
+        .btn-legal { background: var(--accent-blue); }
+        .btn-legal:hover { background: #fff; box-shadow: 0 0 20px rgba(0, 229, 255, 0.4); }
+
+        /* SCUDO LEGALE WEB */
+        .scudo-legale-web { background: rgba(20, 0, 0, 0.85); border: 1px solid var(--danger); border-left: 5px solid var(--danger); padding: 30px; border-radius: 8px; margin-bottom: 20px; font-size: 0.85rem; color: #999; backdrop-filter: blur(5px); }
+        .scudo-legale-web h2 { color: var(--danger); font-size: 1.1rem; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; }
+        .scudo-legale-web p { margin-bottom: 10px; text-align: justify; }
+
+        /* FOOTER */
+        footer { background-color: rgba(0,0,0,0.98); border-top: 1px solid #222; padding: 50px 20px 20px; margin-top: auto; position: relative; z-index: 10; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 30px; }
+        .footer-logo { max-width: 150px; opacity: 0.8; }
+        .footer-links { display: flex; gap: 20px; flex-wrap: wrap;}
+        .footer-links a { color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s; }
+        .footer-links a:hover { color: var(--danger); }
+        .copyright { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #111; color: #333; font-size: 0.7rem; }
+
+        /* MOBILE RESPONSIVENESS */
+        @media(max-width: 768px) {
+            .fixed-skull-img { max-width: 320px; max-height: 320px; margin-top: 12vh; } 
+            .hero-section { margin-top: 8vh; margin-bottom: 8vh; }
+            .hero-content h1 { font-size: 2rem; }
+            summary.forensics-summary { font-size: 1rem; padding: 20px; text-align: left;}
+            .network-box h2 { font-size: 1.6rem; }
+            .network-buttons { flex-direction: column; }
+            .btn-network { width: 100%; }
+            .footer-content { flex-direction: column; text-align: center; }
+            .scudo-legale-web { padding: 20px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="fixed-skull-wrapper">
+    <div class="fixed-skull-img"></div>
+</div>
+
+<header>
+    <div class="header-content">
+        <img src="img/logo-header.png" alt="MONO DOOM - Monopattini Elettrici" class="logo-header">
+        <p class="claim">RESURRECT THE BEAST.</p>
+    </div>
+</header>
+
+<main>
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>
+                <span class="gold-text">IL PRIMO DATABASE IN ITALIA<br>PER</span>
+                <span class="red-text">MONOPATTINI ELETTRICI</span>
+            </h1>
+        </div>
+    </section>
+
+    <h2 class="section-title">Garage Operativi</h2>
+    <div class="grid">
+        <a href="xiaomi.html" class="card card-xiaomi">
+            <h3>Xiaomi</h3>
+            <p>M365, Pro 2, Essential. Riparazioni e sblocchi.</p>
+        </a>
+        <a href="ninebot.html" class="card card-ninebot">
+            <h3>Ninebot</h3>
+            <p>G30 Max, Serie ES/F. SHU Hack e manutenzione.</p>
+        </a>
+        <a href="kaabo.html" class="card card-kaabo">
+            <h3>Kaabo</h3>
+            <p>Mantis e Wolf Warrior. Potenza Off-Road.</p>
+        </a>
+        <a href="kukirin.html" class="card card-kukirin">
+            <h3>KuKirin</h3>
+            <p>G2 Pro, G2 Max. P-Settings e controllo totale.</p>
+        </a>
+        <a href="dualtron.html" class="card card-dualtron">
+            <h3>Dualtron</h3>
+            <p>Victor, Thunder. P-Settings e Hacking EY3.</p>
+        </a>
+        <a href="ducati.html" class="card card-ducati">
+            <h3>Ducati</h3>
+            <p>Pro-I, Pro-II. Centratura freni ed elettronica.</p>
+        </a>
+        <div class="card card-dashed">
+            <h3 style="color: #666;">Altri Garage</h3>
+            <p>In fase di decodifica...</p>
+        </div>
+    </div>
+
+    <section class="forensics-section">
+        <details class="forensics-details">
+            <summary class="forensics-summary">
+                <span>⚖️ ACCEDI ALL'ARCHIVIO FORENSE (RISERVATO)</span>
+                <span class="summary-icon">▼</span>
+            </summary>
+            
+            <div class="forensics-content">
+                <div class="forensics-header">
+                    <p>Divisione Scientifica ad Alta Specifica Investigativa. L'accesso a questi fascicoli è <strong>severamente ristretto</strong> ed è destinato esclusivamente a Consulenti Tecnici d'Ufficio (C.T.U.), Periti Assicurativi e Studi Legali impegnati nel contenzioso stradale.</p>
+                </div>
+                
+                <div class="forensics-grid">
+                    <div class="forensic-card">
+                        <h3>Ecosistema Xiaomi</h3>
+                        <p>Decodifica esadecimale delle costanti motoristiche (MPC), protocolli SWD e campionamento Shunt Modding.</p>
+                        <div class="forensic-badge">Codice: MDF-XIA-2026</div>
+                    </div>
+                    <div class="forensic-card">
+                        <h3>Ecosistema Ninebot</h3>
+                        <p>Verifica sblocchi territoriali (Magic Serial Number), analisi firmware SHFW e vettori di guasto termico.</p>
+                        <div class="forensic-badge">Codice: MDF-NIN-2026</div>
+                    </div>
+                    <div class="forensic-card">
+                        <h3>Minimotors Dualtron</h3>
+                        <p>Reverse engineering EEPROM, alterazione parametri EY3 e bypass hardware del limitatore di velocità.</p>
+                        <div class="forensic-badge">Codice: MDF-MIN-2026</div>
+                    </div>
+                    <div class="forensic-card">
+                        <h3>Ecosistema Ducati</h3>
+                        <p>Ispezione moduli d'accensione NFC/BLE e perizia strutturale sui telai in leghe di Magnesio e saldature.</p>
+                        <div class="forensic-badge">Codice: MDF-DUC-2026</div>
+                    </div>
+                </div>
+
+                <div class="b2b-cta-container">
+                    <p style="color: #999; margin-bottom: 20px; font-size: 0.95rem;">I Trattati Forensi completi sono protetti da diritto d'autore e vengono distribuiti privatamente previo accreditamento.<br><strong>Per fascicoli su altri modelli non listati a catalogo, contattateci direttamente.</strong></p>
+                    <a href="mailto:monodoom.info@gmail.com?subject=Richiesta%20Accreditamento%20e%20Catalogo%20Forensic%20B2B&body=Gentile%20team%20MONO%20DOOM,%0A%0ASono%20interessato%20all'acquisto%20dei%20Vostri%20Trattati%20Forensi.%20Vi%20prego%20di%20inviarmi%20le%20modalità%20di%20accesso%20e%20i%20link%20per%20l'acquisizione%20della%20licenza.%0A%0AStudio%20Legale/Professionista:%0AContatto%20Telefonico:%0AModello%20di%20Interesse:" class="btn-gold">Richiedi Accesso / Altri Fascicoli</a>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <div class="conformita-box">
+        <h3>📄 Dichiarazioni di Conformità (CE)</h3>
+        <p>MONO DOOM fornisce documentazione tecnica peritale ad uso legale. <strong>Non rilasciamo certificati di conformità (CE)</strong> o documentazione omologativa (TÜV/Ministeriale) per conto terzi. Per richiedere l'attestato di conformità del proprio mezzo, l'utente è tenuto a contattare <strong>esclusivamente la casa madre costruttrice</strong> o il rivenditore ufficiale indicando il Numero di Telaio (VIN) del veicolo.</p>
+    </div>
+
+    <h2 class="section-title">Legge & Mercato</h2>
+    <div class="grid">
+        <a href="normativa-targa.html" class="card card-targa">
+            <h3 style="color:var(--accent-blue)">Targa & Legge</h3>
+            <p>Guida operativa al contrassegno obbligatorio e nuovo CDS.</p>
+        </a>
+        <div class="card card-insurance">
+            <h3 style="color:var(--store-gold)">Assicurazioni</h3>
+            <p>I migliori preventivi RCA per monopattini elettrici.</p>
+            <div class="alert-tag" style="color:var(--store-gold)">Rete in Sviluppo</div>
+        </div>
+        <div class="card card-store">
+            <h3 style="color:var(--store-green)">Vetrina Store</h3>
+            <p>Consigli all'acquisto sui modelli più affidabili.</p>
+            <div class="alert-tag" style="color:var(--store-green)">In Allestimento</div>
+        </div>
+    </div>
+
+    <section class="network-box">
+        <h2>Il Network Mono Doom</h2>
+        <p>
+            Stiamo costruendo la prima rete nazionale di assistenza tecnica, meccanica e legale dedicata all'universo dei monopattini elettrici. Selezioniamo solo <strong>Officine Master, Esperti Modder e Studi Legali Specializzati</strong>.
+        </p>
+        
+        <div class="city-grid">
+            <div class="city-box">
+                <strong><span class="radar-dot dot-red"></span> MILANO</strong>
+                <span>Ricerca Attiva</span>
+            </div>
+            <div class="city-box">
+                <strong><span class="radar-dot dot-red"></span> ROMA</strong>
+                <span>Ricerca Attiva</span>
+            </div>
+            <div class="city-box">
+                <strong><span class="radar-dot dot-red"></span> TORINO</strong>
+                <span>Ricerca Attiva</span>
+            </div>
+            <div class="city-box">
+                <strong><span class="radar-dot dot-red"></span> BOLOGNA</strong>
+                <span>Ricerca Attiva</span>
+            </div>
+            <div class="city-box">
+                <strong><span class="radar-dot dot-red"></span> NAPOLI</strong>
+                <span>Ricerca Attiva</span>
+            </div>
+            <div class="city-box city-box-special">
+                <strong><span class="radar-dot dot-gold"></span> QUALSIASI CITTÀ</strong>
+                <span>Selezioni Aperte</span>
+            </div>
+        </div>
+
+        <div class="network-buttons">
+            <a href="mailto:monodoom.info@gmail.com?subject=Candidatura%20Partner%20Network&body=Struttura/Professionista:%0ACittà%20di%20Operatività:%0ASettore%20(Meccanico/Modding/Legale):%0AAnni%20di%20esperienza:%0ALink%20Sito/Social%20(opzionale):" class="btn-network btn-modder">Invia Candidatura (Professionisti)</a>
+            <a href="mailto:monodoom.info@gmail.com?subject=Richiesta%20Servizio%20(Rider)&body=Ciao%20team%20Mono%20Doom,%0A%0ACerco%20assistenza%20nella%20mia%20zona.%0A%0AProvincia:%0AModello%20Monopattino:%0AProblema%20(Riparazione/Incidente):" class="btn-network btn-legal">Richiedi Assistenza (Rider)</a>
+        </div>
+    </section>
+
+    <section class="scudo-legale-web">
+        <h2>⚠️ Clausola di Esclusione e Limitazione di Responsabilità Giuridica</h2>
+        <p><strong>MONO DOOM</strong> opera unicamente in qualità di Osservatorio Digitale indipendente e centro di documentazione teorica a fonti aperte (OSINT). Non disponiamo, non gestiamo e non operiamo attraverso officine meccaniche o centri di collaudo strumentale sul territorio.</p>
+        <p>Le procedure di alterazione firmware (CFW), manomissione hardware (Shunt Modding, Speed Wire) e le informazioni diagnostiche presentate in questo database hanno finalità puramente <strong>speculativa, didattica e di ingegneria inversa</strong>. L'applicazione di tali modifiche su veicoli circolanti in aree pubbliche costituisce reato, trasforma il mezzo in ciclomotore non immatricolato e comporta l'immediata decadenza della copertura assicurativa RCA, oltre all'annullamento della garanzia legale del costruttore (violazione dell'Art. 50 del Codice della Strada).</p>
+        <p>L'Editore declina formalmente ogni e qualsiasi responsabilità civile, penale o patrimoniale per danni a cose, animali o persone, lesioni, decessi, rigetti assicurativi o sanzioni amministrative derivanti dall'applicazione pratica, dall'interpretazione, dall'utilizzo o dalla divulgazione delle informazioni e dei file contenuti in questo sito. L'onere e il rischio delle operazioni tecnico-informatiche gravano esclusivamente sull'utente finale.</p>
+    </section>
+
+</main>
+
+<footer>
+    <div class="footer-content">
+        <img src="img/logo-testo.png" alt="MONO DOOM" class="footer-logo">
+        <div class="footer-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="cookie.html">Cookie Policy</a>
+            <a href="termini.html">Termini e Condizioni</a>
+            <a href="disclaimer.html">Disclaimer Legale</a>
+        </div>
+    </div>
+    <div class="copyright">
+        &copy; 2026 MONO DOOM. Progetto indipendente. Tutte le guide e i trattati B2B/B2C sono a scopo esclusivamente teorico-informativo. Nessuna correlazione con i brand citati.
+    </div>
+</footer>
+<div id="cookie-banner" style="position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(5,5,5,0.95); border-top: 2px solid #00ff66; padding: 20px; z-index: 9999; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 20px; backdrop-filter: blur(10px); box-shadow: 0 -10px 30px rgba(0, 255, 102, 0.1);">
+    <p style="color: #ccc; font-size: 0.85rem; margin: 0; max-width: 800px; text-align: justify;">
+        ⚠️ <strong>SISTEMA DI TRACCIAMENTO ATTIVO:</strong> MONO DOOM utilizza cookie tecnici e analitici anonimizzati per il funzionamento del Database. Chiudendo questo banner, scorrendo la pagina o cliccando su "Inizializza", acconsenti all'uso dei cookie. <a href="cookie.html" style="color: #00ff66; text-decoration: underline;">Leggi la Cookie Policy</a>.
+    </p>
+    <button onclick="document.getElementById('cookie-banner').style.display='none'" style="background: #00ff66; color: #000; border: none; padding: 10px 25px; font-weight: 900; text-transform: uppercase; border-radius: 4px; cursor: pointer; letter-spacing: 1px;">Inizializza</button>
+</div>
+</body>
+</html>
