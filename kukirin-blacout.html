@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kukirin: Blackout e Porta Ricarica Fusa | MONO DOOM</title>
+    <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#050505">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #e0e0e0;
+            --kukirin-orange: #ff8c00;
+            --white: #ffffff;
+            --pure-black: #000000;
+            --danger: #ff003c;
+            --card-bg: #111111;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--pure-black);
+            border-bottom: 2px solid var(--kukirin-orange);
+            padding: 20px 0 10px;
+            text-align: center;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-header {
+            max-height: 110px;
+            width: auto;
+            display: block;
+        }
+
+        .claim {
+            color: var(--white);
+            font-weight: 900;
+            font-style: italic;
+            letter-spacing: 3px;
+            font-size: 1.05rem;
+            margin-top: 5px;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px var(--kukirin-orange);
+        }
+
+        nav {
+            background-color: var(--pure-black);
+            padding: 15px 25px;
+            border-bottom: 1px solid #333;
+        }
+
+        .back-btn {
+            display: inline-block;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .back-btn span {
+            color: var(--kukirin-orange);
+            margin-right: 5px;
+        }
+
+        .back-btn:hover {
+            color: var(--white);
+            text-shadow: 0 0 10px var(--kukirin-orange);
+        }
+
+        main {
+            flex: 1;
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .error-hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .error-tag {
+            background: #333;
+            color: #fff;
+            padding: 5px 15px;
+            font-weight: 900;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .diagnosi-box {
+            background: rgba(255, 140, 0, 0.05);
+            border-left: 4px solid var(--kukirin-orange);
+            padding: 25px;
+            margin-bottom: 40px;
+            border-radius: 0 8px 8px 0;
+            border: 1px solid #333;
+        }
+
+        .diagnosi-box h2 {
+            color: var(--kukirin-orange);
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .video-section {
+            margin-bottom: 50px;
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(255, 140, 0, 0.05);
+        }
+
+        .video-header {
+            background: #111;
+            border-bottom: 1px solid #333;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .video-title {
+            color: var(--kukirin-orange);
+            font-weight: 900;
+            font-family: monospace;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @keyframes pulse-danger {
+            0% { box-shadow: inset 0 0 0 rgba(255, 0, 60, 0.4); }
+            50% { box-shadow: inset 0 0 15px rgba(255, 0, 60, 0.2); }
+            100% { box-shadow: inset 0 0 0 transparent; }
+        }
+
+        .cc-alert-box {
+            background: #1a0004;
+            color: #ff003c;
+            border-bottom: 1px solid #333;
+            padding: 12px 20px;
+            font-size: 0.85rem;
+            animation: pulse-danger 2s infinite;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            line-height: 1.4;
+        }
+
+        .cc-alert-box strong {
+            color: var(--white);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .terminal-log {
+            background: #050505;
+            padding: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            border-top: 1px solid #333;
+        }
+
+        .terminal-log h3 {
+            color: #555;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #333;
+            padding-bottom: 5px;
+        }
+
+        .terminal-text p {
+            color: #888;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .terminal-text strong {
+            color: #ff003c;
+            font-weight: 400;
+        }
+
+        .arsenal-box {
+            background: linear-gradient(145deg, #111, #0a0a0a);
+            border: 1px solid var(--kukirin-orange);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .arsenal-box::before {
+            content: "ARSENALE NECESSARIO";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--bg-color);
+            color: var(--kukirin-orange);
+            font-weight: 900;
+            padding: 0 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .part-item {
+            background: #000;
+            border: 1px solid #333;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .part-info {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .part-name {
+            font-weight: 900;
+            font-size: 1.1rem;
+            color: var(--white);
+            display: block;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .part-desc {
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .btn-amz {
+            background: #f90;
+            color: #000;
+        }
+
+        .btn-ali {
+            background: #ff8c00;
+            color: #000;
+        }
+
+        .step {
+            background: var(--card-bg);
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+        }
+
+        .step h3 {
+            color: var(--kukirin-orange);
+            margin-top: 0;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .step p {
+            margin: 0;
+            color: #ccc;
+        }
+
+        footer {
+            background-color: var(--pure-black);
+            border-top: 2px solid var(--kukirin-orange);
+            padding: 40px 20px;
+            margin-top: auto;
+            text-align: center;
+            color: #666;
+            font-size: 0.8rem;
+        }
+        @media(max-width: 768px) {
+            .part-item { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="img/logo-header.png" alt="MONO DOOM" class="logo-header">
+            <p class="claim">RESURRECT THE BEAST.</p>
+        </div>
+    </header>
+    
+    <nav>
+        <a href="kukirin.html" class="back-btn"><span>&lt;&lt;</span> Ritorna al Garage Kukirin</a>
+    </nav>
+    
+    <main>
+        <div class="error-hero">
+            <span class="error-tag">PROTOCOLLO HARDWARE</span>
+            <h1>Kukirin: Blackout e Porta Ricarica</h1>
+        </div>
+
+        <div class="diagnosi-box">
+            <h2>Spegnimento Improvviso o Non Carica</h2>
+            <p>Se il tuo Kukirin (specialmente M4 e G3) si spegne di colpo in salita e non si riaccende più finché non lo attacchi al caricatore, il BMS è andato in protezione. Se invece non carica del tutto, il colpevole è quasi sempre la porta di ricarica fusa per un arco voltaico (scintilla) o un falso contatto.</p>
+        </div>
+
+        <div class="video-section">
+            <div class="video-header"><span class="video-title">Feed Video - Sostituzione Porta Ricarica</span></div>
+            <div class="cc-alert-box"><span style="font-size: 1.2rem;">⚠️</span><span><strong>ATTIVA I SOTTOTITOLI ITA:</strong> Clicca <strong>[CC]</strong> nel player per tradurre le istruzioni.</span></div>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/xl6uvXIBLKA?cc_load_policy=1&cc_lang_pref=it&hl=it&rel=0" title="Kukirin Charging Port Fix" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="terminal-log">
+                <h3>>> Log Dati Telemetrici (Trascrizione SEO)</h3>
+                <div class="terminal-text">
+                    <p>> Problema: <strong>Il monopattino non accetta la carica o si è fusa la porta.</strong></p>
+                    <p>> Componenti: Porta di ricarica GX16 (3 Pin), cablaggio della batteria.</p>
+                    <p>> Procedura: Apertura deck, rimozione dado bloccaggio porta, tranciatura fili bruciati e saldatura nuovo connettore rispettando le polarità rosso/nero.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="arsenal-box">
+            <div class="part-item">
+                <div class="part-info">
+                    <span class="part-name">Porta di Ricarica GX16 a 3 Pin</span>
+                    <span class="part-desc">Ricambio standard per la maggior parte dei Kukirin. Include cavi rosso/nero pronti per la saldatura o lo spinotto rapido.</span>
+                </div>
+                <a href="https://www.amazon.it/s?k=porta+ricarica+monopattino+3+pin+gx16" target="_blank" class="btn btn-amz">Vedi su Amazon</a>
+            </div>
+            <div class="part-item">
+                <div class="part-info">
+                    <span class="part-name">Caricabatterie 48V Kukirin</span>
+                    <span class="part-desc">Se la porta è intatta ma non carica, spesso è il trasformatore ad essere "saltato".</span>
+                </div>
+                <a href="https://it.aliexpress.com/w/wholesale-kukirin-charger-48v.html" target="_blank" class="btn btn-ali">Vedi su AliExpress</a>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Fase 1: Prevenzione Scintilla</h3>
+            <p>Per evitare di bruciare la porta, la regola d'oro è: <strong>collega SEMPRE prima il caricatore alla presa del muro (220V)</strong>, aspetta che la spia verde si accenda, e SOLO DOPO infila lo spinotto nel monopattino. Così eviti l'arco voltaico che brucia i pin.</p>
+        </div>
+
+        <div class="step">
+            <h3>Fase 2: Sostituzione Porta Fusa</h3>
+            <p>Apri la pedana. Trova i fili rosso e nero che vanno dalla porta alla batteria. <span style="color:var(--danger); font-weight:bold;">ATTENZIONE:</span> Non tagliare mai i fili rosso e nero contemporaneamente con la pinza o farai un cortocircuito. Tagliali uno per volta, spelali e saldali alla nuova porta isolandoli perfettamente con guaina termorestringente.</p>
+        </div>
+    </main>
+    
+    <section class="scudo-legale-web" style="max-width: 1200px; margin: 40px auto; padding: 25px; font-size: 0.85rem; color: #999; border: 1px solid #ff003c; border-left: 5px solid #ff003c; background: rgba(20, 0, 0, 0.4); border-radius: 6px;">
+        <h2 style="color: #ff003c; font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;">⚠️ Nota di Esclusione di Responsabilità (Disclaimer Specifico di Pagina)</h2>
+        <p>I dati metrologici, le segnature esadecimali, gli schemi elettrici di campionamento e i metodi di indagine meccanica riportati in questa pagina derivano da analisi teoriche OSINT e documentazione di pubblico dominio. Le informazioni sono destinate esclusivamente a scopo di studio e approfondimento scientifico per l'analisi forense e la ricostruzione dei sinistri.</p>
+        <p>L'applicazione pratica delle nozioni qui esposte su veicoli destinati alla circolazione stradale avviene sotto l'esclusiva responsabilità dell'utente. L'Editore non risponde di eventuali danni fisici, patrimoniali o sanzioni legali derivanti dall'uso improprio del materiale didattico fornito.</p>
+    </section>
+</main>
+
+<footer style="background-color: #000; border-top: 1px solid #222; padding: 40px 20px 20px; width: 100%;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
+        
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+            
+            <a href="KuKirin.html" style="text-decoration: none; display: flex; align-items: center; transition: 0.3s;">
+               <span style="color: #ff5500; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #ff5500; padding-bottom: 2px;">&larr; Torna al Garage KuKirin</span>
+            
+            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; opacity: 0.7; transition: 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                <img src="img/logo-testo.png" alt="MONO DOOM Home" style="max-width: 120px;">
+                <span style="color: #777; font-size: 0.7rem; font-weight: bold; margin-left: 15px; text-transform: uppercase; letter-spacing: 1px;">Hub Centrale</span>
+            </a>
+        </div>
+
+        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <a href="privacy.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Privacy Policy</a>
+            <a href="cookie.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Cookie Policy</a>
+            <a href="termini.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Termini e Condizioni</a>
+            <a href="disclaimer.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Disclaimer Legale</a>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 35px; padding-top: 20px; border-top: 1px solid #111; color: #333; font-size: 0.7rem; font-family: sans-serif;">
+        &copy; 2026 MONO DOOM. Tutti i diritti riservati. I marchi registrati appartengono ai rispettivi proprietari. Documentazione ad uso informativo e peritale.
+    </div>
+</footer>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codici Errore Kukirin | MONO DOOM</title>
+    <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#050505">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #e0e0e0;
+            --kukirin-orange: #ff8c00;
+            --white: #ffffff;
+            --pure-black: #000000;
+            --danger: #ff003c;
+            --card-bg: #111111;
+            --terminal-green: #0f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--pure-black);
+            border-bottom: 2px solid var(--kukirin-orange);
+            padding: 20px 0 10px;
+            text-align: center;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-header {
+            max-height: 110px;
+            width: auto;
+            display: block;
+        }
+
+        .claim {
+            color: var(--white);
+            font-weight: 900;
+            font-style: italic;
+            letter-spacing: 3px;
+            font-size: 1.05rem;
+            margin-top: 5px;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px var(--kukirin-orange);
+        }
+
+        nav {
+            background-color: var(--pure-black);
+            padding: 15px 25px;
+            border-bottom: 1px solid #333;
+        }
+
+        .back-btn {
+            display: inline-block;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .back-btn span {
+            color: var(--kukirin-orange);
+            margin-right: 5px;
+        }
+
+        .back-btn:hover {
+            color: var(--white);
+            text-shadow: 0 0 10px var(--kukirin-orange);
+        }
+
+        main {
+            flex: 1;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .error-hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .video-section {
+            margin-bottom: 50px;
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(255, 140, 0, 0.05);
+        }
+
+        .video-header {
+            background: #111;
+            border-bottom: 1px solid #333;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .video-title {
+            color: var(--kukirin-orange);
+            font-weight: 900;
+            font-family: monospace;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @keyframes pulse-danger {
+            0% { box-shadow: inset 0 0 0 rgba(255, 0, 60, 0.4); }
+            50% { box-shadow: inset 0 0 15px rgba(255, 0, 60, 0.2); }
+            100% { box-shadow: inset 0 0 0 transparent; }
+        }
+
+        .cc-alert-box {
+            background: #1a0004;
+            color: #ff003c;
+            border-bottom: 1px solid #333;
+            padding: 12px 20px;
+            font-size: 0.85rem;
+            animation: pulse-danger 2s infinite;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            line-height: 1.4;
+        }
+
+        .cc-alert-box strong {
+            color: var(--white);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .terminal-log {
+            background: #050505;
+            padding: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            border-top: 1px solid #333;
+        }
+
+        .terminal-log h3 {
+            color: #555;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #333;
+            padding-bottom: 5px;
+        }
+
+        .terminal-text p {
+            color: #888;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .terminal-text strong {
+            color: var(--danger);
+            font-weight: 400;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #0a0a0a;
+            min-width: 600px;
+        }
+
+        th {
+            background: #111;
+            color: var(--kukirin-orange);
+            font-weight: 900;
+            text-align: left;
+            padding: 15px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #333;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #222;
+            color: #ccc;
+            font-size: 0.95rem;
+        }
+
+        tr:hover td {
+            background: rgba(255, 140, 0, 0.05);
+            color: var(--white);
+        }
+
+        .val-danger {
+            color: var(--danger);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .arsenal-box {
+            background: linear-gradient(145deg, #111, #0a0a0a);
+            border: 1px solid var(--kukirin-orange);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .arsenal-box::before {
+            content: "PEZZI DI RICAMBIO";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--bg-color);
+            color: var(--kukirin-orange);
+            font-weight: 900;
+            padding: 0 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .part-item {
+            background: #000;
+            border: 1px solid #333;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .part-info {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .part-name {
+            font-weight: 900;
+            font-size: 1.1rem;
+            color: var(--white);
+            display: block;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .part-desc {
+            font-size: 0.85rem;
+            color: #aaa;
+            line-height: 1.5;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            background: #ff8c00;
+            color: #000;
+            flex-shrink: 0;
+            min-width: 130px;
+        }
+
+        .btn:hover {
+            background: #e67e00;
+        }
+
+        footer {
+            background-color: var(--pure-black);
+            border-top: 2px solid var(--kukirin-orange);
+            padding: 40px 20px;
+            margin-top: auto;
+            text-align: center;
+            color: #666;
+            font-size: 0.8rem;
+        }
+        @media(max-width: 768px) {
+            .part-item { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="img/logo-header.png" alt="MONO DOOM" class="logo-header">
+            <p class="claim">RESURRECT THE BEAST.</p>
+        </div>
+    </header>
+    
+    <nav>
+        <a href="kukirin.html" class="back-btn"><span>&lt;&lt;</span> Ritorna al Garage Kukirin</a>
+    </nav>
+    
+    <main>
+        <div class="error-hero">
+            <h1>Diagnostica Errori Kukirin</h1>
+            <p style="color: #888; margin-top: 10px;">Valido per G2 Pro, G2 Max, Serie G3 e M4 Pro</p>
+        </div>
+
+        <div class="video-section">
+            <div class="video-header"><span class="video-title">Feed Video - Analisi Errore E002</span></div>
+            <div class="cc-alert-box"><span style="font-size: 1.2rem;">⚠️</span><span><strong>ATTIVA I SOTTOTITOLI ITA:</strong> Clicca <strong>[CC]</strong> nel player per tradurre le istruzioni.</span></div>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/qwhdF9lT9HU?cc_load_policy=1&cc_lang_pref=it&hl=it&rel=0" title="Kukirin E002 Error Fix" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="terminal-log">
+                <h3>>> Log Dati Telemetrici (Trascrizione SEO)</h3>
+                <div class="terminal-text">
+                    <p>> Problema: <strong>Errore E-002 (Acceleratore) o E-005 (Freno) su Kukirin.</strong></p>
+                    <p>> Causa: Disconnessione cavi o guasto magnete interno alla leva del gas.</p>
+                    <p>> Soluzione: Ispezionare il cavo che va dal display al manubrio, verificare connettori. Sostituire acceleratore se il cavo è intatto.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="arsenal-box">
+            <div class="part-item">
+                <div class="part-info">
+                    <span class="part-name">Acceleratore a dito per Kukirin (Ricambio)</span>
+                    <span class="part-desc">Risolve in modo definitivo l'errore E002 o E-01 (Guasto segnale acceleratore). Spinotto impermeabile plug and play.</span>
+                </div>
+                <a href="https://it.aliexpress.com/w/wholesale-kukirin-g2-throttle.html" target="_blank" class="btn">AliExpress</a>
+            </div>
+            <div class="part-item">
+                <div class="part-info">
+                    <span class="part-name">Centralina Controller 48V (G2 Pro / Max)</span>
+                    <span class="part-desc">Se l'errore E003 (Controller Fault) non va via, la scheda madre è bruciata. Sostituzione diretta.</span>
+                </div>
+                <a href="https://it.aliexpress.com/w/wholesale-kukirin-g2-controller.html" target="_blank" class="btn">AliExpress</a>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>Codice Display</th>
+                    <th>Guasto Componente</th>
+                    <th>Risoluzione e Check</th>
+                </tr>
+                <tr>
+                    <td class="val-danger">E001 / E-01</td>
+                    <td>Sensori Hall Motore</td>
+                    <td>Il controller non legge la ruota. Controllare il connettore giallo spesso vicino alla ruota posteriore. Se integro, il motore va sostituito.</td>
+                </tr>
+                <tr>
+                    <td class="val-danger">E002 / E-02</td>
+                    <td>Anomalia Acceleratore (Gas)</td>
+                    <td>Il segnale del gas è assente. Scollega e ricollega lo spinotto vicino all'acceleratore. Se l'errore persiste, sostituisci il blocco dell'acceleratore.</td>
+                </tr>
+                <tr>
+                    <td class="val-danger">E003 / E-04</td>
+                    <td>Errore Controller</td>
+                    <td>Danno interno alla centralina nella pedana. Spegnere, lasciare raffreddare. Se l'errore non sparisce, la centralina è fusa e va cambiata.</td>
+                </tr>
+                <tr>
+                    <td class="val-danger">E005 / E-05</td>
+                    <td>Leva Freno in Blocco</td>
+                    <td>(Oppure "Low Voltage" su alcuni modelli). Se il mezzo è carico, il sensore di frenata della leva è bloccato. Smuovi le leve dei freni per sbloccarlo.</td>
+                </tr>
+                <tr>
+                    <td class="val-danger">E006</td>
+                    <td>Errore di Comunicazione</td>
+                    <td>Il display non riceve dati dalla centralina. Spesso dovuto a un filo schiacciato o staccato dentro il piantone dello sterzo.</td>
+                </tr>
+            </table>
+        </div>
+    </main>
+    
+  <section class="scudo-legale-web" style="max-width: 1200px; margin: 40px auto; padding: 25px; font-size: 0.85rem; color: #999; border: 1px solid #ff003c; border-left: 5px solid #ff003c; background: rgba(20, 0, 0, 0.4); border-radius: 6px;">
+        <h2 style="color: #ff003c; font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;">⚠️ Nota di Esclusione di Responsabilità (Disclaimer Specifico di Pagina)</h2>
+        <p>I dati metrologici, le segnature esadecimali, gli schemi elettrici di campionamento e i metodi di indagine meccanica riportati in questa pagina derivano da analisi teoriche OSINT e documentazione di pubblico dominio. Le informazioni sono destinate esclusivamente a scopo di studio e approfondimento scientifico per l'analisi forense e la ricostruzione dei sinistri.</p>
+        <p>L'applicazione pratica delle nozioni qui esposte su veicoli destinati alla circolazione stradale avviene sotto l'esclusiva responsabilità dell'utente. L'Editore non risponde di eventuali danni fisici, patrimoniali o sanzioni legali derivanti dall'uso improprio del materiale didattico fornito.</p>
+    </section>
+</main>
+
+<footer style="background-color: #000; border-top: 1px solid #222; padding: 40px 20px 20px; width: 100%;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
+        
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+            
+            <a href="KuKirin.html" style="text-decoration: none; display: flex; align-items: center; transition: 0.3s;">
+               <span style="color: #ff5500; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #ff5500; padding-bottom: 2px;">&larr; Torna al Garage KuKirin</span>
+            
+            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; opacity: 0.7; transition: 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                <img src="img/logo-testo.png" alt="MONO DOOM Home" style="max-width: 120px;">
+                <span style="color: #777; font-size: 0.7rem; font-weight: bold; margin-left: 15px; text-transform: uppercase; letter-spacing: 1px;">Hub Centrale</span>
+            </a>
+        </div>
+
+        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <a href="privacy.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Privacy Policy</a>
+            <a href="cookie.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Cookie Policy</a>
+            <a href="termini.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Termini e Condizioni</a>
+            <a href="disclaimer.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Disclaimer Legale</a>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 35px; padding-top: 20px; border-top: 1px solid #111; color: #333; font-size: 0.7rem; font-family: sans-serif;">
+        &copy; 2026 MONO DOOM. Tutti i diritti riservati. I marchi registrati appartengono ai rispettivi proprietari. Documentazione ad uso informativo e peritale.
+    </div>
+</footer>

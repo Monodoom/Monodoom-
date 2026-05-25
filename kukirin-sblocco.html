@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sblocco Velocità Kukirin (P-Settings) | MONO DOOM</title>
+    <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#050505">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #e0e0e0;
+            --kukirin-orange: #ff8c00;
+            --white: #ffffff;
+            --pure-black: #000000;
+            --danger: #ff003c;
+            --card-bg: #111111;
+            --hack: #5000ff;
+            --terminal-green: #0f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--pure-black);
+            border-bottom: 2px solid var(--danger);
+            padding: 20px 0 10px;
+            text-align: center;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-header {
+            max-height: 110px;
+            width: auto;
+            display: block;
+        }
+
+        .claim {
+            color: var(--white);
+            font-weight: 900;
+            font-style: italic;
+            letter-spacing: 3px;
+            font-size: 1.05rem;
+            margin-top: 5px;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px var(--danger);
+        }
+
+        nav {
+            background-color: var(--pure-black);
+            padding: 15px 25px;
+            border-bottom: 1px solid #333;
+        }
+
+        .back-btn {
+            display: inline-block;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .back-btn span {
+            color: var(--danger);
+            margin-right: 5px;
+        }
+
+        .back-btn:hover {
+            color: var(--white);
+            text-shadow: 0 0 10px var(--danger);
+        }
+
+        main {
+            flex: 1;
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .error-hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .error-tag {
+            background: var(--hack);
+            color: #fff;
+            padding: 5px 15px;
+            font-weight: 900;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            box-shadow: 0 0 15px rgba(80, 0, 255, 0.4);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .video-section {
+            margin-bottom: 50px;
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(80, 0, 255, 0.1);
+        }
+
+        .video-header {
+            background: #111;
+            border-bottom: 1px solid #333;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .video-title {
+            color: var(--hack);
+            font-weight: 900;
+            font-family: monospace;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @keyframes pulse-danger {
+            0% { box-shadow: inset 0 0 0 rgba(255, 0, 60, 0.4); }
+            50% { box-shadow: inset 0 0 15px rgba(255, 0, 60, 0.2); }
+            100% { box-shadow: inset 0 0 0 transparent; }
+        }
+
+        .cc-alert-box {
+            background: #1a0004;
+            color: #ff003c;
+            border-bottom: 1px solid #333;
+            padding: 12px 20px;
+            font-size: 0.85rem;
+            animation: pulse-danger 2s infinite;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            line-height: 1.4;
+        }
+
+        .cc-alert-box strong {
+            color: var(--white);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .terminal-log {
+            background: #050505;
+            padding: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            border-top: 1px solid #333;
+        }
+
+        .terminal-log h3 {
+            color: #555;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #333;
+            padding-bottom: 5px;
+        }
+
+        .terminal-text p {
+            color: #888;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .terminal-text strong {
+            color: var(--danger);
+            font-weight: 400;
+        }
+
+        .disclaimer-pista {
+            background: #1a0004;
+            border: 2px solid #ff003c;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            text-align: center;
+            animation: pulse-danger 2s infinite;
+        }
+
+        .disclaimer-pista h3 {
+            color: #ff003c;
+            text-transform: uppercase;
+            margin-top: 0;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .disclaimer-pista p {
+            color: #e0e0e0;
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .step {
+            background: var(--card-bg);
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+            border-left: 4px solid var(--hack);
+        }
+
+        .step h3 {
+            color: var(--hack);
+            margin-top: 0;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .step p {
+            margin: 0;
+            color: #ccc;
+        }
+
+        footer {
+            background-color: var(--pure-black);
+            border-top: 2px solid var(--danger);
+            padding: 40px 20px;
+            margin-top: auto;
+            text-align: center;
+            color: #666;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="img/logo-header.png" alt="MONO DOOM" class="logo-header">
+            <p class="claim">RESURRECT THE BEAST.</p>
+        </div>
+    </header>
+    
+    <nav>
+        <a href="kukirin.html" class="back-btn"><span>&lt;&lt;</span> Ritorna al Garage Kukirin</a>
+    </nav>
+    
+    <main>
+        <div class="error-hero">
+            <span class="error-tag">HACKING EXTREMO</span>
+            <h1>Sblocco Kukirin G2 (P-Settings)</h1>
+        </div>
+
+        <div class="disclaimer-pista">
+            <h3>🛑 ATTENZIONE - PROTOCOLLO FUORILEGGE</h3>
+            <p>Alterare i parametri di fabbrica per sbloccare la velocità massima del monopattino lo rende illegale su strade pubbliche. Questa procedura è destinata <strong>ESCLUSIVAMENTE all'uso in aree private o circuiti chiusi</strong>. MONO DOOM non si assume responsabilità per multe o sequestri.</p>
+        </div>
+
+        <p style="margin-bottom: 30px; font-size: 1.1rem;">La serie Kukirin G2 (Pro e Max) ha un cruscotto intelligente che permette di modificare profondamente il comportamento del mezzo entrando in un menù segreto, noto come "P-Settings" (Parameter Settings). Da qui puoi togliere il blocco dei 25 km/h senza tagliare alcun filo.</p>
+
+        <div class="video-section">
+            <div class="video-header"><span class="video-title">Feed Video - P-Settings Sblocco Velocità</span></div>
+            <div class="cc-alert-box"><span style="font-size: 1.2rem;">⚠️</span><span><strong>ATTIVA I SOTTOTITOLI ITA:</strong> Clicca <strong>[CC]</strong> nel player per tradurre le istruzioni.</span></div>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/wwun08vkezw?cc_load_policy=1&cc_lang_pref=it&hl=it&rel=0" title="Kukirin P-Settings Tutorial" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="terminal-log">
+                <h3>>> Log Dati Telemetrici (Trascrizione SEO)</h3>
+                <div class="terminal-text">
+                    <p>> Target: <strong>Kukirin G2 Pro, G2 Max.</strong></p>
+                    <p>> Operazione: Accesso al menù segreto del cruscotto per alterare P-Settings. Sblocco velocità massima, attivazione cruise control, modifica zero-start.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Fase 1: Accesso al Menu Segreto</h3>
+            <p>Accendi il monopattino. Con il display acceso, <strong>premi il tasto [ON/OFF] 3 volte rapidamente</strong> (in successione). Il display entrerà nell'interfaccia di configurazione mostrando P1, P2, ecc.</p>
+        </div>
+        <div class="step">
+            <h3>Fase 2: Navigare i Parametri</h3>
+            <p>Usa i tasti freccia o brevi pressioni del tasto accensione per scorrere tra le voci (da P1 a PC). Cerca il parametro relativo al limitatore di velocità (solitamente <strong>P07</strong> o <strong>P08</strong> a seconda dell'anno di produzione). Cambia il valore da "25" o "0" a "100" (che sta per 100% della potenza sbloccata).</p>
+        </div>
+        <div class="step">
+            <h3>Fase 3: Zero Start & Cruise Control</h3>
+            <p>Sempre nel menu, puoi disabilitare la partenza a spinta (Zero Start) trovando il parametro P09 (imposta 0 per partire da fermo, 1 per spinta). Il parametro P16 o simili regola invece il Cruise Control (1 per attivarlo: mantenendo il gas fisso per 5 secondi, il mezzo andrà da solo).</p>
+        </div>
+        <div class="step">
+            <h3>Fase 4: Alternativa Hardware (Taglio Filo)</h3>
+            <p>Se il tuo firmware è recentissimo e ha i P-settings bloccati, la soluzione è hardware: apri la pedana inferiore. Trova la centralina (scatola argento). Cerca un <strong>filo singolo bianco</strong> che esce dalla centralina e rientra in essa (spesso con uno spinotto in mezzo). Scollegalo o taglialo. Il monopattino sarà istantaneamente sbloccato.</p>
+        </div>
+    </main>
+    
+    <section class="scudo-legale-web" style="max-width: 1200px; margin: 40px auto; padding: 25px; font-size: 0.85rem; color: #999; border: 1px solid #ff003c; border-left: 5px solid #ff003c; background: rgba(20, 0, 0, 0.4); border-radius: 6px;">
+        <h2 style="color: #ff003c; font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;">⚠️ Nota di Esclusione di Responsabilità (Disclaimer Specifico di Pagina)</h2>
+        <p>I dati metrologici, le segnature esadecimali, gli schemi elettrici di campionamento e i metodi di indagine meccanica riportati in questa pagina derivano da analisi teoriche OSINT e documentazione di pubblico dominio. Le informazioni sono destinate esclusivamente a scopo di studio e approfondimento scientifico per l'analisi forense e la ricostruzione dei sinistri.</p>
+        <p>L'applicazione pratica delle nozioni qui esposte su veicoli destinati alla circolazione stradale avviene sotto l'esclusiva responsabilità dell'utente. L'Editore non risponde di eventuali danni fisici, patrimoniali o sanzioni legali derivanti dall'uso improprio del materiale didattico fornito.</p>
+    </section>
+</main>
+
+<footer style="background-color: #000; border-top: 1px solid #222; padding: 40px 20px 20px; width: 100%;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
+        
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+            
+            <a href="KuKirin.html" style="text-decoration: none; display: flex; align-items: center; transition: 0.3s;">
+               <span style="color: #ff5500; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #ff5500; padding-bottom: 2px;">&larr; Torna al Garage KuKirin</span>
+            
+            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; opacity: 0.7; transition: 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                <img src="img/logo-testo.png" alt="MONO DOOM Home" style="max-width: 120px;">
+                <span style="color: #777; font-size: 0.7rem; font-weight: bold; margin-left: 15px; text-transform: uppercase; letter-spacing: 1px;">Hub Centrale</span>
+            </a>
+        </div>
+
+        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <a href="privacy.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Privacy Policy</a>
+            <a href="cookie.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Cookie Policy</a>
+            <a href="termini.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Termini e Condizioni</a>
+            <a href="disclaimer.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Disclaimer Legale</a>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 35px; padding-top: 20px; border-top: 1px solid #111; color: #333; font-size: 0.7rem; font-family: sans-serif;">
+        &copy; 2026 MONO DOOM. Tutti i diritti riservati. I marchi registrati appartengono ai rispettivi proprietari. Documentazione ad uso informativo e peritale.
+    </div>
+</footer>
