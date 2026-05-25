@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocollo Ninebot | MONO DOOM</title>
+    <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#050505">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #e0e0e0;
+            --ninebot: #FFEE00;
+            --white: #ffffff;
+            --pure-black: #000000;
+            --danger: #ff003c;
+            --card-bg: #111111;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: var(--pure-black);
+            border-bottom: 2px solid var(--ninebot);
+            padding: 20px 0 10px;
+            text-align: center;
+        }
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo-header {
+            max-height: 110px;
+            width: auto;
+            display: block;
+        }
+        .claim {
+            color: var(--white);
+            font-weight: 900;
+            font-style: italic;
+            letter-spacing: 3px;
+            font-size: 1.05rem;
+            margin-top: 5px;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px var(--ninebot);
+        }
+        nav {
+            background-color: var(--pure-black);
+            padding: 15px 25px;
+            border-bottom: 1px solid #222;
+        }
+        .back-btn {
+            display: inline-block;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .back-btn span {
+            color: var(--ninebot);
+            margin-right: 5px;
+        }
+        .back-btn:hover {
+            color: var(--white);
+            text-shadow: 0 0 10px var(--ninebot);
+        }
+        main {
+            flex: 1;
+            padding: 40px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .brand-hero {
+            background: linear-gradient(145deg, #111, #000);
+            padding: 50px 20px;
+            text-align: center;
+            border: 1px solid #333;
+            border-radius: 12px;
+            margin-bottom: 50px;
+            box-shadow: inset 0 0 20px rgba(255, 238, 0, 0.05);
+        }
+        .brand-hero h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        .brand-hero h1 span {
+            color: var(--ninebot);
+            text-shadow: 0 0 15px rgba(255, 238, 0, 0.4);
+        }
+        .brand-hero p {
+            color: #888;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 20px auto 0;
+            font-weight: 700;
+        }
+        .section-title {
+            font-size: 2rem;
+            color: var(--white);
+            margin: 60px 0 30px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .section-title span {
+            color: var(--ninebot);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 25px;
+            display: flex;
+            gap: 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+        .card:hover {
+            border-color: var(--ninebot);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 238, 0, 0.15);
+            background: #1a1a05;
+        }
+        .c-icon {
+            background: rgba(255, 238, 0, 0.1);
+            color: var(--ninebot);
+            font-size: 2.2rem;
+            font-weight: 900;
+            height: 80px;
+            width: 80px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 238, 0, 0.4);
+            text-shadow: 0 0 10px rgba(255, 238, 0, 0.5);
+        }
+        .c-info h3 {
+            margin: 0 0 8px 0;
+            color: var(--white);
+            font-size: 1.3rem;
+            text-transform: uppercase;
+        }
+        .c-info p {
+            margin: 0;
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        .btn-arrow {
+            margin-top: 15px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--ninebot);
+        }
+        footer {
+            background-color: var(--pure-black);
+            border-top: 2px solid var(--ninebot);
+            padding: 50px 20px 20px;
+            margin-top: auto;
+            text-align: center;
+            color: #666;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="img/logo-header.png" alt="MONO DOOM" class="logo-header">
+            <p class="claim">RESURRECT THE BEAST.</p>
+        </div>
+    </header>
+    
+    <nav>
+        <a href="index.html" class="back-btn"><span>&lt;&lt;</span> RITORNA AL GARAGE CENTRALE</a>
+    </nav>
+    
+    <main>
+        <div class="brand-hero">
+            <h1>Protocollo <span>Ninebot</span></h1>
+            <p>Il Carro Armato della micromobilità. Diagnostica bip, sblocco SHU e riparazione dei letali cavi fusi sul G30 Max. Scegli il tuo bersaglio.</p>
+        </div>
+
+        <h2 class="section-title"><span>#</span> Elettronica & Sblocco</h2>
+        <div class="grid">
+            <a href="ninebot-errori.html" class="card">
+                <div class="c-icon">⚠️</div>
+                <div class="c-info">
+                    <h3>Codici Errore (Bip & Numeri)</h3>
+                    <p>Traduzione dei codici sonori e numerici a display. Dall'Errore 10 all'Errore 15. Diagnostica istantanea.</p>
+                    <span class="btn-arrow">Analizza Guasto →</span>
+                </div>
+            </a>
+            <a href="ninebot-shu-hack.html" class="card">
+                <div class="c-icon" style="color:#ff003c; border-color:rgba(255,0,60,0.5); background:rgba(255,0,60,0.1);">⚡</div>
+                <div class="c-info">
+                    <h3>Hack: SHU & Sblocco</h3>
+                    <p>Come usare ScooterHacking Utility per cambiare regione (Global), aggirare il blocco e flashare firmware.</p>
+                    <span class="btn-arrow" style="color:#ff003c;">Zona Rossa →</span>
+                </div>
+            </a>
+        </div>
+
+        <h2 class="section-title"><span>#</span> Difetti Letali & Meccanica</h2>
+        <div class="grid">
+            <a href="ninebot-es-difetti.html" class="card">
+                <div class="c-icon">💀</div>
+                <div class="c-info">
+                    <h3>Serie ES: Difetti Mortali</h3>
+                    <p>Errore 42 e il "Faro della Morte". Come risolvere i due incubi ingegneristici dei modelli ES1, ES2 e ES4.</p>
+                    <span class="btn-arrow">Ripara Elettronica →</span>
+                </div>
+            </a>
+            <a href="ninebot-cavi-motore.html" class="card">
+                <div class="c-icon">🔥</div>
+                <div class="c-info">
+                    <h3>G30 Max: Cavi Motore Fusi</h3>
+                    <p>Il difetto di fabbrica più grave: i cavi di fase che si sciolgono (Errore 14/15). Sostituzione con MR60.</p>
+                    <span class="btn-arrow">Ripara Hardware →</span>
+                </div>
+            </a>
+            <a href="ninebot-hardware-g30.html" class="card">
+                <div class="c-icon">⚙️</div>
+                <div class="c-info">
+                    <h3>G30 Max: Cuscinetti Ruota</h3>
+                    <p>Sostituzione dei cuscinetti ruota arrugginiti (rumore da trattore) del Max G30.</p>
+                    <span class="btn-arrow">Manutenzione Meccanica →</span>
+                </div>
+            </a>
+        </div>
+    </main>
+    
+    <section class="scudo-legale-web" style="max-width: 1200px; margin: 40px auto; padding: 25px; font-size: 0.85rem; color: #999; border: 1px solid #ff003c; border-left: 5px solid #ff003c; background: rgba(20, 0, 0, 0.4); border-radius: 6px;">
+        <h2 style="color: #ff003c; font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;">⚠️ Nota di Esclusione di Responsabilità (Disclaimer Specifico di Pagina)</h2>
+        <p>I dati metrologici, le segnature esadecimali, gli schemi elettrici di campionamento e i metodi di indagine meccanica riportati in questa pagina derivano da analisi teoriche OSINT e documentazione di pubblico dominio. Le informazioni sono destinate esclusivamente a scopo di studio e approfondimento scientifico per l'analisi forense e la ricostruzione dei sinistri.</p>
+        <p>L'applicazione pratica delle nozioni qui esposte su veicoli destinati alla circolazione stradale avviene sotto l'esclusiva responsabilità dell'utente. L'Editore non risponde di eventuali danni fisici, patrimoniali o sanzioni legali derivanti dall'uso improprio del materiale didattico fornito.</p>
+    </section>
+</main>
+
+<footer style="background-color: #000; border-top: 1px solid #222; padding: 40px 20px 20px; width: 100%;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
+        <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+            <img src="img/logo-testo.png" alt="MONO DOOM Home" style="max-width: 150px;">
+            <span style="color: #555; font-size: 0.75rem; font-weight: bold; margin-left: 15px; text-transform: uppercase; letter-spacing: 1px;">&larr; Torna all'Hub Centrale</span>
+        </a>
+        <div style="display: flex; gap: 20px;">
+            <a href="privacy.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">Privacy Policy</a>
+            <a href="cookie.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">Cookie Policy</a>
+            <a href="termini.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">Termini e Condizioni</a>
+            <a href="disclaimer.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">Disclaimer Legale</a>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 30px; padding-top: 15px; border-top: 1px solid #111; color: #333; font-size: 0.7rem; font-family: sans-serif;">
+        &copy; 2026 MONO DOOM. Tutti i diritti riservati. I marchi registrati appartengono ai rispettivi proprietari. Documentazione ad uso informativo e peritale.
+    </div>
+</footer>
