@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Stanco di bucare il tuo Xiaomi? Scopri come montare le gomme da 10 pollici. Protocollo completo, distanziali e leve cacciagomme.">
+    <title>Protocollo Upgrade Gomme 10" Xiaomi | MONO DOOM</title>
+    
+   <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#050505">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Come montare gomme da 10 pollici su Monopattino Xiaomi",
+      "description": "Procedura per aumentare il diametro delle ruote, migliorare il comfort e ridurre le forature.",
+      "step": [
+        { "@type": "HowToStep", "name": "Distanziali", "text": "Installa i rialzi 3D sotto il parafango e sotto il cavalletto laterale." },
+        { "@type": "HowToStep", "name": "Ammorbidimento", "text": "Immergi i copertoni nuovi in acqua bollente per 10 minuti per ammorbidire la gomma." },
+        { "@type": "HowToStep", "name": "Installazione", "text": "Usa le leve da moto per calzare la gomma sul cerchio, facendo attenzione al cavo motore anteriore." }
+      ]
+    }
+    </script>
+
+    <style>
+        :root { --bg-color: #050505; --text-color: #e0e0e0; --neon-blue: #00e5ff; --white: #ffffff; --pure-black: #000000; --danger: #ff003c; --card-bg: #111111; --terminal-green: #0f0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* HEADER DEFINITIVO */
+        header { background-color: var(--pure-black); border-bottom: 2px solid var(--neon-blue); padding: 20px 0 10px; text-align: center; }
+        .header-content { display: flex; flex-direction: column; justify-content: center; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .logo-header { max-height: 110px; width: auto; display: block; }
+        .claim { color: var(--white); font-weight: 900; font-style: italic; letter-spacing: 3px; font-size: 1.05rem; margin-top: 5px; text-transform: uppercase; text-shadow: 0 0 5px var(--neon-blue); }
+
+        /* NAVIGAZIONE TATTICA */
+        nav { background-color: var(--pure-black); padding: 15px 25px; text-align: left; border-bottom: 1px solid #333; }
+        .back-btn { display: inline-block; color: var(--text-color); text-decoration: none; font-weight: 900; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; font-family: 'Courier New', Courier, monospace; }
+        .back-btn span { color: var(--neon-blue); margin-right: 5px; }
+        .back-btn:hover { color: var(--white); text-shadow: 0 0 10px var(--neon-blue); }
+
+        /* MAIN & HERO */
+        main { flex: 1; max-width: 850px; margin: 40px auto; padding: 0 20px; width: 100%; }
+        .error-hero { text-align: center; margin-bottom: 40px; }
+        .error-tag { background: #333; color: white; padding: 5px 15px; font-weight: 900; border-radius: 4px; display: inline-block; margin-bottom: 10px; font-size: 1.2rem; }
+        h1 { font-size: 2.5rem; color: var(--white); text-transform: uppercase; letter-spacing: -1px; line-height: 1.2; margin-bottom: 20px; }
+        
+        /* DIAGNOSI */
+        .diagnosi-box { background: rgba(0, 229, 255, 0.05); border-left: 4px solid var(--neon-blue); padding: 25px; margin-bottom: 40px; border-radius: 0 8px 8px 0; border: 1px solid #333; }
+        .diagnosi-box h2 { color: var(--neon-blue); text-transform: uppercase; font-size: 1.2rem; margin-bottom: 10px; }
+
+        /* VIDEO SECTION */
+        .video-section { margin-bottom: 50px; background: #000; border: 1px solid #333; border-radius: 8px; overflow: hidden; box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); }
+        .video-header { background: #111; border-bottom: 1px solid #333; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .video-title { color: var(--neon-blue); font-weight: 900; font-family: monospace; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* AVVISO SOTTOTITOLI LAMPEGGIANTE */
+        @keyframes pulse-danger { 0% { box-shadow: inset 0 0 0 rgba(255, 0, 60, 0.4); } 50% { box-shadow: inset 0 0 15px rgba(255, 0, 60, 0.2); } 100% { box-shadow: inset 0 0 0 rgba(255, 0, 60, 0); } }
+        .cc-alert-box { background: #1a0004; color: #ff003c; border-bottom: 1px solid #333; padding: 12px 20px; font-size: 0.85rem; animation: pulse-danger 2s infinite; display: flex; align-items: center; gap: 12px; line-height: 1.4; }
+        .cc-alert-box strong { color: var(--white); }
+
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        
+        .terminal-log { background: #050505; padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; border-top: 1px solid #333; }
+        .terminal-log h3 { color: #555; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; border-bottom: 1px dashed #333; padding-bottom: 5px; }
+        .terminal-text p { color: #888; margin-bottom: 10px; line-height: 1.5; }
+        .terminal-text strong { color: var(--neon-blue); font-weight: normal; }
+        .terminal-text .highlight { color: var(--terminal-green); }
+
+        /* ARSENALE AFFILIAZIONI */
+        .arsenal-box { background: linear-gradient(145deg, #111, #0a0a0a); border: 1px solid var(--neon-blue); border-radius: 12px; padding: 30px; margin-bottom: 50px; position: relative; }
+        .arsenal-box::before { content: "ARSENALE NECESSARIO"; position: absolute; top: -12px; left: 20px; background: var(--bg-color); color: var(--neon-blue); font-weight: 900; padding: 0 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .part-item { background: #000; border: 1px solid #333; padding: 20px; border-radius: 8px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
+        .part-item:hover { border-color: #555; }
+        .part-info { flex: 1; padding-right: 20px; }
+        .part-name { font-weight: 900; font-size: 1.2rem; color: var(--white); display: block; margin-bottom: 5px; text-transform: uppercase; }
+        .part-desc { font-size: 0.9rem; color: #aaa; }
+        .buy-buttons { display: flex; gap: 10px; flex-shrink: 0; }
+        .btn { padding: 10px 15px; border-radius: 4px; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; text-decoration: none; text-align: center; transition: 0.3s; }
+        .btn-amz { background: #FF9900; color: #000; }
+        .btn-amz:hover { background: #e68a00; box-shadow: 0 0 10px rgba(255, 153, 0, 0.5); }
+        .btn-ali { background: #ff003c; color: #fff; }
+        .btn-ali:hover { background: #cc0030; box-shadow: 0 0 10px rgba(255, 0, 60, 0.5); }
+
+        /* PROTOCOLLO STEP */
+        .protocol-section h2 { color: var(--neon-blue); text-transform: uppercase; margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .step { position: relative; padding-left: 50px; margin-bottom: 40px; }
+        .step-num { position: absolute; left: 0; top: 0; width: 35px; height: 35px; background: var(--neon-blue); color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.2rem; box-shadow: 0 0 10px rgba(0, 229, 255, 0.5); }
+        .step h3 { color: var(--white); text-transform: uppercase; margin-bottom: 10px; font-size: 1.2rem; }
+        .step p { color: #aaa; }
+
+        /* FOOTER DEFINITIVO */
+        footer { background-color: var(--pure-black); border-top: 2px solid var(--neon-blue); padding: 60px 20px 30px; margin-top: auto; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; text-align: left; }
+        .footer-col h4 { color: var(--neon-blue); margin-bottom: 15px; text-transform: uppercase; font-size: 1rem; }
+        .footer-col p { color: #888; font-size: 0.85rem; line-height: 1.5; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #888; text-decoration: none; transition: 0.3s; font-size: 0.85rem; }
+        .footer-col ul li a:hover { color: var(--white); }
+        .legal-bottom { text-align: center; margin-top: 50px; padding-top: 25px; border-top: 1px solid #222; color: #444; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        @media (max-width: 768px) {
+            .part-item { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .buy-buttons { width: 100%; flex-direction: column; }
+            .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <img src="img/logo-header.png" alt="MONO DOOM" class="logo-header">
+        <p class="claim">RESURRECT THE BEAST.</p>
+    </div>
+</header>
+
+<nav>
+    <a href="xiaomi.html" class="back-btn"><span>&lt;&lt;</span> Ritorna al Protocollo Xiaomi</a>
+</nav>
+
+<main>
+    <div class="error-hero">
+        <span class="error-tag">PROTOCOLLO MECCANICO</span>
+        <h1>Upgrade Gomme da 10"</h1>
+    </div>
+
+    <div class="diagnosi-box">
+        <h2>Il Problema delle 8.5"</h2>
+        <p><strong>Sintomi:</strong> Le gomme originali Xiaomi da 8.5" sono rigide e le camere d'aria si "pizzicano" facilmente sulle buche causando continue forature. Il comfort stradale è minimo, la bestia vibra e si scaricano colpi secchi su batteria e saldature.</p>
+    </div>
+
+    <div class="video-section">
+        <div class="video-header">
+            <span class="video-title">Feed Video - Operazione 10 Pollici</span>
+        </div>
+        <div class="cc-alert-box">
+            <span style="font-size: 1.2rem;">⚠️</span>
+            <span><strong>ATTIVA I SOTTOTITOLI ITA:</strong> Fai partire il video, poi clicca sull'icona <strong>[CC]</strong> o sull'ingranaggio <strong>(⚙️)</strong> in basso a destra nel player per leggere le istruzioni.</span>
+        </div>
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/ia-zrC71Mkg?cc_load_policy=1&cc_lang_pref=it&hl=it&rel=0&modestbranding=1" title="Montaggio Gomme 10 pollici Xiaomi" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        
+        <div class="terminal-log">
+            <h3>>> Log Dati Telemetrici (Trascrizione SEO per i bot)</h3>
+            <div class="terminal-text">
+                <p>> Operazione: <strong>Conversione da gomme 8.5 a gomme da 10 pollici su Xiaomi M365/Pro/1S.</strong></p>
+                <p>> Vantaggi: Assorbimento urti migliorato, riduzione forature (pizzicature), aumento lieve della top speed a causa del maggior rotolamento.</p>
+                <p>> Procedura: Installazione obbligatoria dei <span class="highlight">distanziali stampati in 3D</span> per rialzare parafango posteriore e cavalletto. Riscaldamento dei copertoni Wanda in acqua per facilitare il tallonamento sul mozzo motore.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="arsenal-box">
+        <div class="part-item">
+            <div class="part-info">
+                <span class="part-name">Kit Gomme 10" (Wanda) + Camere d'aria + Rialzi</span>
+                <span class="part-desc">Prendi solo kit completi. Devono esserci i pezzi di plastica per rialzare il parafango e il cavo del freno posteriore, altrimenti la gomma toccherà.</span>
+            </div>
+            <div class="buy-buttons">
+                <a href="https://www.amazon.it/s?k=kit+gomme+10+xiaomi" target="_blank" class="btn btn-amz">Amazon (24h)</a>
+                <a href="https://it.aliexpress.com/w/wholesale-xiaomi-10-inch-tires.html" target="_blank" class="btn btn-ali">AliExpress</a>
+            </div>
+        </div>
+
+        <div class="part-item">
+            <div class="part-info">
+                <span class="part-name">Leve Cacciagomme (Acciaio da Moto)</span>
+                <span class="part-desc">Non provare a fare questo lavoro con cacciaviti o leve di plastica da bicicletta: distruggerai il cerchione e romperai le leve.</span>
+            </div>
+            <div class="buy-buttons">
+                <a href="https://www.amazon.it/s?k=leve+cacciagomme+moto" target="_blank" class="btn btn-amz">Vedi su Amazon</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="protocol-section">
+        <h2>Protocollo di Montaggio</h2>
+        
+        <div class="step">
+            <div class="step-num">1</div>
+            <h3>Assetto e Rialzi</h3>
+            <p>Essendo più grandi, le gomme toccheranno il parafango. Usa le viti più lunghe fornite nel kit per installare il distanziale in plastica sotto il parafango posteriore. Non dimenticare di installare anche il rialzo sotto il cavalletto laterale, o il monopattino cadrà quando parcheggiato.</p>
+        </div>
+
+        <div class="step">
+            <div class="step-num">2</div>
+            <h3>Trattamento Termico</h3>
+            <p>Smonta le vecchie gomme (tagliale se sono piene e non riesci a farle uscire). Prima di montare i nuovi copertoni da 10", immergili in acqua bollente o usa un phon da carrozziere per 10 minuti. Il calore ammorbidirà la gomma dura, permettendoti di fare leva sul cerchio faticando la metà.</p>
+        </div>
+
+        <div class="step">
+            <div class="step-num">3</div>
+            <h3>Tallonamento</h3>
+            <p>Sulla ruota anteriore, fai estrema attenzione con le leve in acciaio a non tranciare il cavo del motore che esce dal perno (ispezionalo!). Infila un lato del copertone, inserisci la valvola e la camera d'aria un po' gonfia per non pizzicarla, e fai leva per chiudere. Gonfia a 45/50 PSI.</p>
+        </div>
+    </div>
+</main>
+
+<section class="scudo-legale-web" style="max-width: 1200px; margin: 40px auto; padding: 25px; font-size: 0.85rem; color: #999; border: 1px solid #ff003c; border-left: 5px solid #ff003c; background: rgba(20, 0, 0, 0.4); border-radius: 6px;">
+        <h2 style="color: #ff003c; font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;">⚠️ Nota di Esclusione di Responsabilità (Disclaimer Specifico di Pagina)</h2>
+        <p>I dati metrologici, le segnature esadecimali, gli schemi elettrici di campionamento e i metodi di indagine meccanica riportati in questa pagina derivano da analisi teoriche OSINT e documentazione di pubblico dominio. Le informazioni sono destinate esclusivamente a scopo di studio e approfondimento scientifico per l'analisi forense e la ricostruzione dei sinistri.</p>
+        <p>L'applicazione pratica delle nozioni qui esposte su veicoli destinati alla circolazione stradale avviene sotto l'esclusiva responsabilità dell'utente. L'Editore non risponde di eventuali danni fisici, patrimoniali o sanzioni legali derivanti dall'uso improprio del materiale didattico fornito.</p>
+    </section>
+</main>
+
+<footer style="background-color: #000; border-top: 1px solid #222; padding: 40px 20px 20px; width: 100%;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
+        
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+            
+            <a href="xiaomi.html" style="text-decoration: none; display: flex; align-items: center; transition: 0.3s;">
+                <span style="color: #00e5ff; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #00e5ff; padding-bottom: 2px;">&larr; Torna al Garage Xiaomi</span>
+            </a>
+            
+            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; opacity: 0.7; transition: 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                <img src="img/logo-testo.png" alt="MONO DOOM Home" style="max-width: 120px;">
+                <span style="color: #777; font-size: 0.7rem; font-weight: bold; margin-left: 15px; text-transform: uppercase; letter-spacing: 1px;">Hub Centrale</span>
+            </a>
+        </div>
+
+        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <a href="privacy.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Privacy Policy</a>
+            <a href="cookie.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Cookie Policy</a>
+            <a href="termini.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Termini e Condizioni</a>
+            <a href="disclaimer.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Disclaimer Legale</a>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 35px; padding-top: 20px; border-top: 1px solid #111; color: #333; font-size: 0.7rem; font-family: sans-serif;">
+        &copy; 2026 MONO DOOM. Tutti i diritti riservati. I marchi registrati appartengono ai rispettivi proprietari. Documentazione ad uso informativo e peritale.
+    </div>
+</footer>
