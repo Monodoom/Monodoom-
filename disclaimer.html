@@ -46,7 +46,8 @@
         /* FOOTER */
         footer { background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); border-top: 1px solid #222; padding: 40px 20px; text-align: center; position: relative; z-index: 10; margin-top: auto;}
         .footer-links { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin: 20px 0;}
-        .footer-links a { color: #777; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; }
+        .footer-links a { color: #777; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;}
+        .footer-links a:hover { color: var(--danger); }
         
         @media(max-width: 768px) { .glass-box { padding: 25px 20px; } }
     </style>
@@ -67,28 +68,33 @@
     <section class="glass-box" style="border-left: 5px solid var(--danger);">
         <h1 class="legal-title" style="color: var(--danger);">Disclaimer Legale</h1>
         
-        <h3 class="legal-h3" style="color: var(--danger);">1. Natura del Progetto (OSINT)</h3>
+        <h3 class="legal-h3" style="color: var(--danger);">1. Natura del Progetto (OSINT e Ingegneria Inversa)</h3>
         <p class="legal-p">MONO DOOM opera esclusivamente come Osservatorio Digitale indipendente. I contenuti, le guide, i parametri esadecimali e i trattati B2B presenti derivano dall'aggregazione di informazioni di pubblico dominio e ingegneria inversa. Il materiale ha uno scopo puramente <strong>didattico, documentale e di studio forense</strong>.</p>
 
         <h3 class="legal-h3" style="color: var(--danger);">2. Esonero Totale di Responsabilità</h3>
-        <p class="legal-p">L'applicazione pratica delle procedure descritte su veicoli reali è <strong>severamente sconsigliata</strong>. L'Editore declina ogni responsabilità per:</p>
+        <p class="legal-p">L'applicazione pratica delle procedure descritte su veicoli reali è <strong>severamente sconsigliata</strong> e avviene sotto l'esclusiva responsabilità dell'utente. L'Editore declina ogni responsabilità per:</p>
         <ul>
             <li>Danni fisici a cose, animali o persone (lesioni o decessi).</li>
-            <li>Danni hardware/software ai veicoli (fusione, cortocircuiti).</li>
+            <li>Danni hardware/software ai veicoli (es. "brick", fusione, cortocircuiti).</li>
             <li>Sanzioni, sequestro del mezzo, o annullamento polizza RCA.</li>
         </ul>
 
         <h3 class="legal-h3" style="color: var(--danger);">3. Codice della Strada</h3>
-        <p class="legal-p">L'alterazione del firmware (CFW) e lo sblocco della velocità trasformano il monopattino in un veicolo non omologato. Tali veicoli <strong>non possono circolare su strade pubbliche</strong>, ma sono rilegati all'uso in aree private.</p>
+        <p class="legal-p">L'alterazione del firmware (CFW) e lo sblocco della velocità trasformano il monopattino in un veicolo non omologato. Tali veicoli <strong>non possono circolare su strade pubbliche</strong>, ma sono rilegati all'uso esclusivo in aree private o circuiti chiusi.</p>
 
-        <h3 class="legal-h3" style="color: var(--danger);">4. Manleva</h3>
+        <h3 class="legal-h3" style="color: var(--danger);">4. Manleva (Hold Harmless)</h3>
         <p class="legal-p">Accedendo al database, l'utente accetta di manlevare l'Editore di MONO DOOM da qualsiasi rivendicazione o causa legale derivante dall'utilizzo delle informazioni fornite.</p>
     </section>
 </main>
 
 <footer>
     <img src="img/logo-testo.png" alt="MONO DOOM" style="max-width: 150px; opacity: 0.6; margin-bottom: 10px;">
-    <div class="footer-links"><a href="privacy.html">Privacy</a><a href="cookie.html">Cookie</a><a href="termini.html">Termini B2B</a><a href="disclaimer.html" style="color: var(--danger);">Disclaimer</a></div>
+    <div class="footer-links">
+        <a href="privacy.html">Privacy</a>
+        <a href="cookie.html">Cookie</a>
+        <a href="termini.html">Termini B2B</a>
+        <a href="disclaimer.html" style="color: var(--danger);">Disclaimer</a>
+    </div>
 </footer>
 </body>
 </html>
