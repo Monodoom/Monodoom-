@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guida completa ai P-Settings del display EY3 Minimotors. Configura accelerazione, freno elettrico e risparmio batteria sul tuo Dualtron.">
+    <title>P-Settings EY3 Dualtron | MONO DOOM</title>
+    <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#050505">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #e0e0e0;
+            --white: #ffffff;
+            --pure-black: #000000;
+            --danger: #ff003c;
+            --acid-green: #00ff66;
+            --card-bg: #111111;
+            --terminal-green: #0f0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+        
+        header { background-color: var(--pure-black); border-bottom: 2px solid var(--acid-green); padding: 20px 0 10px; text-align: center; }
+        .header-content { display: flex; flex-direction: column; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .logo-header { max-height: 65px; width: auto; display: block; }
+        .claim { color: var(--white); font-weight: 900; font-style: italic; letter-spacing: 3px; font-size: 1.05rem; margin-top: 5px; text-transform: uppercase; text-shadow: 0 0 5px var(--acid-green); }
+        
+        nav { background-color: var(--pure-black); padding: 15px 25px; border-bottom: 1px solid #333; }
+        .back-btn { display: inline-block; color: var(--text-color); text-decoration: none; font-weight: 900; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; font-family: 'Courier New', Courier, monospace; }
+        .back-btn span { color: var(--acid-green); margin-right: 5px; }
+        .back-btn:hover { color: var(--white); text-shadow: 0 0 10px var(--acid-green); }
+
+        main { flex: 1; max-width: 850px; margin: 40px auto; padding: 0 20px; width: 100%; }
+
+        .error-hero { text-align: center; margin-bottom: 40px; }
+        .error-tag { background: #333; color: var(--acid-green); padding: 5px 15px; font-weight: 900; border-radius: 4px; display: inline-block; margin-bottom: 10px; font-size: 1.2rem; border: 1px solid var(--acid-green); }
+        h1 { font-size: 2.5rem; color: var(--white); text-transform: uppercase; letter-spacing: -1px; line-height: 1.2; margin-bottom: 20px; }
+
+        .diagnosi-box { background: rgba(0, 255, 102, 0.05); border-left: 4px solid var(--acid-green); padding: 25px; margin-bottom: 40px; border-radius: 0 8px 8px 0; border: 1px solid #333; }
+        .diagnosi-box h2 { color: var(--acid-green); text-transform: uppercase; font-size: 1.2rem; margin-bottom: 10px; }
+
+        .video-section { margin-bottom: 50px; background: #000; border: 1px solid #333; border-radius: 8px; overflow: hidden; box-shadow: 0 0 20px rgba(0, 255, 102, 0.05); }
+        .video-header { background: #111; border-bottom: 1px solid #333; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .video-title { color: var(--danger); font-weight: 900; font-family: monospace; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        .terminal-log { background: #050505; padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; border-top: 1px solid #333; }
+        .terminal-log h3 { color: #555; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; border-bottom: 1px dashed #333; padding-bottom: 5px; }
+        .terminal-text p { color: #888; margin-bottom: 10px; line-height: 1.5; }
+        .terminal-text .highlight { color: var(--terminal-green); font-weight: bold;}
+
+        /* TABELLA P-SETTINGS */
+        .tech-table-container { background: #0a0a0a; border: 1px solid #333; border-radius: 8px; overflow: hidden; margin-bottom: 50px; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        th { background: #111; color: var(--acid-green); text-align: left; padding: 15px; text-transform: uppercase; border-bottom: 1px solid #333; font-weight: 900; }
+        td { padding: 15px; border-bottom: 1px solid #111; color: #ccc; }
+        td strong { color: var(--white); }
+        tr:hover { background: rgba(0, 255, 102, 0.05); }
+
+        .scudo-legale-web { background: rgba(20, 0, 0, 0.4); border: 1px solid var(--danger); border-left: 5px solid var(--danger); padding: 25px; border-radius: 6px; margin-top: 40px; margin-bottom: 20px; font-size: 0.85rem; color: #999; }
+        .scudo-legale-web h2 { color: var(--danger); font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-content"><img src="img/logo-header.png" alt="MONO DOOM" class="logo-header"><p class="claim">RESURRECT THE BEAST.</p></div>
+</header>
+<nav><a href="dualtron.html" class="back-btn"><span>&lt;&lt;</span> Ritorna al Garage Dualtron</a></nav>
+
+<main>
+    <div class="error-hero">
+        <span class="error-tag">ELETTRONICA & CONTROLLO</span>
+        <h1>P-Settings EY3</h1>
+    </div>
+
+    <div class="diagnosi-box">
+        <h2>Accesso al Database EEPROM</h2>
+        <p>I parametri "P" (P-Settings) sono le costanti di base salvate nella memoria del display EY3. Determinano come il controller interpreta il segnale dell'acceleratore e come gestisce il pacco batteria. Un'errata configurazione può simulare un guasto (es. taglio di potenza precoce) o usurare le celle al Litio.</p>
+    </div>
+
+    <div class="video-section">
+        <div class="video-header"><span class="video-title">Feed Video - P-Settings Configuration</span></div>
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/z5D_D6H_kKc?rel=0" title="EY3 P-Settings Guide" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="terminal-log">
+            <h3>>> Log Dati Telemetrici (Trascrizione Forense)</h3>
+            <div class="terminal-text">
+                <p>> Operazione: <strong>Accesso root EY3.</strong></p>
+                <p>> Comando: <span class="highlight">Tenere premuto [MODE] per 3 secondi. Premere [MODE] per scorrere i parametri. Premere [DOT] per modificare il valore.</span></p>
+                <p>> Warning: Non alterare i parametri P0, P1, P2 e P3. Inserire valori di voltaggio errati manderà il BMS in blocco protettivo.</p>
+            </div>
+        </div>
+    </div>
+
+    <h2 style="color: var(--white); text-transform: uppercase; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px;">Costanti di Configurazione</h2>
+    <div class="tech-table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Parametro</th>
+                    <th>Funzione (Hardware)</th>
+                    <th>Setup Consigliato (Forense)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>P0</strong></td>
+                    <td>Diametro Ruota (Pollici)</td>
+                    <td><strong>8.0 / 10.0 / 11.0</strong> (In base al modello. Calibra il tachimetro).</td>
+                </tr>
+                <tr>
+                    <td><strong>P1</strong></td>
+                    <td>Voltaggio Sistema</td>
+                    <td><strong>52V / 60V / 72V</strong> (Incrociare col voltaggio nominale della batteria).</td>
+                </tr>
+                <tr>
+                    <td><strong>P2</strong></td>
+                    <td>Poli Magnetici Motore</td>
+                    <td><strong>10 o 15</strong> (Pre-impostato di fabbrica, non alterare).</td>
+                </tr>
+                <tr>
+                    <td><strong>P3</strong></td>
+                    <td>Segnale Tachimetro</td>
+                    <td><strong>0</strong> (Sensore interno al motore).</td>
+                </tr>
+                <tr>
+                    <td><strong>P4</strong></td>
+                    <td>Unità di Misura</td>
+                    <td><strong>0</strong> (Km/h) / <strong>1</strong> (Mph).</td>
+                </tr>
+                <tr>
+                    <td><strong>P5</strong></td>
+                    <td>Zero Start (Partenza)</td>
+                    <td><strong>0</strong> (Parte da fermo - Pericoloso) / <strong>1</strong> (Richiede spinta - Sicuro).</td>
+                </tr>
+                <tr>
+                    <td><strong>P6</strong></td>
+                    <td>Cruise Control</td>
+                    <td><strong>0</strong> (Off) / <strong>1</strong> (On - Mantiene la velocità costante. Sconsigliato in città).</td>
+                </tr>
+                <tr>
+                    <td><strong>P7</strong></td>
+                    <td>Accelerazione Iniziale</td>
+                    <td><strong>0</strong> (Erogazione Max - Scatto) / <strong>5</strong> (Erogazione Morbida - Eco).</td>
+                </tr>
+                <tr>
+                    <td><strong>P8</strong></td>
+                    <td>Taglio Potenza (Limitatore %)</td>
+                    <td><strong>100</strong> (Solo aree private. 100% della corrente ai motori).</td>
+                </tr>
+                <tr>
+                    <td><strong>P9</strong></td>
+                    <td>Battery Saver Mode</td>
+                    <td><strong>1</strong> (Max risparmio) / <strong>2</strong> (Medio) / <strong>3</strong> (Nessun risparmio - Consuma la batteria fino in fondo).</td>
+                </tr>
+                <tr>
+                    <td><strong>PA</strong></td>
+                    <td>Frenata Elettromagnetica (EBS)</td>
+                    <td><strong>0</strong> (Off) / <strong>1-5</strong> (Forza dell'EBS. Usare 2 o 3 per non friggere il controller).</td>
+                </tr>
+                <tr>
+                    <td><strong>PB</strong></td>
+                    <td>Intensità Retroilluminazione</td>
+                    <td><strong>0</strong> (Spento) / <strong>5</strong> (Max luminosità).</td>
+                </tr>
+                <tr>
+                    <td><strong>PD</strong></td>
+                    <td>Auto Spegnimento ABS</td>
+                    <td><strong>0</strong> (ABS Off) / <strong>1</strong> (ABS On - Crea micro-frenate a scatti. Spesso disattivato dai rider).</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<section class="scudo-legale-web" style="max-width: 1200px; margin: 40px auto; padding: 25px; font-size: 0.85rem; color: #999; border: 1px solid #ff003c; border-left: 5px solid #ff003c; background: rgba(20, 0, 0, 0.4); border-radius: 6px;">
+    <h2 style="color: #ff003c; font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;">⚠️ Nota di Esclusione di Responsabilità (Disclaimer Specifico di Pagina)</h2>
+    <p>I dati metrologici, le segnature esadecimali, gli schemi elettrici di campionamento e i metodi di indagine meccanica riportati in questa pagina derivano da analisi teoriche OSINT e documentazione di pubblico dominio. Le informazioni sono destinate esclusivamente a scopo di studio e approfondimento scientifico per l'analisi forense e la ricostruzione dei sinistri.</p>
+    <p>L'applicazione pratica delle nozioni qui esposte su veicoli destinati alla circolazione stradale avviene sotto l'esclusiva responsabilità dell'utente. L'Editore non risponde di eventuali danni fisici, patrimoniali o sanzioni legali derivanti dall'uso improprio del materiale didattico fornito.</p>
+</section>
+</main>
+
+<footer style="background-color: #000; border-top: 1px solid #222; padding: 40px 20px 20px; width: 100%;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
+        
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+            
+            <a href="dualtron.html" style="text-decoration: none; display: flex; align-items: center; transition: 0.3s;">
+              <span style="color: #00ff66; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #00ff66; padding-bottom: 2px;">&larr; Torna al Garage Dualtron</span>
+            </a>
+            
+            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; opacity: 0.7; transition: 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                <img src="img/logo-testo.png" alt="MONO DOOM Home" style="max-width: 120px;">
+                <span style="color: #777; font-size: 0.7rem; font-weight: bold; margin-left: 15px; text-transform: uppercase; letter-spacing: 1px;">Hub Centrale</span>
+            </a>
+        </div>
+
+        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <a href="privacy.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#00ff66'" onmouseout="this.style.color='#555'">Privacy Policy</a>
+            <a href="cookie.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#00ff66'" onmouseout="this.style.color='#555'">Cookie Policy</a>
+            <a href="termini.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#00ff66'" onmouseout="this.style.color='#555'">Termini e Condizioni</a>
+            <a href="disclaimer.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#00ff66'" onmouseout="this.style.color='#555'">Disclaimer Legale</a>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 35px; padding-top: 20px; border-top: 1px solid #111; color: #333; font-size: 0.7rem; font-family: sans-serif;">
+        &copy; 2026 MONO DOOM. Tutti i diritti riservati. I marchi registrati appartengono ai rispettivi proprietari. Documentazione ad uso informativo e peritale.
+    </div>
+</footer>

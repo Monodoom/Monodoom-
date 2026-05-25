@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garage Dualtron | MONO DOOM</title>
+    <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#050505">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #e0e0e0;
+            --white: #ffffff;
+            --pure-black: #000000;
+            --danger: #ff003c;
+            --card-bg: #111111;
+            --acid-green: #00ff66; /* Colore distintivo Dualtron */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--pure-black);
+            border-bottom: 2px solid var(--acid-green);
+            padding: 20px 0 10px;
+            text-align: center;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-header {
+            max-height: 110px;
+            width: auto;
+            display: block;
+        }
+
+        .claim {
+            color: var(--white);
+            font-weight: 900;
+            font-style: italic;
+            letter-spacing: 3px;
+            font-size: 1.05rem;
+            margin-top: 5px;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px var(--acid-green);
+        }
+
+        nav {
+            background-color: var(--pure-black);
+            padding: 15px 25px;
+            border-bottom: 1px solid #222;
+        }
+
+        .back-btn {
+            display: inline-block;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .back-btn span {
+            color: var(--acid-green);
+            margin-right: 5px;
+        }
+
+        .back-btn:hover {
+            color: var(--white);
+            text-shadow: 0 0 10px var(--acid-green);
+        }
+
+        main {
+            flex: 1;
+            padding: 40px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .brand-hero {
+            background: linear-gradient(145deg, #111, #000);
+            padding: 50px 20px;
+            text-align: center;
+            border: 1px solid #333;
+            border-radius: 12px;
+            margin-bottom: 50px;
+            box-shadow: inset 0 0 20px rgba(0, 255, 102, 0.05);
+        }
+
+        .brand-hero h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .brand-hero h1 span {
+            color: var(--acid-green);
+            text-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+        }
+
+        .brand-hero p {
+            color: #888;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 20px auto 0;
+            font-weight: 700;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--white);
+            margin: 60px 0 30px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .section-title span {
+            color: var(--acid-green);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 25px;
+            display: flex;
+            gap: 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--acid-green);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 102, 0.15);
+            background: #0a140a;
+        }
+
+        .c-icon {
+            background: rgba(0, 255, 102, 0.1);
+            color: var(--acid-green);
+            font-size: 2.2rem;
+            font-weight: 900;
+            height: 80px;
+            width: 80px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 1px solid rgba(0, 255, 102, 0.4);
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+        }
+
+        .c-info h3 {
+            margin: 0 0 8px 0;
+            color: var(--white);
+            font-size: 1.3rem;
+            text-transform: uppercase;
+        }
+
+        .c-info p {
+            margin: 0;
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .btn-arrow {
+            margin-top: 15px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--acid-green);
+        }
+
+        /* Stile per le card "Zona Rossa" / Hacking Estremo */
+        .card.zona-rossa {
+            border-color: var(--danger);
+        }
+        .card.zona-rossa .c-icon {
+            color: var(--danger);
+            border-color: var(--danger);
+            background: rgba(255, 0, 60, 0.1);
+            text-shadow: 0 0 10px rgba(255, 0, 60, 0.5);
+        }
+        .card.zona-rossa .btn-arrow {
+            color: var(--danger);
+        }
+        .card.zona-rossa:hover {
+            background: #1a0505;
+            box-shadow: 0 10px 25px rgba(255, 0, 60, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="img/logo-header.png" alt="MONO DOOM" class="logo-header">
+            <p class="claim">RESURRECT THE BEAST.</p>
+        </div>
+    </header>
+    
+    <nav>
+        <a href="index.html" class="back-btn"><span>&lt;&lt;</span> RITORNA AL GARAGE CENTRALE</a>
+    </nav>
+    
+    <main>
+        <div class="brand-hero">
+            <h1>Garage <span>Dualtron</span></h1>
+            <p>Seleziona il protocollo. Guide per l'ecosistema Minimotors: diagnostica EY3, risoluzione dei problemi strutturali e modifiche ad alta potenza.</p>
+        </div>
+
+        <h2 class="section-title"><span>#</span> Errori e Diagnostica</h2>
+        <div class="grid">
+            <a href="dualtron-error-codes.html" class="card">
+                <div class="c-icon">📟</div>
+                <div class="c-info">
+                    <h3>Codici Errore EY3</h3>
+                    <p>La lista completa dei messaggi diagnostici (da E02 a E10) e i protocolli per risolvere ogni anomalia.</p>
+                    <span class="btn-arrow">Avvia Protocollo →</span>
+                </div>
+            </a>
+            <a href="dualtron-psettings.html" class="card">
+                <div class="c-icon">⚙️</div>
+                <div class="c-info">
+                    <h3>P-Settings EY3</h3>
+                    <p>Tutti i parametri segreti del display: da P0 a Pd. Impostazioni ottimali per accelerazione e gestione batteria.</p>
+                    <span class="btn-arrow">Avvia Protocollo →</span>
+                </div>
+            </a>
+        </div>
+
+        <h2 class="section-title"><span>#</span> Meccanica e Difetti Congeniti</h2>
+        <div class="grid">
+            <a href="dualtron-stem-wobble.html" class="card">
+                <div class="c-icon">🔧</div>
+                <div class="c-info">
+                    <h3>Gioco Piantone (Stem Wobble)</h3>
+                    <p>Risoluzione del problema strutturale con installazione di rinforzi (Rugged Clamp) e serraggio bulloni.</p>
+                    <span class="btn-arrow">Avvia Protocollo →</span>
+                </div>
+            </a>
+            <a href="dualtron-sospensioni.html" class="card">
+                <div class="c-icon">🛠️</div>
+                <div class="c-info">
+                    <h3>Sospensioni in Gomma</h3>
+                    <p>Manutenzione delle cartucce PU: rimozione scricchiolii e procedura di sostituzione per variare la rigidità.</p>
+                    <span class="btn-arrow">Avvia Protocollo →</span>
+                </div>
+            </a>
+            <a href="dualtron-freni-spurgo.html" class="card">
+                <div class="c-icon">🛑</div>
+                <div class="c-info">
+                    <h3>Freni: Spurgo e Regolazione</h3>
+                    <p>Manutenzione degli impianti Nutt. Centratura pinze, sostituzione pastiglie e bleeding completo.</p>
+                    <span class="btn-arrow">Avvia Protocollo →</span>
+                </div>
+            </a>
+        </div>
+
+        <h2 class="section-title"><span>#</span> Modding & Hacking Estremo</h2>
+        <div class="grid">
+            <a href="dualtron-controller-cooling.html" class="card">
+                <div class="c-icon">🧊</div>
+                <div class="c-info">
+                    <h3>Gestione Termica Controller</h3>
+                    <p>Prevenire la fusione dei MOSFET: ricollocazione thermal pad e installazione di dissipatori sul deck.</p>
+                    <span class="btn-arrow">Avvia Protocollo →</span>
+                </div>
+            </a>
+             <a href="dualtron-sblocco-centralina.html" class="card zona-rossa">
+                <div class="c-icon">⚡</div>
+                <div class="c-info">
+                    <h3>Sblocco Limitatori & Potenza</h3>
+                    <p>Bypass dei blocchi hardware e rimozione limiti software per scatenare le massime prestazioni in area privata.</p>
+                    <span class="btn-arrow">Zona Rossa →</span>
+                </div>
+            </a>
+            <a href="dualtron-shunt-mod.html" class="card zona-rossa">
+                <div class="c-icon">🔥</div>
+                <div class="c-info">
+                    <h3>Shunt Modding</h3>
+                    <p>Saldatura del controller per incrementare gli Ampere erogati ai motori. Accelerazione istantanea. Rischio estremo.</p>
+                    <span class="btn-arrow">Zona Rossa →</span>
+                </div>
+            </a>
+        </div>
+    </main>
+    
+    <section class="scudo-legale-web" style="max-width: 1200px; margin: 40px auto; padding: 25px; font-size: 0.85rem; color: #999; border: 1px solid #ff003c; border-left: 5px solid #ff003c; background: rgba(20, 0, 0, 0.4); border-radius: 6px;">
+        <h2 style="color: #ff003c; font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;">⚠️ Nota di Esclusione di Responsabilità (Disclaimer Specifico di Pagina)</h2>
+        <p>I dati metrologici, le segnature esadecimali, gli schemi elettrici di campionamento e i metodi di indagine meccanica riportati in questa pagina derivano da analisi teoriche OSINT e documentazione di pubblico dominio. Le informazioni sono destinate esclusivamente a scopo di studio e approfondimento scientifico per l'analisi forense e la ricostruzione dei sinistri.</p>
+        <p>L'applicazione pratica delle nozioni qui esposte su veicoli destinati alla circolazione stradale avviene sotto l'esclusiva responsabilità dell'utente. L'Editore non risponde di eventuali danni fisici, patrimoniali o sanzioni legali derivanti dall'uso improprio del materiale didattico fornito.</p>
+    </section>
+</main>
+
+<footer style="background-color: #000; border-top: 1px solid #222; padding: 40px 20px 20px; width: 100%;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
+        <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+            <img src="img/logo-testo.png" alt="MONO DOOM Home" style="max-width: 150px;">
+            <span style="color: #555; font-size: 0.75rem; font-weight: bold; margin-left: 15px; text-transform: uppercase; letter-spacing: 1px;">&larr; Torna all'Hub Centrale</span>
+        </a>
+        <div style="display: flex; gap: 20px;">
+            <a href="privacy.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">Privacy Policy</a>
+            <a href="cookie.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">Cookie Policy</a>
+            <a href="termini.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">Termini e Condizioni</a>
+            <a href="disclaimer.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">Disclaimer Legale</a>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 30px; padding-top: 15px; border-top: 1px solid #111; color: #333; font-size: 0.7rem; font-family: sans-serif;">
+        &copy; 2026 MONO DOOM. Tutti i diritti riservati. I marchi registrati appartengono ai rispettivi proprietari. Documentazione ad uso informativo e peritale.
+    </div>
+</footer>
