@@ -2,14 +2,18 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Migliora il comfort dello Xiaomi montando la sospensione anteriore Monorim. Guida meccanica al montaggio ammortizzatore.">
     <title>Upgrade Sospensione Anteriore Xiaomi (Monorim) | MONO DOOM</title>
-   <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#050505">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -22,174 +26,232 @@
       ]
     }
     </script>
+
     <style>
-        /* INSERISCI QUI LO STESSO CODICE CSS E MEDIA QUERIES DEL FILE PRECEDENTE. (Ometto per non farti copiare km di testo, fai un copia incolla del tag <style> dal file sopra) */
-        :root { --bg-color: #050505; --text-color: #e0e0e0; --neon-blue: #00e5ff; --white: #ffffff; --pure-black: #000000; --danger: #ff003c; --card-bg: #111111; --terminal-green: #0f0; }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
-        header { background-color: var(--pure-black); border-bottom: 2px solid var(--neon-blue); padding: 20px 0 10px; text-align: center; }
-        .header-content { display: flex; flex-direction: column; justify-content: center; align-items: center; max-width: 1200px; margin: 0 auto; }
-        .logo-header { max-height: 110px; width: auto; display: block; }
-        .claim { color: var(--white); font-weight: 900; font-style: italic; letter-spacing: 3px; font-size: 1.05rem; margin-top: 5px; text-transform: uppercase; text-shadow: 0 0 5px var(--neon-blue); }
-        nav { background-color: var(--pure-black); padding: 15px 25px; text-align: left; border-bottom: 1px solid #333; }
-        .back-btn { display: inline-block; color: var(--text-color); text-decoration: none; font-weight: 900; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; font-family: 'Courier New', Courier, monospace; }
-        .back-btn span { color: var(--neon-blue); margin-right: 5px; }
-        .back-btn:hover { color: var(--white); text-shadow: 0 0 10px var(--neon-blue); }
-        main { flex: 1; max-width: 850px; margin: 40px auto; padding: 0 20px; width: 100%; }
-        .error-hero { text-align: center; margin-bottom: 40px; }
-        .error-tag { background: #333; color: white; padding: 5px 15px; font-weight: 900; border-radius: 4px; display: inline-block; margin-bottom: 10px; font-size: 1.2rem; }
-        h1 { font-size: 2.5rem; color: var(--white); text-transform: uppercase; letter-spacing: -1px; line-height: 1.2; margin-bottom: 20px; }
-        .diagnosi-box { background: rgba(0, 229, 255, 0.05); border-left: 4px solid var(--neon-blue); padding: 25px; margin-bottom: 40px; border-radius: 0 8px 8px 0; border: 1px solid #333; }
-        .diagnosi-box h2 { color: var(--neon-blue); text-transform: uppercase; font-size: 1.2rem; margin-bottom: 10px; }
-        .video-section { margin-bottom: 50px; background: #000; border: 1px solid #333; border-radius: 8px; overflow: hidden; box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); }
-        .video-header { background: #111; border-bottom: 1px solid #333; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
-        .video-title { color: var(--neon-blue); font-weight: 900; font-family: monospace; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
-        @keyframes pulse-danger { 0% { box-shadow: inset 0 0 0 rgba(255, 0, 60, 0.4); } 50% { box-shadow: inset 0 0 15px rgba(255, 0, 60, 0.2); } 100% { box-shadow: inset 0 0 0 rgba(255, 0, 60, 0); } }
-        .cc-alert-box { background: #1a0004; color: #ff003c; border-bottom: 1px solid #333; padding: 12px 20px; font-size: 0.85rem; animation: pulse-danger 2s infinite; display: flex; align-items: center; gap: 12px; line-height: 1.4; }
-        .cc-alert-box strong { color: var(--white); }
+        :root {
+            --bg-color: #050505; 
+            --text-color: #e0e0e0;
+            --danger: #ff003c;
+            --brand-xiaomi: #00e5ff;
+            --terminal-green: #0f0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* TESCHIO CENTRATO E PULSANTE */
+        .fixed-skull-wrapper { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; z-index: 0; pointer-events: none; }
+        .fixed-skull-img { 
+            width: 90vw; max-width: 600px; height: 90vh; max-height: 600px; 
+            background-image: url('img/teschio.png'); background-size: contain; background-position: center; background-repeat: no-repeat; 
+            opacity: 0.45; animation: heartbeat 3s infinite linear; 
+        }
+        @keyframes heartbeat { 
+            0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255,0,60,0.4)); } 
+            14% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(255,0,60,0.7)); } 
+            28% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255,0,60,0.4)); } 
+            42% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(0,229,255,0.7)); } 
+            70% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255,0,60,0.4)); } 
+        }
+
+        /* HEADER */
+        header { background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border-bottom: 2px solid var(--danger); padding: 10px 0; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .logo-header { max-width: 80vw; height: auto; max-height: 60px; object-fit: contain; display: block; margin: 0 auto 5px auto; }
+        .claim { color: #fff; font-weight: 900; font-style: italic; letter-spacing: 5px; font-size: 0.75rem; text-transform: uppercase; opacity: 0.7; }
+
+        /* MAIN CONTAINER */
+        main { flex: 1; padding: 30px 20px 60px; max-width: 900px; margin: 0 auto; width: 100%; position: relative; z-index: 10; }
+
+        /* BACK NAV */
+        .back-nav { margin-bottom: 30px; }
+        .back-nav a { display: inline-block; color: #aaa; text-decoration: none; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #aaa; padding-bottom: 3px; transition: 0.3s; }
+        .back-nav a:hover { color: #fff; border-color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+
+        /* CLASSE UNIVERSALE VETRO */
+        .glass-box { 
+            background: rgba(10, 10, 10, 0.4); 
+            backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); 
+            border: 1px solid rgba(255,255,255,0.08); 
+            border-radius: 8px; padding: 30px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4); 
+            margin-bottom: 30px;
+        }
+
+        /* HERO MECCANICA */
+        .mech-hero { text-align: center; margin-bottom: 40px; }
+        .mech-tag { background: rgba(0, 229, 255, 0.15); color: var(--brand-xiaomi); border: 1px solid var(--brand-xiaomi); padding: 5px 15px; font-weight: 900; border-radius: 4px; display: inline-block; margin-bottom: 15px; font-size: 1.2rem; box-shadow: 0 0 15px rgba(0,229,255,0.3); letter-spacing: 1px; font-family: 'Orbitron', sans-serif;}
+        .mech-hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 5vw, 3rem); color: #fff; text-transform: uppercase; margin: 0; text-shadow: 0 0 20px rgba(0,229,255,0.3);}
+
+        /* TITOLI SEZIONE */
+        .box-title { color: #fff; text-transform: uppercase; font-size: 1.3rem; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-family: 'Orbitron', sans-serif;}
+        
+        .diagnosi-box { border-left: 4px solid var(--brand-xiaomi); }
+        .diagnosi-box p { color: #ccc; line-height: 1.7; font-size: 1.05rem; }
+
+        /* VIDEO E ALERT */
+        .video-box { padding: 0; overflow: hidden; border: 1px solid #333; }
+        .cc-alert-box { background: rgba(255, 0, 60, 0.1); color: #ccc; border-bottom: 1px solid #333; padding: 15px; font-size: 0.9rem; display: flex; align-items: center; gap: 12px; line-height: 1.5; }
+        .cc-alert-box strong { color: var(--danger); }
         .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-        .terminal-log { background: #050505; padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; border-top: 1px solid #333; }
-        .terminal-log h3 { color: #555; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; border-bottom: 1px dashed #333; padding-bottom: 5px; }
-        .terminal-text p { color: #888; margin-bottom: 10px; line-height: 1.5; }
-        .terminal-text strong { color: var(--neon-blue); font-weight: normal; }
-        .terminal-text .highlight { color: var(--terminal-green); }
-        .arsenal-box { background: linear-gradient(145deg, #111, #0a0a0a); border: 1px solid var(--neon-blue); border-radius: 12px; padding: 30px; margin-bottom: 50px; position: relative; }
-        .arsenal-box::before { content: "ARSENALE NECESSARIO"; position: absolute; top: -12px; left: 20px; background: var(--bg-color); color: var(--neon-blue); font-weight: 900; padding: 0 10px; text-transform: uppercase; letter-spacing: 1px; }
-        .part-item { background: #000; border: 1px solid #333; padding: 20px; border-radius: 8px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
-        .part-item:hover { border-color: #555; }
+
+        /* TERMINALE */
+        .terminal-log { background: rgba(0,0,0,0.6); padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; border-top: 1px solid #333; }
+        .terminal-log h3 { color: #777; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; }
+        .terminal-text p { color: #888; margin-bottom: 8px; line-height: 1.5; }
+        .terminal-text strong { color: #fff; }
+        .highlight { color: var(--terminal-green); text-shadow: 0 0 5px var(--terminal-green); }
+
+        /* ARSENALE RICAMBI */
+        .arsenal-box { border-top: 4px solid var(--brand-xiaomi); }
+        .part-item { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 6px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
         .part-info { flex: 1; padding-right: 20px; }
-        .part-name { font-weight: 900; font-size: 1.2rem; color: var(--white); display: block; margin-bottom: 5px; text-transform: uppercase; }
+        .part-name { font-weight: 900; font-size: 1.1rem; color: var(--brand-xiaomi); display: block; margin-bottom: 5px; text-transform: uppercase; }
         .part-desc { font-size: 0.9rem; color: #aaa; }
+        
         .buy-buttons { display: flex; gap: 10px; flex-shrink: 0; }
-        .btn { padding: 10px 15px; border-radius: 4px; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; text-decoration: none; text-align: center; transition: 0.3s; }
+        .btn { padding: 10px 15px; border-radius: 4px; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; text-decoration: none; text-align: center; transition: 0.3s; }
         .btn-amz { background: #FF9900; color: #000; }
-        .btn-amz:hover { background: #e68a00; box-shadow: 0 0 10px rgba(255, 153, 0, 0.5); }
+        .btn-amz:hover { background: #e68a00; box-shadow: 0 0 15px rgba(255, 153, 0, 0.4); }
         .btn-ali { background: #ff003c; color: #fff; }
-        .btn-ali:hover { background: #cc0030; box-shadow: 0 0 10px rgba(255, 0, 60, 0.5); }
-        .protocol-section h2 { color: var(--neon-blue); text-transform: uppercase; margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .step { position: relative; padding-left: 50px; margin-bottom: 40px; }
-        .step-num { position: absolute; left: 0; top: 0; width: 35px; height: 35px; background: var(--neon-blue); color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.2rem; box-shadow: 0 0 10px rgba(0, 229, 255, 0.5); }
-        .step h3 { color: var(--white); text-transform: uppercase; margin-bottom: 10px; font-size: 1.2rem; }
-        .step p { color: #aaa; }
-        footer { background-color: var(--pure-black); border-top: 2px solid var(--neon-blue); padding: 60px 20px 30px; margin-top: auto; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; text-align: left; }
-        .footer-col h4 { color: var(--neon-blue); margin-bottom: 15px; text-transform: uppercase; font-size: 1rem; }
-        .footer-col p { color: #888; font-size: 0.85rem; line-height: 1.5; }
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 10px; }
-        .footer-col ul li a { color: #888; text-decoration: none; transition: 0.3s; font-size: 0.85rem; }
-        .footer-col ul li a:hover { color: var(--white); }
-        .legal-bottom { text-align: center; margin-top: 50px; padding-top: 25px; border-top: 1px solid #222; color: #444; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
-        @media (max-width: 768px) { .part-item { flex-direction: column; align-items: flex-start; gap: 15px; } .buy-buttons { width: 100%; flex-direction: column; } .btn { width: 100%; } }
+        .btn-ali:hover { background: #cc0030; box-shadow: 0 0 15px rgba(255, 0, 60, 0.4); }
+
+        /* PROTOCOLLO STEPS */
+        .step-container { display: flex; gap: 15px; margin-bottom: 25px; }
+        .step-num { width: 40px; height: 40px; background: rgba(0, 229, 255, 0.1); color: var(--brand-xiaomi); border: 1px solid var(--brand-xiaomi); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.2rem; flex-shrink: 0; font-family: 'Orbitron', sans-serif;}
+        .step-content h3 { color: #fff; text-transform: uppercase; margin-bottom: 5px; font-size: 1.1rem; }
+        .step-content p { color: #aaa; line-height: 1.6; }
+
+        /* DISCLAIMER */
+        .scudo-legale-web { border-left: 5px solid var(--danger); padding: 25px; font-size: 0.8rem; color: #999; text-align: justify; margin-top: 50px;}
+        .scudo-legale-web h2 { color: var(--danger); font-size: 0.9rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
+
+        /* FOOTER */
+        footer { background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); border-top: 1px solid #222; padding: 40px 20px; text-align: center; position: relative; z-index: 10; margin-top: auto;}
+        .footer-links { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin: 20px 0;}
+        .footer-links a { color: #777; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;}
+        .footer-links a:hover { color: var(--danger); }
+
+        @media (max-width: 768px) {
+            .glass-box { padding: 20px; }
+            .part-item { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .buy-buttons { width: 100%; flex-direction: column; }
+            .cc-alert-box { flex-direction: column; text-align: center; }
+        }
     </style>
 </head>
 <body>
 
+<div class="fixed-skull-wrapper">
+    <div class="fixed-skull-img"></div>
+</div>
+
 <header>
-    <div class="header-content"><img src="img/logo-header.png" alt="MONO DOOM" class="logo-header"><p class="claim">RESURRECT THE BEAST.</p></div>
+    <div class="header-content"><a href="index.html"><img src="img/logo-header.png" alt="MONO DOOM" class="logo-header"></a><p class="claim">RESURRECT THE BEAST.</p></div>
 </header>
-<nav><a href="xiaomi.html" class="back-btn"><span>&lt;&lt;</span> Ritorna al Protocollo Xiaomi</a></nav>
 
 <main>
-    <div class="error-hero">
-        <span class="error-tag">PROTOCOLLO MECCANICO</span>
+    <div class="back-nav"><a href="xiaomi.html">⟵ Torna al Garage Xiaomi</a></div>
+
+    <div class="mech-hero">
+        <span class="mech-tag">PROTOCOLLO MECCANICO</span>
         <h1>Installazione Sospensioni</h1>
     </div>
 
-    <div class="diagnosi-box">
-        <h2>Il Limite dello Xiaomi</h2>
-        <p>Zero comfort sui sampietrini, colpi secchi sui polsi e saldature della batteria che saltano (Errore 21). Lo Xiaomi nasce con forcelle rigide. Montare un braccio oscillante anteriore trasforma il mezzo da "giocattolo di legno" a incrociatore stradale.</p>
-    </div>
+    <section class="glass-box diagnosi-box">
+        <h2 class="box-title" style="color: var(--brand-xiaomi);">Il Limite dello Xiaomi</h2>
+        <p>Zero comfort sui sampietrini, colpi secchi sui polsi e saldature della batteria che saltano (innescando il temuto Errore 21). Lo Xiaomi nasce con forcelle rigide. Montare un braccio oscillante anteriore trasforma il mezzo da "giocattolo di legno" a incrociatore stradale, assorbendo le asperità urbane.</p>
+    </section>
 
-    <div class="video-section">
-        <div class="video-header"><span class="video-title">Feed Video - Upgrade Ammortizzatori</span></div>
-        <div class="cc-alert-box"><span style="font-size: 1.2rem;">⚠️</span><span><strong>ATTIVA I SOTTOTITOLI ITA:</strong> Fai partire il video, poi clicca sull'icona <strong>[CC]</strong> o sull'ingranaggio <strong>(⚙️)</strong> nel player.</span></div>
+    <section class="glass-box video-box">
+        <div class="cc-alert-box">
+            <span style="font-size: 1.5rem;">⚠️</span>
+            <span><strong>ATTIVA I SOTTOTITOLI ITA:</strong> Fai partire il video, poi clicca sull'icona <strong>[CC]</strong> o sull'ingranaggio <strong>(⚙️)</strong> in basso a destra nel player per leggere le istruzioni operative.</span>
+        </div>
         <div class="video-wrapper">
             <iframe src="https://www.youtube.com/embed/Y-rjSFBEiOE?cc_load_policy=1&cc_lang_pref=it&hl=it&rel=0&modestbranding=1" title="Montaggio Sospensione Xiaomi" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="terminal-log">
-            <h3>>> Log Dati Telemetrici (Trascrizione SEO)</h3>
+            <h3>>> Log Dati Telemetrici (OSINT)</h3>
             <div class="terminal-text">
-                <p>> Upgrade: <strong>Montaggio Sospensione Anteriore Monorim (Leveraggi o Idraulica) su Xiaomi M365/Pro.</strong></p>
-                <p>> Obiettivo: Assorbimento vibrazioni, preservazione <span class="highlight">BMS batteria</span>, aumento tenuta di strada.</p>
+                <p>> Upgrade: <strong>Montaggio Sospensione Anteriore Monorim (Leveraggi o Idraulica) su Xiaomi M365/Pro/1S.</strong></p>
+                <p>> Obiettivo: Assorbimento vibrazioni ad alta frequenza, preservazione <span class="highlight">BMS batteria</span>, aumento della tenuta di strada.</p>
                 <p>> Necessario: Rimozione del gruppo ruota motore, sostituzione del cannotto di sterzo e ingrassaggio dei cuscinetti sterzo (headset).</p>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="arsenal-box">
+    <section class="glass-box arsenal-box">
+        <h2 class="box-title" style="color: var(--brand-xiaomi);">Arsenale Necessario</h2>
+        
         <div class="part-item">
             <div class="part-info">
-                <span class="part-name">Sospensione Anteriore (Monorim V4 / V5)</span>
-                <span class="part-desc">Il kit definitivo per Xiaomi. Include molla gialla (morbida) o blu (rigida) in base al tuo peso.</span>
+                <span class="part-name">1. Sospensione Anteriore (Monorim V4 / V5)</span>
+                <span class="part-desc">Il kit definitivo per Xiaomi. Include molla gialla (morbida, per under 70kg) o blu (rigida, per over 70kg) in base al tuo peso.</span>
             </div>
             <div class="buy-buttons">
                 <a href="https://www.amazon.it/s?k=sospensione+monorim+xiaomi" target="_blank" class="btn btn-amz">Amazon (24h)</a>
                 <a href="https://it.aliexpress.com/w/wholesale-monorim-xiaomi.html" target="_blank" class="btn btn-ali">AliExpress</a>
             </div>
         </div>
+
         <div class="part-item">
             <div class="part-info">
-                <span class="part-name">Grasso al Litio per Cuscinetti</span>
-                <span class="part-desc">Se smonti lo sterzo senza rimettere grasso pulito, tra un mese sentirai scricchiolare tutto.</span>
+                <span class="part-name">2. Grasso al Litio per Cuscinetti</span>
+                <span class="part-desc">Se smonti lo sterzo senza rimettere grasso fresco e pulito sui cuscinetti a sfera, tra un mese sentirai scricchiolare tutto.</span>
             </div>
             <div class="buy-buttons">
                 <a href="https://www.amazon.it/s?k=grasso+litio+cuscinetti" target="_blank" class="btn btn-amz">Vedi su Amazon</a>
             </div>
         </div>
-    </div>
-
-    <div class="protocol-section">
-        <h2>Protocollo di Installazione</h2>
-        <div class="step">
-            <div class="step-num">1</div>
-            <h3>Estrazione Motore e Forcella</h3>
-            <p>Scollega il freno, rimuovi i catarifrangenti laterali e svita i dadi da 18mm per estrarre la ruota anteriore. Poi smonta il meccanismo di piegatura e sfila verso il basso l'intero blocco forcella originale dal telaio.</p>
-        </div>
-        <div class="step">
-            <div class="step-num">2</div>
-            <h3>Cuscinetti e Innesto Monorim</h3>
-            <p>Pulisci l'alloggiamento nel telaio e applica abbondante grasso al litio. Inserisci il nuovo stelo della sospensione, incastra i cuscinetti superiori e serra bene il collare per evitare "giochi" o "wobble" del manubrio.</p>
-        </div>
-        <div class="step">
-            <div class="step-num">3</div>
-            <h3>Assemblaggio Finale</h3>
-            <p>Monta il braccio oscillante e l'ammortizzatore a molla (o idraulico) seguendo lo schema del video. Reinstalla la ruota motore, regola il parafango in alluminio del kit e chiudi i cavi in eccesso con delle fascette.</p>
-        </div>
-    </div>
-</main>
-<section class="scudo-legale-web" style="max-width: 1200px; margin: 40px auto; padding: 25px; font-size: 0.85rem; color: #999; border: 1px solid #ff003c; border-left: 5px solid #ff003c; background: rgba(20, 0, 0, 0.4); border-radius: 6px;">
-        <h2 style="color: #ff003c; font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;">⚠️ Nota di Esclusione di Responsabilità (Disclaimer Specifico di Pagina)</h2>
-        <p>I dati metrologici, le segnature esadecimali, gli schemi elettrici di campionamento e i metodi di indagine meccanica riportati in questa pagina derivano da analisi teoriche OSINT e documentazione di pubblico dominio. Le informazioni sono destinate esclusivamente a scopo di studio e approfondimento scientifico per l'analisi forense e la ricostruzione dei sinistri.</p>
-        <p>L'applicazione pratica delle nozioni qui esposte su veicoli destinati alla circolazione stradale avviene sotto l'esclusiva responsabilità dell'utente. L'Editore non risponde di eventuali danni fisici, patrimoniali o sanzioni legali derivanti dall'uso improprio del materiale didattico fornito.</p>
     </section>
+
+    <section class="glass-box">
+        <h2 class="box-title">Protocollo di Installazione</h2>
+        
+        <div class="step-container">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h3>Estrazione Motore e Forcella</h3>
+                <p>Scollega il cavo del freno anteriore, rimuovi i catarifrangenti laterali e svita i dadi da 18mm per estrarre la ruota motore. Successivamente smonta il meccanismo di piegatura del piantone e sfila verso il basso l'intero blocco forcella rigida originale estraendola dal telaio.</p>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h3>Cuscinetti e Innesto Monorim</h3>
+                <p>Pulisci accuratamente l'alloggiamento superiore e inferiore nel telaio (headtube) e applica abbondante grasso al litio. Inserisci il nuovo stelo della sospensione, incastra correttamente i cuscinetti a sfera e serra bene il collare superiore per evitare giochi o "wobble" del manubrio in frenata.</p>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h3>Assemblaggio Finale</h3>
+                <p>Monta il braccio oscillante e l'ammortizzatore a molla (o la variante pneumatica) seguendo scrupolosamente lo schema dei leveraggi mostrato nel video. Reinstalla la ruota motore, regola l'altezza del parafango in alluminio fornito nel kit e fissa saldamente i cavi in eccesso utilizzando delle fascette da elettricista.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="scudo-legale-web glass-box">
+        <h2>⚠️ Esclusione di Responsabilità</h2>
+        <p>I dati, gli schemi e i metodi di indagine riportati in questa pagina derivano da documentazione OSINT. Le informazioni sono destinate a scopo di studio e approfondimento tecnico. L'applicazione pratica delle nozioni qui esposte su veicoli avviene sotto l'esclusiva responsabilità dell'utente. L'Editore declina ogni responsabilità per danni hardware o lesioni derivanti dall'uso di queste informazioni o dall'acquisto di ricambi non originali.</p>
+    </section>
+
 </main>
 
-<footer style="background-color: #000; border-top: 1px solid #222; padding: 40px 20px 20px; width: 100%;">
-    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
-        
-        <div style="display: flex; flex-direction: column; gap: 15px;">
-            
-            <a href="xiaomi.html" style="text-decoration: none; display: flex; align-items: center; transition: 0.3s;">
-                <span style="color: #00e5ff; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #00e5ff; padding-bottom: 2px;">&larr; Torna al Garage Xiaomi</span>
-            </a>
-            
-            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; opacity: 0.7; transition: 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
-                <img src="img/logo-testo.png" alt="MONO DOOM Home" style="max-width: 120px;">
-                <span style="color: #777; font-size: 0.7rem; font-weight: bold; margin-left: 15px; text-transform: uppercase; letter-spacing: 1px;">Hub Centrale</span>
-            </a>
-        </div>
-
-        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-            <a href="privacy.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Privacy Policy</a>
-            <a href="cookie.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Cookie Policy</a>
-            <a href="termini.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Termini e Condizioni</a>
-            <a href="disclaimer.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Disclaimer Legale</a>
-        </div>
+<footer>
+    <img src="img/logo-testo.png" alt="MONO DOOM" style="max-width: 150px; opacity: 0.6; margin-bottom: 10px;">
+    <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="cookie.html">Cookie Policy</a>
+        <a href="termini.html">Termini e Condizioni</a>
+        <a href="disclaimer.html">Disclaimer Legale</a>
     </div>
-    
-    <div style="text-align: center; margin-top: 35px; padding-top: 20px; border-top: 1px solid #111; color: #333; font-size: 0.7rem; font-family: sans-serif;">
-        &copy; 2026 MONO DOOM. Tutti i diritti riservati. I marchi registrati appartengono ai rispettivi proprietari. Documentazione ad uso informativo e peritale.
+    <div style="color: #444; font-size: 0.65rem; margin-top: 15px;">
+        &copy; 2026 MONO DOOM. Tutti i diritti riservati.
     </div>
 </footer>
+
+</body>
+</html>
