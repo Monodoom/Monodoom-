@@ -2,264 +2,252 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Protocollo Xiaomi | MONO DOOM</title>
     
-   <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#050505">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --bg-color: #050505; 
             --text-color: #e0e0e0;
-            --neon-blue: #00e5ff;
-            --white: #ffffff;
-            --pure-black: #000000;
             --danger: #ff003c;
-            --hack: #5000ff;
-            --card-bg: #111111;
+            --brand-xiaomi: #00e5ff; /* Azzurro Neon */
+            --hack-color: #5000ff;   /* Viola Hacking */
+            --forensic-gold: #d4af37;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
 
-        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
-
-        /* HEADER - MISURA DECENTE E STABILE */
-        header { 
-            background-color: var(--pure-black); 
-            border-bottom: 2px solid var(--neon-blue); 
-            padding: 20px 0 10px; 
-            text-align: center; 
+        /* TESCHIO CENTRATO E PULSANTE */
+        .fixed-skull-wrapper { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; z-index: 0; pointer-events: none; }
+        .fixed-skull-img { 
+            width: 90vw; max-width: 600px; height: 90vh; max-height: 600px; 
+            background-image: url('img/teschio.png'); background-size: contain; background-position: center; background-repeat: no-repeat; 
+            opacity: 0.45; animation: heartbeat 3s infinite linear; 
         }
-        .header-content { 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            max-width: 1200px; 
-            margin: 0 auto; 
-        }
-        /* LOGO: 110px è il compromesso perfetto tra impatto e stabilità */
-        .logo-header { 
-            max-height: 110px; 
-            width: auto; 
-            display: block;
-        }
-        .claim { 
-            color: var(--white); 
-            font-weight: 900; 
-            font-style: italic; 
-            letter-spacing: 3px; 
-            font-size: 1.05rem; 
-            text-shadow: 0 0 5px var(--neon-blue); 
-            margin-top: 5px; 
-            text-transform: uppercase; 
+        @keyframes heartbeat { 
+            0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255,0,60,0.4)); } 
+            14% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(255,0,60,0.7)); } 
+            28% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255,0,60,0.4)); } 
+            42% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(0,229,255,0.7)); } 
+            70% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255,0,60,0.4)); } 
         }
 
-        /* NAVIGAZIONE SOLO RITORNO */
-        nav { background-color: var(--pure-black); padding: 15px 25px; text-align: left; border-bottom: 1px solid #222; }
-        .back-btn { 
-            display: inline-block; 
-            color: var(--text-color); 
-            text-decoration: none; 
-            font-weight: 900; 
-            font-size: 0.9rem; 
-            text-transform: uppercase; 
-            transition: 0.3s; 
-            font-family: 'Courier New', Courier, monospace; 
-        }
-        .back-btn span { color: var(--neon-blue); margin-right: 5px; }
-        .back-btn:hover { color: var(--white); text-shadow: 0 0 10px var(--neon-blue); }
+        /* HEADER */
+        header { background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border-bottom: 2px solid var(--danger); padding: 10px 0; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .logo-header { max-width: 80vw; height: auto; max-height: 60px; object-fit: contain; display: block; margin: 0 auto 5px auto; }
+        .claim { color: #fff; font-weight: 900; font-style: italic; letter-spacing: 5px; font-size: 0.75rem; text-transform: uppercase; opacity: 0.7; }
 
-        main { flex: 1; padding: 40px 20px; max-width: 1100px; margin: 0 auto; width: 100%; }
+        /* MAIN CONTAINER */
+        main { flex: 1; padding: 30px 20px 60px; max-width: 1100px; margin: 0 auto; width: 100%; position: relative; z-index: 10; }
+
+        /* BACK NAV */
+        .back-nav { margin-bottom: 30px; }
+        .back-nav a { display: inline-block; color: #aaa; text-decoration: none; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #aaa; padding-bottom: 3px; transition: 0.3s; }
+        .back-nav a:hover { color: #fff; border-color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+
+        /* CLASSE UNIVERSALE VETRO */
+        .glass-box { 
+            background: rgba(10, 10, 10, 0.4); 
+            backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); 
+            border: 1px solid rgba(255,255,255,0.08); 
+            border-radius: 8px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4); 
+        }
 
         /* HERO SEZIONE */
-        .brand-hero { background: linear-gradient(145deg, #111, #000); padding: 50px 20px; text-align: center; border: 1px solid #333; border-radius: 12px; margin-bottom: 50px; box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.05); }
-        .brand-hero h1 { font-size: 3.5rem; margin: 0; color: var(--white); text-transform: uppercase; letter-spacing: 3px; }
-        .brand-hero h1 span { color: var(--neon-blue); }
-        .brand-hero p { color: #888; font-size: 1.2rem; max-width: 700px; margin: 20px auto 0; font-weight: bold; }
+        .brand-hero { padding: 40px 20px; text-align: center; margin-bottom: 50px; border-top: 4px solid var(--brand-xiaomi); }
+        .brand-hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 6vw, 3.5rem); margin: 0; color: #fff; text-transform: uppercase; letter-spacing: 2px; }
+        .brand-hero h1 span { color: var(--brand-xiaomi); text-shadow: 0 0 15px rgba(0, 229, 255, 0.4); }
+        .brand-hero p { color: #bbb; font-size: 1.1rem; max-width: 700px; margin: 15px auto 0; }
 
-        .section-title { font-size: 2rem; color: var(--white); margin: 60px 0 30px 0; display: flex; align-items: center; gap: 15px; border-bottom: 2px solid #333; padding-bottom: 10px; text-transform: uppercase; }
-        .section-title span { color: var(--neon-blue); }
+        /* TITOLI SEZIONI */
+        .section-title { font-size: 1.6rem; color: #fff; margin: 50px 0 25px 0; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* GRIGLIE SCHEDE */
-        .error-grid, .mech-grid, .hack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        /* GRIGLIE */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         
-        .error-card, .mech-card, .hack-card { background: var(--card-bg); border: 1px solid #333; border-radius: 8px; padding: 25px; display: flex; gap: 20px; text-decoration: none; color: inherit; transition: 0.3s; }
+        .card { padding: 25px; display: flex; gap: 20px; text-decoration: none; color: inherit; transition: 0.3s; align-items: flex-start;}
         
-        .error-card:hover { border-color: var(--danger); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(255, 0, 60, 0.2); background: #1a0505; }
-        .mech-card:hover { border-color: var(--neon-blue); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0, 229, 255, 0.15); }
-        .hack-card:hover { border-color: var(--hack); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(80, 0, 255, 0.2); background: #08001a; }
+        /* HOVER EFFECTS SPECIFICI */
+        .error-card:hover { border-color: var(--danger); transform: translateY(-5px); background: rgba(20, 5, 5, 0.7); box-shadow: 0 10px 25px rgba(255, 0, 60, 0.2); }
+        .mech-card:hover { border-color: var(--brand-xiaomi); transform: translateY(-5px); background: rgba(5, 15, 20, 0.7); box-shadow: 0 10px 25px rgba(0, 229, 255, 0.15); }
+        .hack-card:hover { border-color: var(--hack-color); transform: translateY(-5px); background: rgba(10, 5, 25, 0.7); box-shadow: 0 10px 25px rgba(80, 0, 255, 0.2); }
 
-        .e-code { background: rgba(255, 0, 60, 0.1); color: var(--danger); font-size: 2.2rem; font-weight: 900; height: 80px; width: 80px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1px solid rgba(255, 0, 60, 0.4); text-shadow: 0 0 10px rgba(255,0,60,0.5); }
-        .e-info h3, .mech-info h3, .hack-info h3 { margin: 0 0 8px 0; color: var(--white); font-size: 1.3rem; text-transform: uppercase; }
-        .e-info p, .mech-info p, .hack-info p { margin: 0; color: #aaa; font-size: 0.9rem; line-height: 1.4; }
+        /* CONTENUTI CARD */
+        .e-code { background: rgba(255, 0, 60, 0.1); color: var(--danger); font-size: 1.8rem; font-weight: 900; height: 70px; width: 70px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1px solid rgba(255, 0, 60, 0.3); font-family: 'Orbitron', sans-serif;}
+        .card-icon { font-size: 2.2rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 70px; height: 70px; }
         
-        .btn-arrow, .mech-btn, .hack-btn { margin-top: 15px; font-weight: bold; font-size: 0.9rem; display: block; text-transform: uppercase; letter-spacing: 1px; }
-        .btn-arrow { color: var(--danger); }
-        .mech-btn { color: var(--neon-blue); }
-        .hack-btn { color: var(--hack); }
-
-        .mech-img, .hack-img { font-size: 2.5rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 60px; }
-
-        /* FOOTER NERO PURO */
-        footer { background-color: var(--pure-black); border-top: 2px solid var(--neon-blue); padding: 50px 20px 20px; margin-top: auto; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
-        .footer-col h4 { color: var(--neon-blue); margin-bottom: 15px; text-transform: uppercase; font-size: 1rem; }
-        .footer-col p { color: #888; font-size: 0.85rem; line-height: 1.5; }
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 10px; }
-        .footer-col ul li a { color: #888; text-decoration: none; transition: 0.3s; font-size: 0.85rem; }
-        .footer-col ul li a:hover { color: var(--white); }
+        .card-info h3 { margin: 0 0 8px 0; color: #fff; font-size: 1.15rem; text-transform: uppercase; }
+        .card-info p { margin: 0; color: #aaa; font-size: 0.85rem; line-height: 1.5; }
         
-        .legal-bottom { text-align: center; margin-top: 50px; padding-top: 25px; border-top: 1px solid #222; color: #555; font-size: 0.8rem; }
+        .btn-action { margin-top: 15px; font-weight: bold; font-size: 0.8rem; display: block; text-transform: uppercase; letter-spacing: 1px; }
+        .error-card .btn-action { color: var(--danger); }
+        .mech-card .btn-action { color: var(--brand-xiaomi); }
+        .hack-card .btn-action { color: var(--hack-color); }
+
+        /* DISCLAIMER SPECIFICO */
+        .scudo-legale-web { border-left: 5px solid var(--danger); padding: 30px; font-size: 0.85rem; color: #aaa; margin-top: 60px; text-align: justify; }
+        .scudo-legale-web h2 { color: var(--danger); font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
+
+        /* FOOTER */
+        footer { background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); border-top: 1px solid #222; padding: 40px 20px; text-align: center; position: relative; z-index: 10; margin-top: auto;}
+        .footer-links { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin: 20px 0;}
+        .footer-links a { color: #777; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;}
+        .footer-links a:hover { color: var(--brand-xiaomi); }
+
+        @media(max-width: 768px) {
+            .brand-hero { padding: 30px 15px; }
+            .card { flex-direction: column; text-align: center; align-items: center; padding: 20px;}
+            .e-code, .card-icon { margin-bottom: 10px; }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="header-content">
-            <img src="img/logo-header.png" alt="MONO DOOM" class="logo-header">
-            <p class="claim">RESURRECT THE BEAST.</p>
-        </div>
-    </header>
+<div class="fixed-skull-wrapper">
+    <div class="fixed-skull-img"></div>
+</div>
 
-    <nav>
-        <a href="index.html" class="back-btn"><span>&lt;&lt;</span> RITORNA AL GARAGE CENTRALE</a>
-    </nav>
+<header>
+    <div class="header-content"><a href="index.html"><img src="img/logo-header.png" alt="MONO DOOM" class="logo-header"></a><p class="claim">RESURRECT THE BEAST.</p></div>
+</header>
 
-    <main>
-        <div class="brand-hero">
-            <h1>Protocollo <span>Xiaomi</span></h1>
-            <p>Il tuo mezzo è in blocco. Il display suona. L'asfalto aspetta. Scegli il sintomo qui sotto, applica la procedura chirurgica e resuscita la bestia.</p>
-        </div>
+<main>
+    <div class="back-nav"><a href="index.html">⟵ Torna all'Hub Centrale</a></div>
 
-        <h2 class="section-title"><span>#</span> Fallimento Elettronico</h2>
-        <div class="error-grid">
-            <a href="errore-14-xiaomi.html" class="error-card">
-                <div class="e-code">E14</div>
-                <div class="e-info">
-                    <h3>Anomalia Acceleratore</h3>
-                    <p>Sensore Hall andato. Smetti di premere a vuoto. Sostituiscilo prima che bruci la centralina.</p>
-                    <span class="btn-arrow">Applica Cura →</span>
-                </div>
-            </a>
-            <a href="errore-15-xiaomi.html" class="error-card">
-                <div class="e-code">E15</div>
-                <div class="e-info">
-                    <h3>Leva Freno Bloccata</h3>
-                    <p>Sensore incastrato o magnete saltato. Il motore viene tagliato. Ripristina il contatto.</p>
-                    <span class="btn-arrow">Applica Cura →</span>
-                </div>
-            </a>
-            <a href="errore-18-xiaomi.html" class="error-card">
-                <div class="e-code">E18</div>
-                <div class="e-info">
-                    <h3>Sensori Motore Morti</h3>
-                    <p>I sensori all'interno della ruota non comunicano. Diagnosi cavi fusi e sostituzione.</p>
-                    <span class="btn-arrow">Applica Cura →</span>
-                </div>
-            </a>
-            <a href="errore-21-xiaomi.html" class="error-card">
-                <div class="e-code">E21</div>
-                <div class="e-info">
-                    <h3>Blocco BMS Batteria</h3>
-                    <p>Errore critico col pacco batteria. Rischio spegnimento. Procedura di sblocco forzato.</p>
-                    <span class="btn-arrow">Applica Cura →</span>
-                </div>
-            </a>
-        </div>
+    <div class="brand-hero glass-box">
+        <h1>Protocollo <span>Xiaomi</span></h1>
+        <p>Il tuo mezzo è in blocco. Il display suona. L'asfalto aspetta. Scegli il sintomo, applica la procedura chirurgica e resuscita la bestia.</p>
+    </div>
 
-        <h2 class="section-title"><span>#</span> Meccanica & Riparazioni</h2>
-        <div class="mech-grid">
-            <a href="freno.html" class="mech-card">
-                <div class="mech-img">🛑</div>
-                <div class="mech-info">
-                    <h3>Frenata Inesistente</h3>
-                    <p>Il disco posteriore non morde o fischia. Protocollo di centraggio pinza e pastiglie.</p>
-                    <span class="mech-btn">Regola Ora</span>
-                </div>
-            </a>
-            <a href="gioco-piantone.html" class="mech-card">
-                <div class="mech-img">🛴</div>
-                <div class="mech-info">
-                    <h3>Gioco Sterzo (Wobble)</h3>
-                    <p>Il manubrio balla e minaccia di spezzarsi. Elimina il gioco mortale dalla cerniera.</p>
-                    <span class="mech-btn">Elimina Gioco</span>
-                </div>
-            </a>
-            <a href="parafango-xiaomi.html" class="mech-card">
-                <div class="mech-img">🛡️</div>
-                <div class="mech-info">
-                    <h3>Parafango Tranciato</h3>
-                    <p>Vibrazioni letali hanno spezzato la plastica. Montaggio della staffa rigida antirottura.</p>
-                    <span class="mech-btn">Ripara Danno</span>
-                </div>
-            </a>
-        </div>
+    <h2 class="section-title"><span style="color: var(--danger);">#</span> Fallimento Elettronico</h2>
+    <div class="grid">
+        <a href="errore-14-xiaomi.html" class="card glass-box error-card">
+            <div class="e-code">E14</div>
+            <div class="card-info">
+                <h3>Anomalia Acceleratore</h3>
+                <p>Sensore Hall andato. Smetti di premere a vuoto. Sostituiscilo prima che bruci la centralina.</p>
+                <span class="btn-action">Applica Cura →</span>
+            </div>
+        </a>
+        <a href="errore-15-xiaomi.html" class="card glass-box error-card">
+            <div class="e-code">E15</div>
+            <div class="card-info">
+                <h3>Leva Freno Bloccata</h3>
+                <p>Sensore incastrato o magnete saltato. Il motore viene tagliato. Ripristina il contatto.</p>
+                <span class="btn-action">Applica Cura →</span>
+            </div>
+        </a>
+        <a href="errore-18-xiaomi.html" class="card glass-box error-card">
+            <div class="e-code">E18</div>
+            <div class="card-info">
+                <h3>Sensori Motore Morti</h3>
+                <p>I sensori all'interno della ruota non comunicano. Diagnosi cavi fusi e sostituzione.</p>
+                <span class="btn-action">Applica Cura →</span>
+            </div>
+        </a>
+        <a href="errore-21-xiaomi.html" class="card glass-box error-card">
+            <div class="e-code">E21</div>
+            <div class="card-info">
+                <h3>Blocco BMS Batteria</h3>
+                <p>Errore critico col pacco batteria. Rischio spegnimento. Procedura di sblocco forzato.</p>
+                <span class="btn-action">Applica Cura →</span>
+            </div>
+        </a>
+    </div>
 
-        <h2 class="section-title"><span style="color: #5000ff;">#</span> Modding & Hacking Extremo</h2>
-        <div class="hack-grid">
-            <a href="sblocco-xiaomi.html" class="hack-card">
-                <div class="hack-img">⚡</div>
-                <div class="hack-info">
-                    <h3>Sblocco Velocità & PRO</h3>
-                    <p>Flash del firmware Custom (CFW) per rimuovere il limitatore e installazione cruscotto digitale.</p>
-                    <span class="hack-btn">Esegui Hack</span>
-                </div>
-            </a>
-            <a href="sospensione-xiaomi.html" class="hack-card">
-                <div class="hack-img">🦾</div>
-                <div class="hack-info">
-                    <h3>Sospensione Monorim</h3>
-                    <p>Distruggi le vibrazioni. Guida al montaggio dell'ammortizzatore anteriore a stelo o aria.</p>
-                    <span class="hack-btn">Installa Upgrade</span>
-                </div>
-            </a>
-            <a href="gomme-10.html" class="hack-card">
-                <div class="hack-img">🛞</div>
-                <div class="hack-info">
-                    <h3>Upgrade Gomme 10"</h3>
-                    <p>Aumenta il comfort e la top speed montando i copertoni maggiorati e i distanziali 3D.</p>
-                    <span class="hack-btn">Inizia Upgrade</span>
-                </div>
-            </a>
-            <a href="gomme-piene-xiaomi.html" class="hack-card">
-                <div class="hack-img">🧱</div>
-                <div class="hack-info">
-                    <h3>Gomme Piene a Nido d'Ape</h3>
-                    <p>Elimina per sempre le forature. Il protocollo estremo per tallonare le gomme solide.</p>
-                    <span class="hack-btn">Inizia Upgrade</span>
-                </div>
-            </a>
-        </div>
+    <h2 class="section-title"><span style="color: var(--brand-xiaomi);">#</span> Meccanica & Riparazioni</h2>
+    <div class="grid">
+        <a href="freno.html" class="card glass-box mech-card">
+            <div class="card-icon">🛑</div>
+            <div class="card-info">
+                <h3>Frenata Inesistente</h3>
+                <p>Il disco posteriore non morde o fischia. Protocollo di centraggio pinza e pastiglie.</p>
+                <span class="btn-action">Regola Ora</span>
+            </div>
+        </a>
+        <a href="gioco-piantone.html" class="card glass-box mech-card">
+            <div class="card-icon">🛴</div>
+            <div class="card-info">
+                <h3>Gioco Sterzo (Wobble)</h3>
+                <p>Il manubrio balla e minaccia di spezzarsi. Elimina il gioco mortale dalla cerniera.</p>
+                <span class="btn-action">Elimina Gioco</span>
+            </div>
+        </a>
+        <a href="parafango-xiaomi.html" class="card glass-box mech-card">
+            <div class="card-icon">🛡️</div>
+            <div class="card-info">
+                <h3>Parafango Tranciato</h3>
+                <p>Vibrazioni letali hanno spezzato la plastica. Montaggio della staffa rigida antirottura.</p>
+                <span class="btn-action">Ripara Danno</span>
+            </div>
+        </a>
+    </div>
 
-    </main>
+    <h2 class="section-title"><span style="color: var(--hack-color);">#</span> Modding & Hacking Extremo</h2>
+    <div class="grid">
+        <a href="sblocco-xiaomi.html" class="card glass-box hack-card">
+            <div class="card-icon">⚡</div>
+            <div class="card-info">
+                <h3>Sblocco Velocità & PRO</h3>
+                <p>Flash del firmware Custom (CFW) per rimuovere il limitatore e installazione cruscotto.</p>
+                <span class="btn-action">Esegui Hack</span>
+            </div>
+        </a>
+        <a href="sospensione-xiaomi.html" class="card glass-box hack-card">
+            <div class="card-icon">🦾</div>
+            <div class="card-info">
+                <h3>Sospensione Monorim</h3>
+                <p>Distruggi le vibrazioni. Guida al montaggio dell'ammortizzatore anteriore a stelo o aria.</p>
+                <span class="btn-action">Installa Upgrade</span>
+            </div>
+        </a>
+        <a href="gomme-10.html" class="card glass-box hack-card">
+            <div class="card-icon">🛞</div>
+            <div class="card-info">
+                <h3>Upgrade Gomme 10"</h3>
+                <p>Aumenta il comfort e la top speed montando i copertoni maggiorati e i distanziali 3D.</p>
+                <span class="btn-action">Inizia Upgrade</span>
+            </div>
+        </a>
+        <a href="gomme-piene-xiaomi.html" class="card glass-box hack-card">
+            <div class="card-icon">🧱</div>
+            <div class="card-info">
+                <h3>Gomme Piene a Nido d'Ape</h3>
+                <p>Elimina per sempre le forature. Il protocollo estremo per tallonare le gomme solide.</p>
+                <span class="btn-action">Inizia Upgrade</span>
+            </div>
+        </a>
+    </div>
 
-    <section class="scudo-legale-web" style="max-width: 1200px; margin: 40px auto; padding: 25px; font-size: 0.85rem; color: #999; border: 1px solid #ff003c; border-left: 5px solid #ff003c; background: rgba(20, 0, 0, 0.4); border-radius: 6px;">
-        <h2 style="color: #ff003c; font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;">⚠️ Nota di Esclusione di Responsabilità (Disclaimer Specifico di Pagina)</h2>
+    <section class="scudo-legale-web glass-box">
+        <h2>⚠️ Esclusione di Responsabilità</h2>
         <p>I dati metrologici, le segnature esadecimali, gli schemi elettrici di campionamento e i metodi di indagine meccanica riportati in questa pagina derivano da analisi teoriche OSINT e documentazione di pubblico dominio. Le informazioni sono destinate esclusivamente a scopo di studio e approfondimento scientifico per l'analisi forense e la ricostruzione dei sinistri.</p>
-        <p>L'applicazione pratica delle nozioni qui esposte su veicoli destinati alla circolazione stradale avviene sotto l'esclusiva responsabilità dell'utente. L'Editore non risponde di eventuali danni fisici, patrimoniali o sanzioni legali derivanti dall'uso improprio del materiale didattico fornito.</p>
+        <p style="margin-top: 10px;">L'applicazione pratica delle nozioni qui esposte su veicoli destinati alla circolazione stradale avviene sotto l'esclusiva responsabilità dell'utente. L'Editore non risponde di eventuali danni fisici, patrimoniali o sanzioni legali derivanti dall'uso improprio del materiale didattico fornito.</p>
     </section>
+
 </main>
 
-<footer style="background-color: #000; border-top: 1px solid #222; padding: 40px 20px 20px; width: 100%;">
-    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
-        <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
-            <img src="img/logo-testo.png" alt="MONO DOOM Home" style="max-width: 150px;">
-            <span style="color: #555; font-size: 0.75rem; font-weight: bold; margin-left: 15px; text-transform: uppercase; letter-spacing: 1px;">&larr; Torna all'Hub Centrale</span>
-        </a>
-        <div style="display: flex; gap: 20px;">
-            <a href="privacy.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">Privacy Policy</a>
-            <a href="cookie.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">Cookie Policy</a>
-            <a href="termini.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">Termini e Condizioni</a>
-            <a href="disclaimer.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">Disclaimer Legale</a>
-        </div>
+<footer>
+    <img src="img/logo-testo.png" alt="MONO DOOM" style="max-width: 150px; opacity: 0.6; margin-bottom: 10px;">
+    <div class="footer-links">
+        <a href="privacy.html">Privacy</a>
+        <a href="cookie.html">Cookie</a>
+        <a href="termini.html">Termini B2B</a>
+        <a href="disclaimer.html">Disclaimer</a>
     </div>
-    <div style="text-align: center; margin-top: 30px; padding-top: 15px; border-top: 1px solid #111; color: #333; font-size: 0.7rem; font-family: sans-serif;">
-        &copy; 2026 MONO DOOM. Tutti i diritti riservati. I marchi registrati appartengono ai rispettivi proprietari. Documentazione ad uso informativo e peritale.
+    <div style="color: #444; font-size: 0.65rem; margin-top: 15px;">
+        &copy; 2026 MONO DOOM. Tutti i diritti riservati. I marchi registrati appartengono ai rispettivi proprietari.
     </div>
 </footer>
+
+</body>
+</html>
