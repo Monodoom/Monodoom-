@@ -2,294 +2,246 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ninebot G30: Meccanica e Cuscinetti | MONO DOOM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Ninebot G30 Max: come sostituire i cuscinetti della ruota anteriore con modelli SKF sigillati e come montare la staffa parafango.">
+    <title>Ninebot G30 Max: Cuscinetti e Meccanica | MONO DOOM</title>
+    
     <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#050505">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Sostituzione Cuscinetti Anteriori Ninebot G30 Max",
+      "description": "Risoluzione del rumore di attrito all'anteriore tramite la sostituzione dei cuscinetti di fabbrica con modelli SKF 6001 2RS sigillati.",
+      "step": [
+        { "@type": "HowToStep", "name": "Smontaggio", "text": "Svita il dado dell'asse, sfila la ruota e rimuovi il tamburo del freno." },
+        { "@type": "HowToStep", "name": "Estrazione", "text": "Usa un punteruolo per battere fuori i vecchi cuscinetti arrugginiti." },
+        { "@type": "HowToStep", "name": "Installazione", "text": "Ingrassa la sede e incastra i nuovi cuscinetti SKF battendo delicatamente solo sull'anello esterno." }
+      ]
+    }
+    </script>
+
     <style>
         :root {
-            --bg-color: #050505;
+            --bg-color: #050505; 
             --text-color: #e0e0e0;
-            --ninebot: #FFEE00;
-            --white: #ffffff;
-            --pure-black: #000000;
             --danger: #ff003c;
-            --card-bg: #111111;
+            --brand-ninebot: #FFEE00; 
+            --terminal-green: #0f0;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* TESCHIO CENTRATO E PULSANTE */
+        .fixed-skull-wrapper { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; z-index: 0; pointer-events: none; }
+        .fixed-skull-img { 
+            width: 90vw; max-width: 600px; height: 90vh; max-height: 600px; 
+            background-image: url('img/teschio.png'); background-size: contain; background-position: center; background-repeat: no-repeat; 
+            opacity: 0.35; animation: heartbeat-ninebot 3s infinite linear; 
+        }
+        @keyframes heartbeat-ninebot { 
+            0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255,0,60,0.4)); } 
+            14% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(255,0,60,0.7)); } 
+            28% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255,0,60,0.4)); } 
+            42% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(255,238,0,0.6)); } 
+            70% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255,0,60,0.4)); } 
         }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+        /* HEADER */
+        header { background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border-bottom: 2px solid var(--danger); padding: 10px 0; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .logo-header { max-width: 80vw; height: auto; max-height: 60px; object-fit: contain; display: block; margin: 0 auto 5px auto; }
+        .claim { color: #fff; font-weight: 900; font-style: italic; letter-spacing: 5px; font-size: 0.75rem; text-transform: uppercase; opacity: 0.7; }
+
+        /* MAIN CONTAINER */
+        main { flex: 1; padding: 30px 20px 60px; max-width: 900px; margin: 0 auto; width: 100%; position: relative; z-index: 10; }
+
+        /* BACK NAV */
+        .back-nav { margin-bottom: 30px; }
+        .back-nav a { display: inline-block; color: #aaa; text-decoration: none; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #aaa; padding-bottom: 3px; transition: 0.3s; }
+        .back-nav a:hover { color: #fff; border-color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+
+        /* CLASSE UNIVERSALE VETRO */
+        .glass-box { 
+            background: rgba(10, 10, 10, 0.4); 
+            backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); 
+            border: 1px solid rgba(255,255,255,0.08); 
+            border-radius: 8px; padding: 30px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4); 
+            margin-bottom: 30px;
         }
 
-        header {
-            background-color: var(--pure-black);
-            border-bottom: 2px solid var(--ninebot);
-            padding: 20px 0 10px;
-            text-align: center;
-        }
+        /* HERO MECCANICA */
+        .mech-hero { text-align: center; margin-bottom: 40px; }
+        .mech-tag { background: rgba(255, 238, 0, 0.15); color: var(--brand-ninebot); border: 1px solid var(--brand-ninebot); padding: 5px 15px; font-weight: 900; border-radius: 4px; display: inline-block; margin-bottom: 15px; font-size: 1.2rem; box-shadow: 0 0 15px rgba(255,238,0,0.3); letter-spacing: 1px; font-family: 'Orbitron', sans-serif;}
+        .mech-hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 5vw, 3rem); color: #fff; text-transform: uppercase; margin: 0; text-shadow: 0 0 20px rgba(255,238,0,0.3);}
 
-        .header-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        /* TITOLI SEZIONE */
+        .box-title { color: #fff; text-transform: uppercase; font-size: 1.3rem; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-family: 'Orbitron', sans-serif;}
+        
+        .diagnosi-box { border-left: 4px solid var(--brand-ninebot); }
+        .diagnosi-box p { color: #ccc; line-height: 1.7; font-size: 1.05rem; }
 
-        .logo-header {
-            max-height: 110px;
-            width: auto;
-            display: block;
-        }
+        /* VIDEO E ALERT */
+        .video-box { padding: 0; overflow: hidden; border: 1px solid #333; }
+        .cc-alert-box { background: rgba(255, 0, 60, 0.1); color: #ccc; border-bottom: 1px solid #333; padding: 15px; font-size: 0.9rem; display: flex; align-items: center; gap: 12px; line-height: 1.5; }
+        .cc-alert-box strong { color: var(--danger); }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        .claim {
-            color: var(--white);
-            font-weight: 900;
-            font-style: italic;
-            letter-spacing: 3px;
-            font-size: 1.05rem;
-            margin-top: 5px;
-            text-transform: uppercase;
-            text-shadow: 0 0 5px var(--ninebot);
-        }
+        /* TERMINALE OSINT */
+        .terminal-log { background: rgba(0,0,0,0.6); padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; border-top: 1px solid #333; }
+        .terminal-log h3 { color: #777; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; }
+        .terminal-text p { color: #888; margin-bottom: 8px; line-height: 1.5; }
+        .terminal-text strong { color: #fff; }
+        .highlight { color: var(--brand-ninebot); text-shadow: 0 0 5px var(--brand-ninebot); font-weight: bold;}
 
-        nav {
-            background-color: var(--pure-black);
-            padding: 15px 25px;
-            border-bottom: 1px solid #333;
-        }
+        /* ARSENALE RICAMBI */
+        .arsenal-box { border-top: 4px solid var(--brand-ninebot); }
+        .part-item { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 6px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .part-info { flex: 1; padding-right: 20px; }
+        .part-name { font-weight: 900; font-size: 1.1rem; color: var(--brand-ninebot); display: block; margin-bottom: 5px; text-transform: uppercase; }
+        .part-desc { font-size: 0.9rem; color: #aaa; }
+        
+        .buy-buttons { display: flex; gap: 10px; flex-shrink: 0; }
+        .btn { padding: 10px 15px; border-radius: 4px; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; text-decoration: none; text-align: center; transition: 0.3s; }
+        .btn-amz { background: #FF9900; color: #000; }
+        .btn-amz:hover { background: #e68a00; box-shadow: 0 0 15px rgba(255, 153, 0, 0.4); }
 
-        .back-btn {
-            display: inline-block;
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 900;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            transition: 0.3s;
-            font-family: 'Courier New', Courier, monospace;
-        }
+        /* PROTOCOLLO STEPS */
+        .step-container { display: flex; gap: 15px; margin-bottom: 25px; }
+        .step-num { width: 40px; height: 40px; background: rgba(255, 238, 0, 0.1); color: var(--brand-ninebot); border: 1px solid var(--brand-ninebot); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.2rem; flex-shrink: 0; font-family: 'Orbitron', sans-serif;}
+        .step-content h3 { color: #fff; text-transform: uppercase; margin-bottom: 5px; font-size: 1.1rem; }
+        .step-content p { color: #aaa; line-height: 1.6; }
 
-        .back-btn span {
-            color: var(--ninebot);
-            margin-right: 5px;
-        }
+        /* DISCLAIMER */
+        .scudo-legale-web { border-left: 5px solid var(--danger); padding: 25px; font-size: 0.8rem; color: #999; text-align: justify; margin-top: 50px;}
+        .scudo-legale-web h2 { color: var(--danger); font-size: 0.9rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
 
-        .back-btn:hover {
-            color: var(--white);
-            text-shadow: 0 0 10px var(--ninebot);
-        }
+        /* FOOTER */
+        footer { background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); border-top: 1px solid #222; padding: 40px 20px; text-align: center; position: relative; z-index: 10; margin-top: auto;}
+        .footer-links { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin: 20px 0;}
+        .footer-links a { color: #777; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;}
+        .footer-links a:hover { color: var(--danger); }
 
-        main {
-            flex: 1;
-            max-width: 850px;
-            margin: 40px auto;
-            padding: 0 20px;
-            width: 100%;
-        }
-
-        .error-hero {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .error-tag {
-            background: #333;
-            color: #fff;
-            padding: 5px 15px;
-            font-weight: 900;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            color: var(--white);
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-
-        .diagnosi-box {
-            background: rgba(255, 238, 0, 0.05);
-            border-left: 4px solid var(--ninebot);
-            padding: 25px;
-            margin-bottom: 40px;
-            border-radius: 0 8px 8px 0;
-            border: 1px solid #333;
-        }
-
-        .diagnosi-box h2 {
-            color: var(--ninebot);
-            text-transform: uppercase;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-
-        .video-section {
-            margin-bottom: 50px;
-            background: #000;
-            border: 1px solid #333;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(255, 238, 0, 0.05);
-        }
-
-        .video-header {
-            background: #111;
-            border-bottom: 1px solid #333;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .video-title {
-            color: var(--ninebot);
-            font-weight: 900;
-            font-family: monospace;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .step {
-            background: var(--card-bg);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #333;
-        }
-
-        .step h3 {
-            color: var(--ninebot);
-            margin-top: 0;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .step p {
-            margin: 0;
-            color: #ccc;
-        }
-
-        footer {
-            background-color: var(--pure-black);
-            border-top: 2px solid var(--ninebot);
-            padding: 40px 20px;
-            margin-top: auto;
-            text-align: center;
-            color: #666;
-            font-size: 0.8rem;
+        @media (max-width: 768px) {
+            .glass-box { padding: 20px; }
+            .part-item { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .buy-buttons { width: 100%; flex-direction: column; }
+            .cc-alert-box { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <img src="img/logo-header.png" alt="MONO DOOM" class="logo-header">
-            <p class="claim">RESURRECT THE BEAST.</p>
-        </div>
-    </header>
-    
-    <nav>
-        <a href="ninebot.html" class="back-btn"><span>&lt;&lt;</span> Ritorna al Garage Ninebot</a>
-    </nav>
-    
-    <main>
-        <div class="error-hero">
-            <span class="error-tag">PROTOCOLLO MECCANICO</span>
-            <h1>G30 Max: Cuscinetti e Rumori</h1>
-        </div>
 
-        <div class="diagnosi-box">
-            <h2>Rumore di "Trattore" all'anteriore</h2>
-            <p>Se girando a mano la ruota anteriore del tuo G30 senti un rumore metallico, di sfregamento o un "croc-croc" tipico da mulino a vento, i cuscinetti sono andati. Ninebot usa cuscinetti non sigillati che prendono ruggine alla prima pozzanghera.</p>
-        </div>
+<div class="fixed-skull-wrapper">
+    <div class="fixed-skull-img"></div>
+</div>
 
-        <div class="video-section">
-            <div class="video-header"><span class="video-title">Feed Video - Sostituzione Cuscinetti G30</span></div>
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/D4vPklKBfg0?cc_load_policy=1&cc_lang_pref=it&hl=it&rel=0" title="Ninebot G30 Bearings Replacement" frameborder="0" allowfullscreen></iframe>
+<header>
+    <div class="header-content"><a href="index.html"><img src="img/logo-header.png" alt="MONO DOOM" class="logo-header"></a><p class="claim">RESURRECT THE BEAST.</p></div>
+</header>
+
+<main>
+    <div class="back-nav"><a href="ninebot.html">⟵ Torna al Garage Ninebot</a></div>
+
+    <div class="mech-hero">
+        <span class="mech-tag">PROTOCOLLO MECCANICO</span>
+        <h1>G30 Max: Cuscinetti e Rumori</h1>
+    </div>
+
+    <section class="glass-box diagnosi-box">
+        <h2 class="box-title" style="color: var(--brand-ninebot);">Rumore di "Trattore" all'anteriore</h2>
+        <p>Se girando a mano la ruota anteriore del tuo G30 senti un rumore metallico, di sfregamento o un "croc-croc" tipico da mulino a vento, i cuscinetti del mozzo sono andati. Ninebot usa cuscinetti non sigillati che si ossidano e prendono ruggine alla prima pozzanghera seria.</p>
+    </section>
+
+    <section class="glass-box video-box">
+        <div class="cc-alert-box">
+            <span style="font-size: 1.5rem;">⚠️</span>
+            <span><strong>ATTIVA I SOTTOTITOLI ITA:</strong> Fai partire il video, poi clicca sull'icona <strong>[CC]</strong> o sull'ingranaggio <strong>(⚙️)</strong> in basso a destra nel player per leggere le istruzioni operative.</span>
+        </div>
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/D4vPklKBfg0?cc_load_policy=1&cc_lang_pref=it&hl=it&rel=0&modestbranding=1" title="Ninebot G30 Bearings Replacement" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="terminal-log">
+            <h3>>> Log Dati Telemetrici (OSINT)</h3>
+            <div class="terminal-text">
+                <p>> Target: <strong>Mozzo ruota anteriore Ninebot G30 Max.</strong></p>
+                <p>> Rilevamento: Decadimento strutturale dei cuscinetti di fabbrica a causa di infiltrazioni idriche e detriti stradali. Generazione di attrito volvente estremo.</p>
+                <p>> Intervento: Estrazione meccanica del tamburo e pressatura di nuovi cuscinetti schermati ad altissima scorrevolezza e tenuta stagna (<span class="highlight">Misura: 6001-2RS</span>).</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="glass-box arsenal-box">
+        <h2 class="box-title" style="color: var(--brand-ninebot);">Arsenale Ricambi</h2>
+        
+        <div class="part-item">
+            <div class="part-info">
+                <span class="part-name">1. Cuscinetti SKF 6001-2RS (Coppia)</span>
+                <span class="part-desc">I migliori sul mercato. La sigla "2RS" indica la schermatura in gomma su entrambi i lati contro acqua e polvere. La scorrevolezza definitiva.</span>
+            </div>
+            <div class="buy-buttons">
+                <a href="https://www.amazon.it/s?k=cuscinetti+skf+6001+2rs" target="_blank" class="btn btn-amz">Amazon (24h)</a>
             </div>
         </div>
 
-        <div class="step">
-            <h3>Soluzione: Cuscinetti SKF Sigillati</h3>
-            <p>Devi comprare i cuscinetti misura <strong>6001 2RS</strong> (2RS significa "con schermatura in gomma"). Quelli della SKF sono immortali. Svita il dado dell'asse, sfila la ruota e rimuovi il tamburo del freno. Usa un punteruolo e un martello per battere da dentro verso fuori i vecchi cuscinetti. Ingrassa la sede e incastra i nuovi, battendoli delicatamente <strong>solo sull'anello esterno</strong> per non rovinare le sfere interne.</p>
+        <div class="part-item">
+            <div class="part-info">
+                <span class="part-name">2. Staffa di Rinforzo Parafango G30</span>
+                <span class="part-desc">Struttura in alluminio che blocca le vibrazioni in marcia e impedisce la rottura netta del parafango posteriore alla base.</span>
+            </div>
+            <div class="buy-buttons">
+                <a href="https://www.amazon.it/s?k=staffa+parafango+ninebot+g30" target="_blank" class="btn btn-amz">Amazon (24h)</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="glass-box">
+        <h2 class="box-title">Protocolli di Manutenzione</h2>
+        
+        <div class="step-container">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h3>Estrazione e Sostituzione Cuscinetti</h3>
+                <p>Procurati i cuscinetti misura <strong>6001 2RS</strong> (quelli della SKF sono praticamente immortali). Svita il dado dell'asse, sfila la ruota anteriore dal mozzo e rimuovi il tamburo del freno. Usa un punteruolo (o un cacciavite a taglio lungo) e un martello per battere da dentro verso fuori i vecchi cuscinetti. Pulisci e ingrassa leggermente la sede, poi incastra i nuovi, battendoli delicatamente <strong>solo sull'anello esterno in metallo</strong> (mai sulla guarnizione in gomma centrale) per non rovinare le sfere interne.</p>
+            </div>
         </div>
 
-        <div class="step">
-            <h3>Il Parafango Posteriore si Spezza?</h3>
-            <p>Altro classico del G30. Il parafango posteriore trema e alla fine si spacca alla base (dove ci sono le 3 viti). Per evitarlo, compra su Amazon la <strong>Staffa di Supporto in metallo</strong> per G30: si avvita sotto il parafango e si aggancia ai lati della ruota. Il parafango diventerà rigido e indistruttibile.</p>
+        <div class="step-container">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h3>Il Parafango Posteriore si Spezza?</h3>
+                <p>Altro classico difetto meccanico del G30: a causa della sua stessa lunghezza, il parafango posteriore trema in continuazione e, a lungo andare, la plastica si snerva e si spacca di netto alla base (dove ci sono le 3 viti di ancoraggio). Per evitarlo preventivamente, monta una <strong>Staffa di Supporto in metallo</strong> per G30: si avvita sotto il parafango e si aggancia ai lati della ruota (sotto i copridadi catarifrangenti). Il parafango diventerà rigido e indistruttibile.</p>
+            </div>
         </div>
-    </main>
-    
-   <section class="scudo-legale-web" style="max-width: 1200px; margin: 40px auto; padding: 25px; font-size: 0.85rem; color: #999; border: 1px solid #ff003c; border-left: 5px solid #ff003c; background: rgba(20, 0, 0, 0.4); border-radius: 6px;">
-        <h2 style="color: #ff003c; font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;">⚠️ Nota di Esclusione di Responsabilità (Disclaimer Specifico di Pagina)</h2>
-        <p>I dati metrologici, le segnature esadecimali, gli schemi elettrici di campionamento e i metodi di indagine meccanica riportati in questa pagina derivano da analisi teoriche OSINT e documentazione di pubblico dominio. Le informazioni sono destinate esclusivamente a scopo di studio e approfondimento scientifico per l'analisi forense e la ricostruzione dei sinistri.</p>
-        <p>L'applicazione pratica delle nozioni qui esposte su veicoli destinati alla circolazione stradale avviene sotto l'esclusiva responsabilità dell'utente. L'Editore non risponde di eventuali danni fisici, patrimoniali o sanzioni legali derivanti dall'uso improprio del materiale didattico fornito.</p>
     </section>
+
+    <section class="scudo-legale-web glass-box">
+        <h2>⚠️ Esclusione di Responsabilità</h2>
+        <p>I dati, gli schemi e i metodi di indagine riportati in questa pagina derivano da documentazione OSINT. Le informazioni sono destinate a scopo di studio e approfondimento tecnico. L'applicazione pratica delle nozioni meccaniche qui esposte su veicoli avviene sotto l'esclusiva responsabilità dell'utente. L'Editore declina ogni responsabilità per danni hardware o lesioni derivanti dall'uso di queste informazioni o dall'errato montaggio dei componenti.</p>
+    </section>
+
 </main>
 
-<footer style="background-color: #000; border-top: 1px solid #222; padding: 40px 20px 20px; width: 100%;">
-    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
-        
-        <div style="display: flex; flex-direction: column; gap: 15px;">
-            
-            <a href="Ninebot.html" style="text-decoration: none; display: flex; align-items: center; transition: 0.3s;">
-               <span style="color: #ffcc00; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #ffcc00; padding-bottom: 2px;">&larr; Torna al Garage Ninebot</span>
-            </a>
-            
-            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; opacity: 0.7; transition: 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
-                <img src="img/logo-testo.png" alt="MONO DOOM Home" style="max-width: 120px;">
-                <span style="color: #777; font-size: 0.7rem; font-weight: bold; margin-left: 15px; text-transform: uppercase; letter-spacing: 1px;">Hub Centrale</span>
-            </a>
-        </div>
-
-        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-            <a href="privacy.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Privacy Policy</a>
-            <a href="cookie.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Cookie Policy</a>
-            <a href="termini.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Termini e Condizioni</a>
-            <a href="disclaimer.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Disclaimer Legale</a>
-        </div>
+<footer>
+    <img src="img/logo-testo.png" alt="MONO DOOM" style="max-width: 150px; opacity: 0.6; margin-bottom: 10px;">
+    <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="cookie.html">Cookie Policy</a>
+        <a href="termini.html">Termini e Condizioni</a>
+        <a href="disclaimer.html">Disclaimer Legale</a>
     </div>
-    
-    <div style="text-align: center; margin-top: 35px; padding-top: 20px; border-top: 1px solid #111; color: #333; font-size: 0.7rem; font-family: sans-serif;">
-        &copy; 2026 MONO DOOM. Tutti i diritti riservati. I marchi registrati appartengono ai rispettivi proprietari. Documentazione ad uso informativo e peritale.
+    <div style="color: #444; font-size: 0.65rem; margin-top: 15px;">
+        &copy; 2026 MONO DOOM. Tutti i diritti riservati.
     </div>
 </footer>
+
+</body>
+</html>

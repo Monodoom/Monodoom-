@@ -2,294 +2,208 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Ninebot Serie ES (ES1, ES2, ES4): guida alla risoluzione dell'Errore 42 e riparazione del Faro della Morte (fusibile F2).">
     <title>Ninebot Serie ES: Difetti Letali | MONO DOOM</title>
-   <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#050505">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Riparazione Difetti Ninebot Serie ES",
+      "description": "Come risolvere il Faro della Morte (Fusibile F2) e l'Errore 42 (Batteria Esterna) sui Ninebot ES.",
+      "step": [
+        { "@type": "HowToStep", "name": "Faro della Morte", "text": "Estrai la centralina e salda un bypass sul fusibile SMD F2 bruciato." },
+        { "@type": "HowToStep", "name": "Errore 42", "text": "Rimuovi la batteria esterna, inserisci spessori strutturali e fissa con frenafiletti per eliminare le vibrazioni sui pin." }
+      ]
+    }
+    </script>
+
     <style>
         :root {
-            --bg-color: #050505;
+            --bg-color: #050505; 
             --text-color: #e0e0e0;
-            --ninebot: #FFEE00;
-            --white: #ffffff;
-            --pure-black: #000000;
             --danger: #ff003c;
-            --card-bg: #111111;
+            --brand-ninebot: #FFEE00; 
+            --terminal-green: #0f0;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* TESCHIO CENTRATO E PULSANTE */
+        .fixed-skull-wrapper { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; z-index: 0; pointer-events: none; }
+        .fixed-skull-img { 
+            width: 90vw; max-width: 600px; height: 90vh; max-height: 600px; 
+            background-image: url('img/teschio.png'); background-size: contain; background-position: center; background-repeat: no-repeat; 
+            opacity: 0.45; animation: heartbeat 3s infinite linear; 
+        }
+        @keyframes heartbeat { 
+            0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255,0,60,0.4)); } 
+            14% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(255,0,60,0.7)); } 
+            28% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255,0,60,0.4)); } 
+            42% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(255,0,60,0.7)); } 
+            70% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255,0,60,0.4)); } 
         }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+        /* HEADER */
+        header { background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border-bottom: 2px solid var(--danger); padding: 10px 0; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .logo-header { max-width: 80vw; height: auto; max-height: 60px; object-fit: contain; display: block; margin: 0 auto 5px auto; }
+        .claim { color: #fff; font-weight: 900; font-style: italic; letter-spacing: 5px; font-size: 0.75rem; text-transform: uppercase; opacity: 0.7; }
+
+        /* MAIN CONTAINER */
+        main { flex: 1; padding: 30px 20px 60px; max-width: 900px; margin: 0 auto; width: 100%; position: relative; z-index: 10; }
+
+        /* BACK NAV */
+        .back-nav { margin-bottom: 30px; }
+        .back-nav a { display: inline-block; color: #aaa; text-decoration: none; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #aaa; padding-bottom: 3px; transition: 0.3s; }
+        .back-nav a:hover { color: #fff; border-color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+
+        /* CLASSE UNIVERSALE VETRO */
+        .glass-box { 
+            background: rgba(10, 10, 10, 0.4); 
+            backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); 
+            border: 1px solid rgba(255,255,255,0.08); 
+            border-radius: 8px; padding: 30px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4); 
+            margin-bottom: 30px;
         }
 
-        header {
-            background-color: var(--pure-black);
-            border-bottom: 2px solid var(--ninebot);
-            padding: 20px 0 10px;
-            text-align: center;
-        }
+        /* HERO ERRORE */
+        .error-hero { text-align: center; margin-bottom: 40px; }
+        .error-tag { background: rgba(255, 0, 60, 0.15); color: var(--danger); border: 1px solid var(--danger); padding: 5px 15px; font-weight: 900; border-radius: 4px; display: inline-block; margin-bottom: 15px; font-size: 1.2rem; box-shadow: 0 0 15px rgba(255,0,60,0.3); letter-spacing: 1px; font-family: 'Orbitron', sans-serif;}
+        .error-hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 5vw, 3rem); color: #fff; text-transform: uppercase; margin: 0; text-shadow: 0 0 20px rgba(255,0,60,0.3);}
 
-        .header-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        /* TITOLI SEZIONE */
+        .box-title { color: #fff; text-transform: uppercase; font-size: 1.3rem; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-family: 'Orbitron', sans-serif;}
+        
+        .diagnosi-box { border-left: 4px solid var(--danger); }
+        .diagnosi-box p { color: #ccc; line-height: 1.7; font-size: 1.05rem; }
 
-        .logo-header {
-            max-height: 110px;
-            width: auto;
-            display: block;
-        }
+        /* VIDEO E ALERT */
+        .video-box { padding: 0; overflow: hidden; border: 1px solid #333; }
+        .cc-alert-box { background: rgba(255, 0, 60, 0.1); color: #ccc; border-bottom: 1px solid #333; padding: 15px; font-size: 0.9rem; display: flex; align-items: center; gap: 12px; line-height: 1.5; }
+        .cc-alert-box strong { color: var(--danger); }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        .claim {
-            color: var(--white);
-            font-weight: 900;
-            font-style: italic;
-            letter-spacing: 3px;
-            font-size: 1.05rem;
-            margin-top: 5px;
-            text-transform: uppercase;
-            text-shadow: 0 0 5px var(--ninebot);
-        }
+        /* TERMINALE OSINT */
+        .terminal-log { background: rgba(0,0,0,0.6); padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; border-top: 1px solid #333; }
+        .terminal-log h3 { color: #777; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; }
+        .terminal-text p { color: #888; margin-bottom: 8px; line-height: 1.5; }
+        .terminal-text strong { color: #fff; }
+        .highlight { color: var(--danger); text-shadow: 0 0 5px var(--danger); font-weight: bold;}
 
-        nav {
-            background-color: var(--pure-black);
-            padding: 15px 25px;
-            border-bottom: 1px solid #333;
-        }
+        /* PROTOCOLLO STEPS */
+        .step-container { display: flex; gap: 15px; margin-bottom: 25px; }
+        .step-num { width: 40px; height: 40px; background: rgba(255, 0, 60, 0.1); color: var(--danger); border: 1px solid var(--danger); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.2rem; flex-shrink: 0; font-family: 'Orbitron', sans-serif;}
+        .step-content h3 { color: #fff; text-transform: uppercase; margin-bottom: 5px; font-size: 1.1rem; }
+        .step-content p { color: #aaa; line-height: 1.6; }
 
-        .back-btn {
-            display: inline-block;
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 900;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            transition: 0.3s;
-            font-family: 'Courier New', Courier, monospace;
-        }
+        /* DISCLAIMER */
+        .scudo-legale-web { border-left: 5px solid var(--danger); padding: 25px; font-size: 0.8rem; color: #999; text-align: justify; margin-top: 50px;}
+        .scudo-legale-web h2 { color: var(--danger); font-size: 0.9rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
 
-        .back-btn span {
-            color: var(--ninebot);
-            margin-right: 5px;
-        }
+        /* FOOTER */
+        footer { background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); border-top: 1px solid #222; padding: 40px 20px; text-align: center; position: relative; z-index: 10; margin-top: auto;}
+        .footer-links { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin: 20px 0;}
+        .footer-links a { color: #777; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;}
+        .footer-links a:hover { color: var(--danger); }
 
-        .back-btn:hover {
-            color: var(--white);
-            text-shadow: 0 0 10px var(--ninebot);
-        }
-
-        main {
-            flex: 1;
-            max-width: 850px;
-            margin: 40px auto;
-            padding: 0 20px;
-            width: 100%;
-        }
-
-        .error-hero {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .error-tag {
-            background: #333;
-            color: #fff;
-            padding: 5px 15px;
-            font-weight: 900;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            color: var(--white);
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-
-        .diagnosi-box {
-            background: rgba(255, 238, 0, 0.05);
-            border-left: 4px solid var(--ninebot);
-            padding: 25px;
-            margin-bottom: 40px;
-            border-radius: 0 8px 8px 0;
-            border: 1px solid #333;
-        }
-
-        .diagnosi-box h2 {
-            color: var(--ninebot);
-            text-transform: uppercase;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-
-        .video-section {
-            margin-bottom: 50px;
-            background: #000;
-            border: 1px solid #333;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(255, 238, 0, 0.05);
-        }
-
-        .video-header {
-            background: #111;
-            border-bottom: 1px solid #333;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .video-title {
-            color: var(--ninebot);
-            font-weight: 900;
-            font-family: monospace;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .step {
-            background: var(--card-bg);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #333;
-        }
-
-        .step h3 {
-            color: var(--danger);
-            margin-top: 0;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .step p {
-            margin: 0;
-            color: #ccc;
-        }
-
-        footer {
-            background-color: var(--pure-black);
-            border-top: 2px solid var(--ninebot);
-            padding: 40px 20px;
-            margin-top: auto;
-            text-align: center;
-            color: #666;
-            font-size: 0.8rem;
+        @media (max-width: 768px) {
+            .glass-box { padding: 20px; }
+            .cc-alert-box { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <img src="img/logo-header.png" alt="MONO DOOM" class="logo-header">
-            <p class="claim">RESURRECT THE BEAST.</p>
-        </div>
-    </header>
-    
-    <nav>
-        <a href="ninebot.html" class="back-btn"><span>&lt;&lt;</span> Ritorna al Garage Ninebot</a>
-    </nav>
-    
-    <main>
-        <div class="error-hero">
-            <span class="error-tag">PROTOCOLLO MECCANICO</span>
-            <h1>Serie ES: Difetti Letali (ES1, ES2, ES4)</h1>
-        </div>
 
-        <div class="diagnosi-box">
-            <h2>Il Fallimento della Serie ES</h2>
-            <p>La serie ES ha venduto milioni di unità, ma nasconde due difetti ingegneristici tremendi: l'<strong>Errore 42</strong> (batteria esterna) e il <strong>"Faro della Morte"</strong>. Se ne hai uno, incapperai in uno di questi due problemi al 100%.</p>
-        </div>
+<div class="fixed-skull-wrapper">
+    <div class="fixed-skull-img"></div>
+</div>
 
-        <div class="video-section">
-            <div class="video-header"><span class="video-title">Feed Video - Errore 42 / Control Board Fix</span></div>
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/zH_qm6drMok?cc_load_policy=1&cc_lang_pref=it&hl=it&rel=0" title="Ninebot ES2 Error 42 Fix" frameborder="0" allowfullscreen></iframe>
+<header>
+    <div class="header-content"><a href="index.html"><img src="img/logo-header.png" alt="MONO DOOM" class="logo-header"></a><p class="claim">RESURRECT THE BEAST.</p></div>
+</header>
+
+<main>
+    <div class="back-nav"><a href="ninebot.html">⟵ Torna al Garage Ninebot</a></div>
+
+    <div class="error-hero">
+        <span class="error-tag">PROTOCOLLO CRITICO</span>
+        <h1>Serie ES: Difetti Letali (ES1, ES2, ES4)</h1>
+    </div>
+
+    <section class="glass-box diagnosi-box">
+        <h2 class="box-title" style="color: var(--danger);">Il Fallimento della Serie ES</h2>
+        <p>La serie ES di Ninebot ha venduto milioni di unità in tutto il mondo, ma nasconde due difetti ingegneristici tremendi che emergono col tempo: l'<strong>Errore 42</strong> (legato alla batteria esterna) e il famigerato <strong>"Faro della Morte"</strong>. Se possiedi uno di questi modelli, incapperai statisticamente in uno di questi due problemi.</p>
+    </section>
+
+    <section class="glass-box video-box">
+        <div class="cc-alert-box">
+            <span style="font-size: 1.5rem;">⚠️</span>
+            <span><strong>ATTIVA I SOTTOTITOLI ITA:</strong> Fai partire il video, poi clicca sull'icona <strong>[CC]</strong> o sull'ingranaggio <strong>(⚙️)</strong> in basso a destra nel player per leggere le istruzioni operative.</span>
+        </div>
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/zH_qm6drMok?cc_load_policy=1&cc_lang_pref=it&hl=it&rel=0&modestbranding=1" title="Ninebot ES2 Error 42 Fix" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="terminal-log">
+            <h3>>> Log Dati Telemetrici (OSINT)</h3>
+            <div class="terminal-text">
+                <p>> Target: <strong>Architettura Ninebot Serie ES (ES1/ES2/ES4)</strong></p>
+                <p>> Vulnerabilità 1: Sovraccarico anomalo del fusibile SMD F2 sul controller in fase di accensione dei LED (<span class="highlight">Faro della Morte</span>).</p>
+                <p>> Vulnerabilità 2: Deterioramento hardware dei contatti a 4-pin della batteria addizionale esterna causato da vibrazioni cinetiche (<span class="highlight">Errore 42</span>).</p>
+                <p>> Intervento: Bypass hardware sulla motherboard (micro-saldatura F2) o rinforzo strutturale anti-vibrazione per il battery pack.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="glass-box">
+        <h2 class="box-title">Protocollo di Riparazione</h2>
+        
+        <div class="step-container">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h3>Il Faro della Morte (Accendi e Frena)</h3>
+                <p>Se accendendo il faro anteriore il monopattino improvvisamente rallenta, perde potenza o si spegne di colpo, sei vittima del Faro della Morte. Si tratta del famigerato fusibile SMD F2 bruciato sulla scheda madre. Il faro assorbe troppa corrente e distrugge il ponte radio verso il controller del motore. <br><br><strong>Soluzione:</strong> Bisogna smontare e estrarre la centralina (situata dentro il tubo del manubrio) e saldare un ponticello a stagno (bypass) direttamente sopra il micro-fusibile F2, oppure sostituire l'intero cruscotto/controller.</p>
             </div>
         </div>
 
-        <div class="step">
-            <h3>Il Faro della Morte (Accendi e Frena)</h3>
-            <p>Se accendi il faro anteriore, il monopattino rallenta o si spegne di colpo? È il famoso fusibile SMD F2 bruciato sulla scheda madre. Il faro assorbe troppa corrente e distrugge il ponte radio verso il motore. <br><br><strong>Soluzione:</strong> Bisogna estrarre la centralina (dentro il tubo del manubrio) e saldare un ponticello (bypass) sopra il micro-fusibile F2, o sostituire l'intero cruscotto.</p>
+        <div class="step-container">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h3>Errore 42: La Batteria Esterna</h3>
+                <p>Hai montato la seconda batteria sul piantone per farlo diventare un ES4, ma il display suona all'infinito segnalando Errore 42. Il connettore a 4 pin che unisce la batteria esterna al piantone si è fuso (o allentato) a causa delle costanti vibrazioni stradali, poiché i perni originali sono troppo deboli per reggere il peso della batteria a sbalzo. <br><br><strong>Soluzione:</strong> Rimuovi la batteria esterna, controlla i pin (se fusi vanno sostituiti) e inserisci dei piccoli spessori in alluminio (o fascette industriali) tra la piastra di metallo e il piantone per fare spessore. Avvita saldamente usando frenafiletti blu. Il blocco deve essere immobile come granito, altrimenti le micro-vibrazioni fonderanno di nuovo i contatti.</p>
+            </div>
         </div>
-
-        <div class="step">
-            <h3>Errore 42: La Batteria Esterna</h3>
-            <p>Hai montato la seconda batteria per farlo diventare un ES4, ma il display suona e ti dà Errore 42. Il connettore a 4 pin che unisce la batteria esterna al piantone si è fuso a causa delle vibrazioni (i perni sono troppo deboli). <br><br><strong>Soluzione:</strong> Togli la batteria, inserisci dei piccoli spessori in alluminio (o fascette) tra la piastra di metallo e il piantone per fare spessore. Avvita usando frenafiletti blu. Il contatto deve essere di granito, altrimenti si fonderà di nuovo.</p>
-        </div>
-    </main>
-    
-   <section class="scudo-legale-web" style="max-width: 1200px; margin: 40px auto; padding: 25px; font-size: 0.85rem; color: #999; border: 1px solid #ff003c; border-left: 5px solid #ff003c; background: rgba(20, 0, 0, 0.4); border-radius: 6px;">
-        <h2 style="color: #ff003c; font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;">⚠️ Nota di Esclusione di Responsabilità (Disclaimer Specifico di Pagina)</h2>
-        <p>I dati metrologici, le segnature esadecimali, gli schemi elettrici di campionamento e i metodi di indagine meccanica riportati in questa pagina derivano da analisi teoriche OSINT e documentazione di pubblico dominio. Le informazioni sono destinate esclusivamente a scopo di studio e approfondimento scientifico per l'analisi forense e la ricostruzione dei sinistri.</p>
-        <p>L'applicazione pratica delle nozioni qui esposte su veicoli destinati alla circolazione stradale avviene sotto l'esclusiva responsabilità dell'utente. L'Editore non risponde di eventuali danni fisici, patrimoniali o sanzioni legali derivanti dall'uso improprio del materiale didattico fornito.</p>
     </section>
+
+    <section class="scudo-legale-web glass-box">
+        <h2>⚠️ Esclusione di Responsabilità</h2>
+        <p>I dati, gli schemi e i metodi di indagine riportati in questa pagina derivano da documentazione OSINT. Le informazioni sono destinate a scopo di studio e approfondimento tecnico. Manomettere centraline o bypassare fusibili di sicurezza (come l'F2) espone i componenti a rischio di cortocircuito o incendio. L'applicazione pratica delle nozioni qui esposte avviene sotto l'esclusiva responsabilità dell'utente. L'Editore declina ogni responsabilità per danni hardware o lesioni derivanti dall'uso di queste informazioni.</p>
+    </section>
+
 </main>
 
-<footer style="background-color: #000; border-top: 1px solid #222; padding: 40px 20px 20px; width: 100%;">
-    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
-        
-        <div style="display: flex; flex-direction: column; gap: 15px;">
-            
-            <a href="Ninebot.html" style="text-decoration: none; display: flex; align-items: center; transition: 0.3s;">
-               <span style="color: #ffcc00; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #ffcc00; padding-bottom: 2px;">&larr; Torna al Garage Ninebot</span>
-            </a>
-            
-            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; opacity: 0.7; transition: 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
-                <img src="img/logo-testo.png" alt="MONO DOOM Home" style="max-width: 120px;">
-                <span style="color: #777; font-size: 0.7rem; font-weight: bold; margin-left: 15px; text-transform: uppercase; letter-spacing: 1px;">Hub Centrale</span>
-            </a>
-        </div>
-
-        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-            <a href="privacy.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Privacy Policy</a>
-            <a href="cookie.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Cookie Policy</a>
-            <a href="termini.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Termini e Condizioni</a>
-            <a href="disclaimer.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Disclaimer Legale</a>
-        </div>
+<footer>
+    <img src="img/logo-testo.png" alt="MONO DOOM" style="max-width: 150px; opacity: 0.6; margin-bottom: 10px;">
+    <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="cookie.html">Cookie Policy</a>
+        <a href="termini.html">Termini e Condizioni</a>
+        <a href="disclaimer.html">Disclaimer Legale</a>
     </div>
-    
-    <div style="text-align: center; margin-top: 35px; padding-top: 20px; border-top: 1px solid #111; color: #333; font-size: 0.7rem; font-family: sans-serif;">
-        &copy; 2026 MONO DOOM. Tutti i diritti riservati. I marchi registrati appartengono ai rispettivi proprietari. Documentazione ad uso informativo e peritale.
+    <div style="color: #444; font-size: 0.65rem; margin-top: 15px;">
+        &copy; 2026 MONO DOOM. Tutti i diritti riservati.
     </div>
 </footer>
+
+</body>
+</html>
