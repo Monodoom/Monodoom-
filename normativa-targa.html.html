@@ -2,300 +2,227 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Guida completa per richiedere la targa (contrassegno) per monopattini elettrici sul Portale dell'Automobilista e ritirarla in Motorizzazione.">
     <title>Richiesta Targa Monopattino | MONO DOOM</title>
+    
     <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#050505">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Come richiedere la targa per monopattino elettrico",
+      "description": "Procedura ufficiale per il rilascio del contrassegno identificativo per monopattini tramite PagoPA e Portale dell'Automobilista.",
+      "step": [
+        { "@type": "HowToStep", "name": "Pagamento", "text": "Paga la Tariffa N174 tramite il circuito PagoPA." },
+        { "@type": "HowToStep", "name": "Istanza Online", "text": "Carica la ricevuta e i documenti d'identità sul Portale dell'Automobilista." },
+        { "@type": "HowToStep", "name": "Ritiro", "text": "Prenota l'appuntamento e ritira il contrassegno adesivo presso la Motorizzazione Civile." }
+      ]
+    }
+    </script>
+
     <style>
         :root {
-            --bg-color: #050505;
+            --bg-color: #050505; 
             --text-color: #e0e0e0;
-            --legal-blue: #007bff;
-            --white: #ffffff;
-            --pure-black: #000000;
             --danger: #ff003c;
-            --card-bg: #111111;
+            --legal-blue: #0099ff; /* Blu Neon Istituzionale */
+            --terminal-green: #0f0;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* TESCHIO CENTRATO E PULSANTE - VERSIONE BLU LEGALE */
+        .fixed-skull-wrapper { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; z-index: 0; pointer-events: none; }
+        .fixed-skull-img { 
+            width: 90vw; max-width: 600px; height: 90vh; max-height: 600px; 
+            background-image: url('img/teschio.png'); background-size: contain; background-position: center; background-repeat: no-repeat; 
+            opacity: 0.35; animation: heartbeat-legal 3s infinite linear; 
+        }
+        @keyframes heartbeat-legal { 
+            0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(0,153,255,0.3)); } 
+            14% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(0,153,255,0.6)); } 
+            28% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(0,153,255,0.3)); } 
+            42% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(0,229,255,0.5)); } 
+            70% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(0,153,255,0.3)); } 
         }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+        /* HEADER */
+        header { background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border-bottom: 2px solid var(--legal-blue); padding: 10px 0; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .logo-header { max-width: 80vw; height: auto; max-height: 60px; object-fit: contain; display: block; margin: 0 auto 5px auto; }
+        .claim { color: #fff; font-weight: 900; font-style: italic; letter-spacing: 5px; font-size: 0.75rem; text-transform: uppercase; opacity: 0.7; }
+
+        /* MAIN CONTAINER */
+        main { flex: 1; padding: 30px 20px 60px; max-width: 900px; margin: 0 auto; width: 100%; position: relative; z-index: 10; }
+
+        /* BACK NAV */
+        .back-nav { margin-bottom: 30px; }
+        .back-nav a { display: inline-block; color: #aaa; text-decoration: none; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #aaa; padding-bottom: 3px; transition: 0.3s; }
+        .back-nav a:hover { color: #fff; border-color: #fff; text-shadow: 0 0 10px var(--legal-blue); }
+
+        /* CLASSE UNIVERSALE VETRO */
+        .glass-box { 
+            background: rgba(10, 10, 10, 0.4); 
+            backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); 
+            border: 1px solid rgba(255,255,255,0.08); 
+            border-radius: 8px; padding: 30px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4); 
+            margin-bottom: 30px;
         }
 
-        header {
-            background-color: var(--pure-black);
-            border-bottom: 2px solid var(--legal-blue);
-            padding: 20px 0 10px;
-            text-align: center;
-        }
+        /* HERO PAGE */
+        .page-hero { text-align: center; margin-bottom: 40px; }
+        .status-tag { background: rgba(0, 153, 255, 0.15); color: var(--legal-blue); border: 1px solid var(--legal-blue); padding: 5px 15px; font-weight: 900; border-radius: 4px; display: inline-block; margin-bottom: 15px; font-size: 1.2rem; box-shadow: 0 0 15px rgba(0,153,255,0.3); letter-spacing: 1px; font-family: 'Orbitron', sans-serif;}
+        .page-hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 5vw, 3rem); color: #fff; text-transform: uppercase; margin: 0; text-shadow: 0 0 20px rgba(0,153,255,0.3);}
 
-        .header-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        /* TITOLI SEZIONE */
+        .box-title { color: #fff; text-transform: uppercase; font-size: 1.3rem; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-family: 'Orbitron', sans-serif;}
+        
+        .diagnosi-box { border-left: 4px solid var(--legal-blue); }
+        .diagnosi-box p { color: #ccc; line-height: 1.7; font-size: 1.05rem; }
 
-        .logo-header {
-            max-height: 110px;
-            width: auto;
-            display: block;
-        }
+        /* TERMINALE OSINT */
+        .terminal-log { background: rgba(0,0,0,0.6); padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; border-top: 1px solid #333; margin-bottom: 40px; border-left: 4px solid var(--legal-blue);}
+        .terminal-log h3 { color: #777; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; }
+        .terminal-text p { color: #888; margin-bottom: 8px; line-height: 1.5; }
+        .terminal-text strong { color: #fff; }
+        .highlight { color: var(--legal-blue); text-shadow: 0 0 5px var(--legal-blue); font-weight: bold;}
 
-        .claim {
-            color: var(--white);
-            font-weight: 900;
-            font-style: italic;
-            letter-spacing: 3px;
-            font-size: 1.05rem;
-            margin-top: 5px;
-            text-transform: uppercase;
-            text-shadow: 0 0 5px var(--legal-blue);
-        }
+        /* PROTOCOLLO STEPS */
+        .step-container { display: flex; gap: 15px; margin-bottom: 25px; }
+        .step-num { width: 40px; height: 40px; background: rgba(0, 153, 255, 0.1); color: var(--legal-blue); border: 1px solid var(--legal-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.2rem; flex-shrink: 0; font-family: 'Orbitron', sans-serif;}
+        .step-content h3 { color: #fff; text-transform: uppercase; margin-bottom: 10px; font-size: 1.1rem; }
+        .step-content p { color: #aaa; line-height: 1.6; }
 
-        nav {
-            background-color: var(--pure-black);
-            padding: 15px 25px;
-            border-bottom: 1px solid #333;
-        }
+        /* LISTE DOCUMENTI */
+        .doc-list { margin-top: 15px; list-style: none; padding: 0;}
+        .doc-list li { background: rgba(0,0,0,0.5); padding: 12px 15px; margin-bottom: 8px; border-radius: 4px; border-left: 2px solid var(--legal-blue); font-size: 0.9rem; color: #bbb; }
 
-        .back-btn {
-            display: inline-block;
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 900;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            transition: 0.3s;
-            font-family: 'Courier New', Courier, monospace;
-        }
+        /* BOTTONI */
+        .btn-link { display: inline-block; margin-top: 20px; background: rgba(0, 153, 255, 0.2); color: var(--legal-blue); border: 1px solid var(--legal-blue); padding: 12px 20px; border-radius: 4px; text-decoration: none; font-weight: 800; text-transform: uppercase; transition: 0.3s; font-size: 0.85rem; letter-spacing: 1px;}
+        .btn-link:hover { background: var(--legal-blue); color: #000; box-shadow: 0 0 20px rgba(0, 153, 255, 0.5); }
 
-        .back-btn span {
-            color: var(--legal-blue);
-            margin-right: 5px;
-        }
+        /* DISCLAIMER */
+        .scudo-legale-web { border-left: 5px solid var(--danger); padding: 25px; font-size: 0.8rem; color: #999; text-align: justify; margin-top: 50px;}
+        .scudo-legale-web h2 { color: var(--danger); font-size: 0.9rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
 
-        .back-btn:hover {
-            color: var(--white);
-            text-shadow: 0 0 10px var(--legal-blue);
-        }
+        /* FOOTER */
+        footer { background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); border-top: 1px solid #222; padding: 40px 20px; text-align: center; position: relative; z-index: 10; margin-top: auto;}
+        .footer-links { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin: 20px 0;}
+        .footer-links a { color: #777; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;}
+        .footer-links a:hover { color: var(--legal-blue); }
 
-        main {
-            flex: 1;
-            max-width: 850px;
-            margin: 40px auto;
-            padding: 0 20px;
-            width: 100%;
-        }
-
-        .page-hero {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .status-tag {
-            background: var(--legal-blue);
-            color: #fff;
-            padding: 5px 15px;
-            font-weight: 900;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            color: var(--white);
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-
-        .diagnosi-box {
-            background: rgba(0, 123, 255, 0.05);
-            border-left: 4px solid var(--legal-blue);
-            padding: 25px;
-            margin-bottom: 40px;
-            border-radius: 0 8px 8px 0;
-            border: 1px solid #333;
-        }
-
-        .diagnosi-box h2 {
-            color: var(--legal-blue);
-            text-transform: uppercase;
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-
-        /* PROTOCOLLO STEP BY STEP */
-        .step {
-            position: relative;
-            padding-left: 60px;
-            margin-bottom: 40px;
-            background: var(--card-bg);
-            padding: 25px 25px 25px 70px;
-            border-radius: 12px;
-            border: 1px solid #222;
-        }
-
-        .step-num {
-            position: absolute;
-            left: 15px;
-            top: 25px;
-            width: 40px;
-            height: 40px;
-            background: var(--legal-blue);
-            color: #fff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 1.2rem;
-            box-shadow: 0 0 15px rgba(0, 123, 255, 0.4);
-        }
-
-        .step h3 {
-            color: var(--white);
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-
-        .step p {
-            color: #ccc;
-            font-size: 0.95rem;
-        }
-
-        .doc-list {
-            margin-top: 15px;
-            list-style: none;
-        }
-
-        .doc-list li {
-            background: #000;
-            padding: 10px;
-            margin-bottom: 5px;
-            border-radius: 4px;
-            border-left: 2px solid var(--legal-blue);
-            font-size: 0.85rem;
-            color: #888;
-        }
-
-        .btn-link {
-            display: inline-block;
-            margin-top: 20px;
-            background: var(--legal-blue);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 800;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-
-        .btn-link:hover {
-            background: #0056b3;
-            box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
-        }
-
-        footer {
-            background-color: var(--pure-black);
-            border-top: 2px solid var(--legal-blue);
-            padding: 40px 20px;
-            margin-top: auto;
-            text-align: center;
-            color: #666;
-            font-size: 0.8rem;
+        @media (max-width: 768px) {
+            .glass-box { padding: 20px; }
         }
     </style>
 </head>
 <body>
 
+<div class="fixed-skull-wrapper">
+    <div class="fixed-skull-img"></div>
+</div>
+
 <header>
-    <div class="header-content">
-        <img src="img/logo-header.png" alt="MONO DOOM" class="logo-header">
-        <p class="claim">RESURRECT THE BEAST.</p>
-    </div>
+    <div class="header-content"><a href="index.html"><img src="img/logo-header.png" alt="MONO DOOM" class="logo-header"></a><p class="claim">RESURRECT THE BEAST.</p></div>
 </header>
 
-<nav>
-    <a href="index.html" class="back-btn"><span>&lt;&lt;</span> Ritorna all'Hub Centrale</a>
-</nav>
-
 <main>
+    <div class="back-nav"><a href="index.html">⟵ Torna all'Hub Centrale</a></div>
+
     <div class="page-hero">
         <span class="status-tag">PROCEDURA LEGALE</span>
         <h1>Richiesta Targa (Contrassegno)</h1>
     </div>
 
-    <div class="diagnosi-box">
-        <h2>Obbligo Identificativo 2024/2025</h2>
-        <p>In base alla nuova normativa, ogni monopattino a propulsione elettrica deve essere dotato di un contrassegno identificativo (targa adesiva). La procedura non è immediata e richiede il passaggio attraverso il <strong>Portale dell'Automobilista</strong> e il ritiro fisico presso la Motorizzazione Civile (UMC).</p>
+    <section class="glass-box diagnosi-box">
+        <h2 class="box-title" style="color: var(--legal-blue);">Obbligo Identificativo 2024/2026</h2>
+        <p>In base all'aggiornamento normativo, ogni monopattino a propulsione elettrica deve essere dotato di un contrassegno identificativo (targa adesiva) per circolare su suolo pubblico. La procedura telematica richiede l'interfacciamento con i server del <strong>Portale dell'Automobilista</strong> e il successivo ritiro fisico presso gli uffici della Motorizzazione Civile (UMC) di competenza.</p>
+    </section>
+
+    <div class="terminal-log">
+        <h3>>> Log Dati Telemetrici (OSINT)</h3>
+        <div class="terminal-text">
+            <p>> Target: <strong>Conformità Legale Monopattini Elettrici.</strong></p>
+            <p>> Hardware Impact: L'adesivo rilasciato dalla Motorizzazione richiede una superficie di ancoraggio solida. Per telai ad alte prestazioni o con bracci oscillanti esposti (es. Kaabo Mantis 10), l'applicazione diretta sul telaio è sconsigliata; si rende necessaria l'installazione di un <span class="highlight">porta targa after-market</span> strutturato.</p>
+            <p>> Autorizzazione: Operazione subordinata al tracciamento dell'identità digitale (SPID/CIE) e all'assolvimento degli oneri tramite circuito PagoPA.</p>
+        </div>
     </div>
 
-    <div class="step">
-        <div class="step-num">1</div>
-        <h3>Preparazione e Pagamento</h3>
-        <p>Prima di iniziare la pratica online, devi assolvere gli oneri finanziari. Accedi a PagoPa e paga la <strong>Tariffa N174</strong>. Senza la ricevuta di questo pagamento non potrai caricare l'istanza.</p>
-        <ul class="doc-list">
-            <li>Identificativo Tariffa: N174 (Rilascio contrassegno monopattini)</li>
-            <li>Possibile istanza cumulativa se possiedi più mezzi.</li>
-        </ul>
-    </div>
+    <section class="glass-box">
+        <h2 class="box-title">Iter Burocratico</h2>
+        
+        <div class="step-container">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h3>Preparazione e Pagamento</h3>
+                <p>Prima di inizializzare l'istanza online, è obbligatorio assolvere gli oneri finanziari. Accedi al circuito PagoPa e salda la <strong>Tariffa N174</strong>. Senza il numero di ricevuta telematica di questo pagamento, il Portale dell'Automobilista bloccherà la richiesta.</p>
+                <ul class="doc-list">
+                    <li>Identificativo Tariffa: <strong>N174</strong> (Rilascio contrassegno monopattini).</li>
+                    <li>L'istanza può essere cumulativa se possiedi più veicoli da regolarizzare.</li>
+                </ul>
+            </div>
+        </div>
 
-    <div class="step">
-        <div class="step-num">2</div>
-        <h3>Compilazione Istanza Online</h3>
-        <p>Accedi al Portale dell'Automobilista tramite SPID o CIE. Vai nella sezione <strong>«Gestione Pratiche Online»</strong> e seleziona «RILASCIO CONTRASSEGNO MONOPATTINI». Dovrai caricare i seguenti file scannerizzati:</p>
-        <ul class="doc-list">
-            <li>Modulo di richiesta compilato e firmato.</li>
-            <li>Ricevuta di pagamento PagoPa.</li>
-            <li>Fotocopia Documento d'Identità in corso di validità.</li>
-            <li>Per cittadini Extra-UE: Permesso di soggiorno o carta di lunga permanenza.</li>
-            <li>Per minorenni: Firma del genitore e suo documento d'identità.</li>
-        </ul>
-        <a href="https://www.ilportaledellautomobilista.it" target="_blank" class="btn-link">Vai al Portale dell'Automobilista</a>
-    </div>
+        <div class="step-container">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h3>Compilazione Istanza Online</h3>
+                <p>Autenticati sul Portale dell'Automobilista tramite SPID o CIE. Naviga nella sezione <strong>«Gestione Pratiche Online»</strong> e seleziona «RILASCIO CONTRASSEGNO MONOPATTINI». Il sistema ti chiederà di caricare in formato digitale (PDF/JPG) i seguenti documenti:</p>
+                <ul class="doc-list">
+                    <li>Modulo di richiesta ministeriale (compilato e firmato digitalmente o a penna).</li>
+                    <li>Ricevuta di avvenuto pagamento PagoPa.</li>
+                    <li>Fotocopia Documento d'Identità in corso di validità (fronte/retro).</li>
+                    <li>Per cittadini Extra-UE: Permesso di soggiorno o carta di lunga permanenza.</li>
+                    <li>Per minorenni: Firma del genitore o tutore legale e relativo documento d'identità.</li>
+                </ul>
+                <a href="https://www.ilportaledellautomobilista.it" target="_blank" class="btn-link">Accedi al Portale dell'Automobilista</a>
+            </div>
+        </div>
 
-    <div class="step">
-        <div class="step-num">3</div>
-        <h3>Conferma ed Esito</h3>
-        <p>Una volta inviata la richiesta, il sistema controllerà la documentazione. Riceverai una mail ufficiale non appena l'istanza avrà esito positivo. A quel punto, rientra nel portale nella sezione <strong>«Le mie richieste»</strong> per prenotare l'appuntamento fisico.</p>
-    </div>
+        <div class="step-container">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h3>Elaborazione ed Esito</h3>
+                <p>Una volta inviata la richiesta, i server verificheranno la congruità della documentazione. Riceverai un alert via mail non appena l'istanza sarà processata con esito positivo. A quel punto, rientra nel portale nella sezione <strong>«Le mie richieste»</strong> per generare la ricevuta e prenotare l'appuntamento per il ritiro fisico.</p>
+            </div>
+        </div>
 
-    <div class="step">
-        <div class="step-num">4</div>
-        <h3>Ritiro presso la Motorizzazione (UMC)</h3>
-        <p>Recati presso l'ufficio della Motorizzazione Civile scelto in fase di richiesta nel giorno e ora stabiliti. Porta con te:</p>
-        <ul class="doc-list">
-            <li>Ricevuta di prenotazione rilasciata dal sistema.</li>
-            <li>Documento di identità originale caricato online.</li>
-        </ul>
-        <p>L'operatore effettuerà le verifiche di abbinamento e ti consegnerà materialmente i contrassegni adesivi da applicare al tuo mezzo.</p>
-    </div>
+        <div class="step-container">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <h3>Ritiro presso l'UMC e Applicazione</h3>
+                <p>Recati presso l'ufficio della Motorizzazione Civile selezionato in fase di richiesta nel giorno e ora stabiliti, portando con te la <strong>ricevuta di prenotazione</strong> e il <strong>documento di identità originale</strong>.</p>
+                <p style="margin-top: 10px;">L'operatore effettuerà le verifiche di abbinamento e ti consegnerà materialmente i contrassegni adesivi. Ricorda di procurarti un porta targa specifico e compatibile con il tuo mezzo (ad esempio, l'installazione su un Kaabo Mantis 10 richiede un supporto dedicato sul braccio oscillante posteriore) per evitare che le vibrazioni distruggano l'adesivo identificativo.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="scudo-legale-web glass-box">
+        <h2>⚠️ Esclusione di Responsabilità</h2>
+        <p>Le procedure amministrative e i costi (come la tariffa N174) descritti in questa pagina si basano sulle normative in vigore al momento della stesura e possono essere soggetti a variazioni ministeriali. L'Editore di MONO DOOM non fornisce assistenza legale, non è collegato alla Motorizzazione Civile e non si assume la responsabilità per eventuali rigetti dell'istanza o sanzioni derivanti da ritardi nella regolarizzazione dei mezzi.</p>
+    </section>
+
 </main>
 
 <footer>
-    &copy; 2026 MONO DOOM. Guida indipendente alla regolarizzazione dei monopattini elettrici.
+    <img src="img/logo-testo.png" alt="MONO DOOM" style="max-width: 150px; opacity: 0.6; margin-bottom: 10px;">
+    <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="cookie.html">Cookie Policy</a>
+        <a href="termini.html">Termini e Condizioni</a>
+        <a href="disclaimer.html">Disclaimer Legale</a>
+    </div>
+    <div style="color: #444; font-size: 0.65rem; margin-top: 15px;">
+        &copy; 2026 MONO DOOM. Tutti i diritti riservati.
+    </div>
 </footer>
 
 </body>
