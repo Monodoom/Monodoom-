@@ -1,419 +1,246 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QGRVQ9N6N2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-QGRVQ9N6N2');
+    </script>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ducati Pro-II: Registrazione Freni a Disco | MONO DOOM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Guida alla regolazione dei freni a disco meccanici Ducati Pro-II. Risolvi i fischi metallici e centra la pinza senza danneggiare il disco.">
+    <title>Allineamento Freni a Disco Ducati | MONO DOOM</title>
+    
+    <!-- FIX FAVICON -->
     <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <meta name="theme-color" content="#050505">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+
+    <!-- SEO STRUCTURED DATA -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Regolazione Freni a Disco Ducati",
+      "description": "Procedura per centrare la pinza dei freni meccanici e regolare la pastiglia interna per eliminare i fischi.",
+      "step": [
+        { "@type": "HowToStep", "name": "Centratura Pinza", "text": "Allenta le viti, premi il freno per centrare la pinza sul disco e stringi nuovamente." },
+        { "@type": "HowToStep", "name": "Regolazione Pastiglia", "text": "Usa la brugola sul retro della pinza per allontanare la pastiglia fissa dal disco." }
+      ]
+    }
+    </script>
+
     <style>
         :root {
-            --bg-color: #050505;
+            --bg-color: #050505; 
             --text-color: #e0e0e0;
-            --ducati-red: #da291c;
-            --white: #ffffff;
-            --pure-black: #000000;
-            --card-bg: #111111;
+            --danger: #ff003c; 
+            --ducati-red: #da291c; /* Rosso Corsa Ducati */
+            --terminal-green: #0f0;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* TESCHIO CENTRATO E PULSANTE */
+        .fixed-skull-wrapper { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; z-index: 0; pointer-events: none; }
+        .fixed-skull-img { 
+            width: 90vw; max-width: 600px; height: 90vh; max-height: 600px; 
+            background-image: url('img/teschio.png'); background-size: contain; background-position: center; background-repeat: no-repeat; 
+            opacity: 0.35; animation: heartbeat-ducati 3s infinite linear; 
+        }
+        @keyframes heartbeat-ducati { 
+            0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(218,41,28,0.3)); } 
+            14% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(218,41,28,0.6)); } 
+            28% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(218,41,28,0.3)); } 
+            42% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(255,0,60,0.5)); } 
+            70% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(218,41,28,0.3)); } 
         }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+        /* HEADER */
+        header { background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border-bottom: 2px solid var(--ducati-red); padding: 10px 0; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .logo-header { max-width: 80vw; height: auto; max-height: 60px; object-fit: contain; display: block; margin: 0 auto 5px auto; }
+        .claim { color: #fff; font-weight: 900; font-style: italic; letter-spacing: 5px; font-size: 0.75rem; text-transform: uppercase; opacity: 0.7; }
+
+        /* MAIN CONTAINER */
+        main { flex: 1; padding: 30px 20px 60px; max-width: 900px; margin: 0 auto; width: 100%; position: relative; z-index: 10; }
+
+        /* BACK NAV */
+        .back-nav { margin-bottom: 30px; }
+        .back-nav a { display: inline-block; color: #aaa; text-decoration: none; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #aaa; padding-bottom: 3px; transition: 0.3s; }
+        .back-nav a:hover { color: #fff; border-color: #fff; text-shadow: 0 0 10px var(--ducati-red); }
+
+        /* CLASSE UNIVERSALE VETRO */
+        .glass-box { 
+            background: rgba(10, 10, 10, 0.4); 
+            backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); 
+            border: 1px solid rgba(255,255,255,0.08); 
+            border-radius: 8px; padding: 30px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4); 
+            margin-bottom: 30px;
         }
 
-        header {
-            background-color: var(--pure-black);
-            border-bottom: 2px solid var(--ducati-red);
-            padding: 20px 0 10px;
-            text-align: center;
-        }
+        /* HERO MECCANICA */
+        .mech-hero { text-align: center; margin-bottom: 40px; }
+        .mech-tag { background: rgba(218, 41, 28, 0.15); color: var(--ducati-red); border: 1px solid var(--ducati-red); padding: 5px 15px; font-weight: 900; border-radius: 4px; display: inline-block; margin-bottom: 15px; font-size: 1.2rem; box-shadow: 0 0 15px rgba(218,41,28,0.3); letter-spacing: 1px; font-family: 'Orbitron', sans-serif;}
+        .mech-hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 5vw, 3rem); color: #fff; text-transform: uppercase; margin: 0; text-shadow: 0 0 20px rgba(218,41,28,0.3);}
 
-        .header-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        /* TITOLI SEZIONE */
+        .box-title { color: #fff; text-transform: uppercase; font-size: 1.3rem; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-family: 'Orbitron', sans-serif;}
+        
+        .diagnosi-box { border-left: 4px solid var(--ducati-red); }
+        .diagnosi-box p { color: #ccc; line-height: 1.7; font-size: 1.05rem; }
 
-        .logo-header {
-            max-height: 110px;
-            width: auto;
-            display: block;
-        }
+        /* VIDEO E ALERT */
+        .video-box { padding: 0; overflow: hidden; border: 1px solid #333; border-left: 4px solid var(--ducati-red); }
+        .cc-alert-box { background: rgba(218, 41, 28, 0.1); color: #ccc; border-bottom: 1px solid #333; padding: 15px; font-size: 0.9rem; display: flex; align-items: center; gap: 12px; line-height: 1.5; }
+        .cc-alert-box strong { color: var(--ducati-red); }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; background: #000;}
 
-        .claim {
-            color: var(--white);
-            font-weight: 900;
-            font-style: italic;
-            letter-spacing: 3px;
-            font-size: 1.05rem;
-            margin-top: 5px;
-            text-transform: uppercase;
-            text-shadow: 0 0 5px var(--ducati-red);
-        }
+        /* ARSENALE RICAMBI */
+        .arsenal-box { border-top: 4px solid var(--ducati-red); }
+        .part-item { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 6px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .part-info { flex: 1; padding-right: 20px; }
+        .part-name { font-weight: 900; font-size: 1.1rem; color: var(--ducati-red); display: block; margin-bottom: 5px; text-transform: uppercase; }
+        .part-desc { font-size: 0.9rem; color: #aaa; }
+        
+        .buy-buttons { display: flex; gap: 10px; flex-shrink: 0; }
+        .btn { padding: 10px 15px; border-radius: 4px; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; text-decoration: none; text-align: center; transition: 0.3s; }
+        .btn-amz { background: #FF9900; color: #000; }
+        .btn-amz:hover { background: #e68a00; box-shadow: 0 0 15px rgba(255, 153, 0, 0.4); }
 
-        nav {
-            background-color: var(--pure-black);
-            padding: 15px 25px;
-            border-bottom: 1px solid #333;
-        }
+        /* PROTOCOLLO STEPS */
+        .step-container { display: flex; gap: 15px; margin-bottom: 25px; }
+        .step-num { width: 40px; height: 40px; background: rgba(218, 41, 28, 0.1); color: var(--ducati-red); border: 1px solid var(--ducati-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.2rem; flex-shrink: 0; font-family: 'Orbitron', sans-serif;}
+        .step-content h3 { color: #fff; text-transform: uppercase; margin-bottom: 5px; font-size: 1.1rem; }
+        .step-content p { color: #aaa; line-height: 1.6; }
 
-        .back-btn {
-            display: inline-block;
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 900;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            transition: 0.3s;
-            font-family: 'Courier New', Courier, monospace;
-        }
+        /* DISCLAIMER */
+        .scudo-legale-web { border-left: 5px solid var(--danger); padding: 25px; font-size: 0.8rem; color: #999; text-align: justify; margin-top: 50px;}
+        .scudo-legale-web h2 { color: var(--danger); font-size: 0.9rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
 
-        .back-btn span {
-            color: var(--ducati-red);
-            margin-right: 5px;
-        }
+        /* FOOTER */
+        footer { background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); border-top: 1px solid #222; padding: 40px 20px; text-align: center; position: relative; z-index: 10; margin-top: auto;}
+        .footer-links { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin: 20px 0;}
+        .footer-links a { color: #777; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;}
+        .footer-links a:hover { color: var(--ducati-red); }
 
-        .back-btn:hover {
-            color: var(--white);
-            text-shadow: 0 0 10px var(--ducati-red);
-        }
-
-        main {
-            flex: 1;
-            max-width: 850px;
-            margin: 40px auto;
-            padding: 0 20px;
-            width: 100%;
-        }
-
-        .error-hero {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .error-tag {
-            background: #333;
-            color: #fff;
-            padding: 5px 15px;
-            font-weight: 900;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            color: var(--white);
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-
-        .diagnosi-box {
-            background: rgba(218, 41, 28, 0.05);
-            border-left: 4px solid var(--ducati-red);
-            padding: 25px;
-            margin-bottom: 40px;
-            border-radius: 0 8px 8px 0;
-            border: 1px solid #333;
-        }
-
-        .diagnosi-box h2 {
-            color: var(--ducati-red);
-            text-transform: uppercase;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-
-        .video-section {
-            margin-bottom: 50px;
-            background: #000;
-            border: 1px solid #333;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(218, 41, 28, 0.05);
-        }
-
-        .video-header {
-            background: #111;
-            border-bottom: 1px solid #333;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .video-title {
-            color: var(--ducati-red);
-            font-weight: 900;
-            font-family: monospace;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        @keyframes pulse-danger {
-            0% { box-shadow: inset 0 0 0 rgba(255, 0, 60, 0.4); }
-            50% { box-shadow: inset 0 0 15px rgba(255, 0, 60, 0.2); }
-            100% { box-shadow: inset 0 0 0 transparent; }
-        }
-
-        .cc-alert-box {
-            background: #1a0004;
-            color: #ff003c;
-            border-bottom: 1px solid #333;
-            padding: 12px 20px;
-            font-size: 0.85rem;
-            animation: pulse-danger 2s infinite;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            line-height: 1.4;
-        }
-
-        .cc-alert-box strong {
-            color: var(--white);
-        }
-
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .arsenal-box {
-            background: linear-gradient(145deg, #111, #0a0a0a);
-            border: 1px solid var(--ducati-red);
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 50px;
-            position: relative;
-        }
-
-        .arsenal-box::before {
-            content: "ARSENALE NECESSARIO";
-            position: absolute;
-            top: -12px;
-            left: 20px;
-            background: var(--bg-color);
-            color: var(--ducati-red);
-            font-weight: 900;
-            padding: 0 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .part-item {
-            background: #000;
-            border: 1px solid #333;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: 0.3s;
-        }
-
-        .part-info {
-            flex: 1;
-            padding-right: 20px;
-        }
-
-        .part-name {
-            font-weight: 900;
-            font-size: 1.1rem;
-            color: var(--white);
-            display: block;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        .part-desc {
-            font-size: 0.85rem;
-            color: #aaa;
-        }
-
-        .btn {
-            padding: 10px 15px;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            text-decoration: none;
-            text-align: center;
-            transition: 0.3s;
-        }
-
-        .btn-amz {
-            background: #f90;
-            color: #000;
-        }
-
-        .btn-ali {
-            background: #da291c;
-            color: #fff;
-        }
-
-        .step {
-            background: var(--card-bg);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #333;
-        }
-
-        .step h3 {
-            color: var(--ducati-red);
-            margin-top: 0;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .step p {
-            margin: 0;
-            color: #ccc;
-        }
-
-        footer {
-            background-color: var(--pure-black);
-            border-top: 2px solid var(--ducati-red);
-            padding: 40px 20px;
-            margin-top: auto;
-            text-align: center;
-            color: #666;
-            font-size: 0.8rem;
-        }
-        @media(max-width: 768px) {
+        @media (max-width: 768px) {
+            .glass-box { padding: 20px; }
             .part-item { flex-direction: column; align-items: flex-start; gap: 15px; }
-            .btn { width: 100%; }
+            .buy-buttons { width: 100%; flex-direction: column; }
+            .cc-alert-box { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <img src="img/logo-header.png" alt="MONO DOOM" class="logo-header">
-            <p class="claim">RESURRECT THE BEAST.</p>
-        </div>
-    </header>
-    
-    <nav>
-        <a href="ducati.html" class="back-btn"><span>&lt;&lt;</span> Ritorna al Garage Ducati</a>
-    </nav>
-    
-    <main>
-        <div class="error-hero">
-            <span class="error-tag">PROTOCOLLO MECCANICO</span>
-            <h1>Ducati: Freni a Disco e Fischi</h1>
-        </div>
 
-        <div class="diagnosi-box">
-            <h2>Il fastidio costante: il disco che sfrega</h2>
-            <p>Sui modelli Ducati (Pro-I, Pro-II Plus) equipaggiati con freni a disco meccanici a filo, è comune sentire un fastidioso fischio metallico ("zing-zing") durante la marcia. Questo accade perché la pastiglia interna è fissa e il disco, spesso leggermente storto, ci sfrega contro ad ogni giro.</p>
-        </div>
+<div class="fixed-skull-wrapper">
+    <div class="fixed-skull-img"></div>
+</div>
 
-        <div class="video-section">
-            <div class="video-header"><span class="video-title">Feed Video - Allineamento Pinza Meccanica</span></div>
-            <div class="cc-alert-box"><span style="font-size: 1.2rem;">⚠️</span><span><strong>ATTIVA I SOTTOTITOLI ITA:</strong> Clicca <strong>[CC]</strong> nel player per tradurre le istruzioni.</span></div>
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/1N2AS-Eth5o?cc_load_policy=1&cc_lang_pref=it&hl=it&rel=0" title="Adjust Mechanical Disc Brakes" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </div>
+<header>
+    <div class="header-content"><a href="index.html"><img src="img/logo-header.png" alt="MONO DOOM" class="logo-header"></a><p class="claim">RESURRECT THE BEAST.</p></div>
+</header>
 
-        <div class="arsenal-box">
-            <div class="part-item">
-                <div class="part-info">
-                    <span class="part-name">Pastiglie Freno Ducati (Semi-Metalliche)</span>
-                    <span class="part-desc">Compatibili con Pro-I Evo e Pro-II. Offrono un grip superiore alle originali e fischiano meno sotto stress.</span>
-                </div>
-                <a href="https://www.amazon.it/s?k=pastiglie+freno+ducati+pro+2" target="_blank" class="btn btn-amz">Vedi su Amazon</a>
-            </div>
-            <div class="part-item">
-                <div class="part-info">
-                    <span class="part-name">Disco Freno 110mm / 120mm Rinforzato</span>
-                    <span class="part-desc">Se il tuo disco è piegato, l'allineamento è impossibile. Sostituiscilo per una frenata dritta e silenziosa.</span>
-                </div>
-                <a href="https://www.amazon.it/s?k=disco+freno+monopattino+110mm" target="_blank" class="btn btn-amz">Vedi su Amazon</a>
-            </div>
-            <div class="part-item">
-                <div class="part-info">
-                    <span class="part-name">Pinza Freno Meccanica X-Tech (Upgrade)</span>
-                    <span class="part-desc">Il miglior upgrade per Ducati: pinza idraulica a comando meccanico. Entrambe le pastiglie si muovono contemporaneamente.</span>
-                </div>
-                <a href="https://it.aliexpress.com/w/wholesale-xtech-brake-scooter.html" target="_blank" class="btn btn-ali">Vedi su AliExpress</a>
-            </div>
-        </div>
+<main>
+    <div class="back-nav"><a href="ducati.html">⟵ Torna al Garage Ducati</a></div>
 
-        <div class="step">
-            <h3>Fase 1: Centratura della Pinza</h3>
-            <p>Allenta le due viti a brugola principali che tengono la pinza attaccata al telaio. Premi a fondo la leva del freno sul manubrio. Mentre il freno è tirato, stringi nuovamente le due viti. In questo modo la pinza si auto-centra sul disco.</p>
-        </div>
+    <div class="mech-hero">
+        <span class="mech-tag">PROTOCOLLO MECCANICO</span>
+        <h1>Ducati: Freni a Disco e Fischi</h1>
+    </div>
 
-        <div class="step">
-            <h3>Fase 2: Regolazione Pastiglia Interna</h3>
-            <p>Guarda il retro della pinza (lato ruota). Troverai una grossa vite a brugola (5mm). Quella regola la distanza della pastiglia fissa. Svitandola leggermente, allontanerai la pastiglia dal disco eliminando il fischio.</p>
-        </div>
-    </main>
-    
-    <section class="scudo-legale-web" style="max-width: 1200px; margin: 40px auto; padding: 25px; font-size: 0.85rem; color: #999; border: 1px solid #ff003c; border-left: 5px solid #ff003c; background: rgba(20, 0, 0, 0.4); border-radius: 6px;">
-        <h2 style="color: #ff003c; font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;">⚠️ Nota di Esclusione di Responsabilità (Disclaimer Specifico di Pagina)</h2>
-        <p>I dati metrologici, le segnature esadecimali, gli schemi elettrici di campionamento e i metodi di indagine meccanica riportati in questa pagina derivano da analisi teoriche OSINT e documentazione di pubblico dominio. Le informazioni sono destinate esclusivamente a scopo di studio e approfondimento scientifico per l'analisi forense e la ricostruzione dei sinistri.</p>
-        <p>L'applicazione pratica delle nozioni qui esposte su veicoli destinati alla circolazione stradale avviene sotto l'esclusiva responsabilità dell'utente. L'Editore non risponde di eventuali danni fisici, patrimoniali o sanzioni legali derivanti dall'uso improprio del materiale didattico fornito.</p>
+    <section class="glass-box diagnosi-box">
+        <h2 class="box-title" style="color: var(--ducati-red);">Il fastidio costante: il disco che sfrega</h2>
+        <p>Sui modelli Ducati (Pro-I, Pro-II, Pro-III) equipaggiati con freni a disco meccanici a filo, è purtroppo comune sentire un fastidioso fischio metallico (il classico "zing-zing") durante la marcia. Questo accade perché la pastiglia interna è fissa e il disco, spesso leggermente storto o non perfettamente centrato, sfrega contro di essa ad ogni rotazione della ruota. Una regolazione millimetrica è la chiave per tornare a viaggiare in silenzio.</p>
     </section>
+
+    <section class="glass-box video-box">
+        <div class="cc-alert-box">
+            <span style="font-size: 1.5rem;">⚠️</span>
+            <span><strong>ATTIVA I SOTTOTITOLI ITA:</strong> Fai partire il video, poi clicca sull'icona <strong>[CC]</strong> o sull'ingranaggio in basso a destra per leggere la traduzione.</span>
+        </div>
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/1N2AS-Eth5o?cc_load_policy=1&cc_lang_pref=it&hl=it&rel=0&modestbranding=1" title="Adjust Mechanical Disc Brakes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <section class="glass-box arsenal-box">
+        <h2 class="box-title" style="color: var(--ducati-red);">Arsenale Necessario</h2>
+        
+        <div class="part-item">
+            <div class="part-info">
+                <span class="part-name">1. Pastiglie Freno Ducati (Semi-Metalliche)</span>
+                <span class="part-desc">Compatibili con serie Pro. Offrono un grip superiore e durano molto più delle pastiglie originali in resina, producendo meno fischio.</span>
+            </div>
+            <div class="buy-buttons">
+                <a href="https://www.amazon.it/s?k=pastiglie+freno+ducati+pro+2" target="_blank" class="btn btn-amz">Amazon (24h)</a>
+            </div>
+        </div>
+        
+        <div class="part-item">
+            <div class="part-info">
+                <span class="part-name">2. Disco Freno 120mm Rinforzato</span>
+                <span class="part-desc">Se il tuo disco è piegato o presenta solchi profondi, l'allineamento sarà inutile. Sostituiscilo per una frenata dritta, sicura e silenziosa.</span>
+            </div>
+            <div class="buy-buttons">
+                <a href="https://www.amazon.it/s?k=disco+freno+monopattino+120mm" target="_blank" class="btn btn-amz">Vedi su Amazon</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="glass-box">
+        <h2 class="box-title">Protocollo di Allineamento</h2>
+        
+        <div class="step-container">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h3>Centratura della Pinza</h3>
+                <p>Allenta le due viti a brugola principali che fissano la pinza al telaio (non svitarle del tutto, devono solo permettere alla pinza di muoversi lateralmente). Premi a fondo la leva del freno sul manubrio con decisione: la forza della leva sposterà la pinza fino a farla auto-centrare perfettamente sul disco. Mentre tieni la leva premuta, stringi nuovamente le due viti con forza.</p>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h3>Regolazione Pastiglia Interna</h3>
+                <p>Guarda il retro della pinza (lato ruota). Troverai una vite a brugola da 5mm. Quella regola la distanza della pastiglia fissa. Svitandola leggermente (senso antiorario), allontanerai la pastiglia dal disco eliminando il fischio in marcia. Fai dei micro-aggiustamenti finché la ruota gira libera senza alcun rumore.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="scudo-legale-web glass-box">
+        <h2>⚠️ Esclusione di Responsabilità</h2>
+        <p>I dati, le procedure meccaniche e i metodi di indagine riportati in questa pagina derivano da documentazione OSINT. Le informazioni sono destinate a scopo di studio e approfondimento tecnico. L'applicazione pratica delle nozioni qui esposte su veicoli avviene sotto l'esclusiva responsabilità dell'utente. L'Editore declina ogni responsabilità per sinistri, danni fisici o inefficienza dell'impianto frenante derivante dall'errata esecuzione delle manovre di registro descritte.</p>
+    </section>
+
 </main>
 
-<footer style="background-color: #000; border-top: 1px solid #222; padding: 40px 20px 20px; width: 100%;">
-    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
-        
-        <div style="display: flex; flex-direction: column; gap: 15px;">
-            
-            <a href="Ducati.html" style="text-decoration: none; display: flex; align-items: center; transition: 0.3s;">
-              <span style="color: #ff0022; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #ff0022; padding-bottom: 2px;">&larr; Torna al Garage Ducati</span>
-            
-            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; opacity: 0.7; transition: 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
-                <img src="img/logo-testo.png" alt="MONO DOOM Home" style="max-width: 120px;">
-                <span style="color: #777; font-size: 0.7rem; font-weight: bold; margin-left: 15px; text-transform: uppercase; letter-spacing: 1px;">Hub Centrale</span>
-            </a>
-        </div>
-
-        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-            <a href="privacy.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Privacy Policy</a>
-            <a href="cookie.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Cookie Policy</a>
-            <a href="termini.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Termini e Condizioni</a>
-            <a href="disclaimer.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Disclaimer Legale</a>
-        </div>
+<footer>
+    <img src="img/logo-testo.png" alt="MONO DOOM" style="max-width: 150px; opacity: 0.6; margin-bottom: 10px;">
+    <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="cookie.html">Cookie Policy</a>
+        <a href="termini.html">Termini e Condizioni</a>
+        <a href="disclaimer.html">Disclaimer Legale</a>
     </div>
-    
-    <div style="text-align: center; margin-top: 35px; padding-top: 20px; border-top: 1px solid #111; color: #333; font-size: 0.7rem; font-family: sans-serif;">
-        &copy; 2026 MONO DOOM. Tutti i diritti riservati. I marchi registrati appartengono ai rispettivi proprietari. Documentazione ad uso informativo e peritale.
+    <div style="color: #444; font-size: 0.65rem; margin-top: 15px;">
+        &copy; 2026 MONO DOOM. Tutti i diritti riservati.
     </div>
 </footer>
+
+</body>
+</html>
