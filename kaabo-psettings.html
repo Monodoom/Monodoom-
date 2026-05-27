@@ -1,157 +1,199 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QGRVQ9N6N2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-QGRVQ9N6N2');
+    </script>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="L'archivio definitivo Kaabo. Sblocco velocità, tabella P-Settings completa e diagnostica errori per display EY3, LT01 e TFT su Mantis e Wolf.">
     <title>Sblocco & Diagnostica Display Kaabo | MONO DOOM</title>
     
     <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <meta name="theme-color" content="#050505">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Sblocco e Diagnostica Display Kaabo (EY3, LT01, TFT)",
+      "description": "Guida ai P-Settings, codici di errore e sblocco della velocità massima per i monopattini elettrici Kaabo Mantis e Wolf Warrior.",
+      "articleSection": "Elettronica e Modding"
+    }
+    </script>
 
     <style>
         :root {
             --bg-color: #050505; 
             --text-color: #e0e0e0;
-            --neon-blue: #00e5ff;
-            --white: #ffffff;
-            --pure-black: #000000;
-            --danger: #ff003c;
-            --hack: #5000ff;
-            --card-bg: #111111;
+            --danger: #ff003c; /* Rosso Kaabo */
+            --neon-blue: #00e5ff; /* Azzurro Elettronica */
             --terminal-green: #0f0;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
 
-        /* HEADER DEFINITIVO */
-        header { background-color: var(--pure-black); border-bottom: 2px solid var(--danger); padding: 20px 0 10px; text-align: center; }
-        .header-content { display: flex; flex-direction: column; justify-content: center; align-items: center; max-width: 1200px; margin: 0 auto; }
-        .logo-header { max-height: 110px; width: auto; display: block; }
-        .claim { color: var(--white); font-weight: 900; font-style: italic; letter-spacing: 3px; font-size: 1.05rem; margin-top: 5px; text-transform: uppercase; text-shadow: 0 0 5px var(--danger); }
+        /* TESCHIO CENTRATO E PULSANTE */
+        .fixed-skull-wrapper { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; z-index: 0; pointer-events: none; }
+        .fixed-skull-img { 
+            width: 90vw; max-width: 600px; height: 90vh; max-height: 600px; 
+            background-image: url('img/teschio.png'); background-size: contain; background-position: center; background-repeat: no-repeat; 
+            opacity: 0.35; animation: heartbeat-elec 3s infinite linear; 
+        }
+        @keyframes heartbeat-elec { 
+            0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(0,229,255,0.3)); } 
+            14% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(0,229,255,0.6)); } 
+            28% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(0,229,255,0.3)); } 
+            42% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(255,0,60,0.5)); } 
+            70% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(0,229,255,0.3)); } 
+        }
 
-        /* NAVIGAZIONE TATTICA */
-        nav { background-color: var(--pure-black); padding: 15px 25px; text-align: left; border-bottom: 1px solid #333; }
-        .back-btn { display: inline-block; color: var(--text-color); text-decoration: none; font-weight: 900; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; font-family: 'Courier New', Courier, monospace; }
-        .back-btn span { color: var(--danger); margin-right: 5px; }
-        .back-btn:hover { color: var(--white); text-shadow: 0 0 10px var(--danger); }
+        /* HEADER */
+        header { background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border-bottom: 2px solid var(--danger); padding: 10px 0; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .logo-header { max-width: 80vw; height: auto; max-height: 60px; object-fit: contain; display: block; margin: 0 auto 5px auto; }
+        .claim { color: #fff; font-weight: 900; font-style: italic; letter-spacing: 5px; font-size: 0.75rem; text-transform: uppercase; opacity: 0.7; }
 
-        /* MAIN & HERO */
-        main { flex: 1; max-width: 900px; margin: 40px auto; padding: 0 20px; width: 100%; }
+        /* MAIN CONTAINER */
+        main { flex: 1; padding: 30px 20px 60px; max-width: 900px; margin: 0 auto; width: 100%; position: relative; z-index: 10; }
+
+        /* BACK NAV */
+        .back-nav { margin-bottom: 30px; }
+        .back-nav a { display: inline-block; color: #aaa; text-decoration: none; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #aaa; padding-bottom: 3px; transition: 0.3s; }
+        .back-nav a:hover { color: #fff; border-color: #fff; text-shadow: 0 0 10px var(--danger); }
+
+        /* CLASSE UNIVERSALE VETRO */
+        .glass-box { 
+            background: rgba(10, 10, 10, 0.4); 
+            backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); 
+            border: 1px solid rgba(255,255,255,0.08); 
+            border-radius: 8px; padding: 30px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4); 
+            margin-bottom: 30px;
+        }
+
+        /* HERO ELETTRONICA */
         .error-hero { text-align: center; margin-bottom: 40px; }
-        .error-tag { background: #333; color: white; padding: 5px 15px; font-weight: 900; border-radius: 4px; display: inline-block; margin-bottom: 10px; font-size: 1.2rem; }
-        h1 { font-size: 2.5rem; color: var(--white); text-transform: uppercase; letter-spacing: -1px; line-height: 1.2; margin-bottom: 20px; }
+        .error-tag { background: rgba(0, 229, 255, 0.15); color: var(--neon-blue); border: 1px solid var(--neon-blue); padding: 5px 15px; font-weight: 900; border-radius: 4px; display: inline-block; margin-bottom: 15px; font-size: 1.2rem; box-shadow: 0 0 15px rgba(0,229,255,0.3); letter-spacing: 1px; font-family: 'Orbitron', sans-serif;}
+        .error-hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 5vw, 3rem); color: #fff; text-transform: uppercase; margin: 0; text-shadow: 0 0 20px rgba(0,229,255,0.3);}
 
-        /* BOX ACCESSO / DIAGNOSI */
-        .diagnosi-box { background: rgba(0, 229, 255, 0.05); border-left: 4px solid var(--neon-blue); padding: 25px; margin-bottom: 30px; border-radius: 0 8px 8px 0; border: 1px solid #333; }
+        /* TITOLI SEZIONE */
+        .box-title { color: #fff; text-transform: uppercase; font-size: 1.5rem; margin: 40px 0 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-family: 'Orbitron', sans-serif;}
+        
+        .diagnosi-box { border-left: 4px solid var(--neon-blue); }
         .diagnosi-box h3 { color: var(--neon-blue); text-transform: uppercase; font-size: 1.2rem; margin-top: 0; margin-bottom: 10px; }
-        .pin-code { display: inline-block; background: #000; color: var(--neon-blue); font-family: 'Courier New', monospace; font-size: 1.1rem; font-weight: 900; padding: 4px 10px; border-radius: 4px; border: 1px solid #333; margin: 0 5px; }
+        .diagnosi-box p { color: #ccc; line-height: 1.7; font-size: 1.05rem; margin-bottom: 10px;}
+        .pin-code { display: inline-block; background: rgba(0,0,0,0.8); color: var(--neon-blue); font-family: 'Courier New', monospace; font-size: 1.1rem; font-weight: 900; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--neon-blue); margin: 0 5px; }
 
-        /* VIDEO E TERMINALE SEO */
-        .video-section { margin-bottom: 50px; background: #000; border: 1px solid #333; border-radius: 8px; overflow: hidden; box-shadow: 0 0 20px rgba(255, 0, 60, 0.05); }
-        .video-header { background: #111; border-bottom: 1px solid #333; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
-        .video-title { color: var(--danger); font-weight: 900; font-family: monospace; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        /* VIDEO E ALERT */
+        .video-box { padding: 0; overflow: hidden; border: 1px solid #333; border-left: 4px solid var(--neon-blue); }
+        @keyframes pulse-elec {
+            0% { box-shadow: inset 0 0 0 rgba(0, 229, 255, 0.4); border-color: rgba(0, 229, 255, 0.5); }
+            50% { box-shadow: inset 0 0 15px rgba(0, 229, 255, 0.2); border-color: var(--neon-blue); }
+            100% { box-shadow: inset 0 0 0 transparent; border-color: rgba(0, 229, 255, 0.5); }
+        }
+        .cc-alert-box { background: rgba(0, 229, 255, 0.05); color: #ccc; border-bottom: 1px solid #333; padding: 15px; font-size: 0.9rem; display: flex; align-items: center; gap: 12px; line-height: 1.5; animation: pulse-elec 2s infinite;}
+        .cc-alert-box strong { color: var(--neon-blue); }
         .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-        
-        @keyframes pulse-danger { 0% { box-shadow: inset 0 0 0 rgba(255, 0, 60, 0.4); } 50% { box-shadow: inset 0 0 15px rgba(255, 0, 60, 0.2); } 100% { box-shadow: inset 0 0 0 rgba(255, 0, 60, 0); } }
-        .cc-alert-box { background: #1a0004; color: #ff003c; border-bottom: 1px solid #333; padding: 12px 20px; font-size: 0.85rem; animation: pulse-danger 2s infinite; display: flex; align-items: center; gap: 12px; line-height: 1.4; }
-        .cc-alert-box strong { color: var(--white); }
 
-        .terminal-log { background: #050505; padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; border-top: 1px solid #333; }
-        .terminal-log h3 { color: #555; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; border-bottom: 1px dashed #333; padding-bottom: 5px; }
-        .terminal-text p { color: #888; margin-bottom: 10px; line-height: 1.5; }
-        .terminal-text strong { color: var(--danger); font-weight: normal; }
-        .terminal-text .highlight { color: var(--terminal-green); }
+        /* TERMINALE OSINT */
+        .terminal-log { background: rgba(0,0,0,0.6); padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; border-top: 1px solid #333; }
+        .terminal-log h3 { color: #777; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; }
+        .terminal-text p { color: #888; margin-bottom: 8px; line-height: 1.5; }
+        .terminal-text strong { color: #fff; }
+        .highlight { color: var(--neon-blue); text-shadow: 0 0 5px var(--neon-blue); font-weight: bold;}
 
-        /* ARSENALE AFFILIAZIONI */
-        .arsenal-box { background: linear-gradient(145deg, #111, #0a0a0a); border: 1px solid var(--danger); border-radius: 12px; padding: 30px; margin-bottom: 50px; position: relative; }
-        .arsenal-box::before { content: "ARSENALE NECESSARIO"; position: absolute; top: -12px; left: 20px; background: var(--bg-color); color: var(--danger); font-weight: 900; padding: 0 10px; text-transform: uppercase; letter-spacing: 1px; }
-        .part-item { background: #000; border: 1px solid #333; padding: 20px; border-radius: 8px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
-        .part-item:hover { border-color: #555; }
+        /* ARSENALE RICAMBI */
+        .arsenal-box { border-top: 4px solid var(--neon-blue); }
+        .part-item { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 6px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
         .part-info { flex: 1; padding-right: 20px; }
-        .part-name { font-weight: 900; font-size: 1.2rem; color: var(--white); display: block; margin-bottom: 5px; text-transform: uppercase; }
+        .part-name { font-weight: 900; font-size: 1.1rem; color: var(--neon-blue); display: block; margin-bottom: 5px; text-transform: uppercase; }
         .part-desc { font-size: 0.9rem; color: #aaa; }
+        
         .buy-buttons { display: flex; gap: 10px; flex-shrink: 0; }
-        .btn { padding: 10px 15px; border-radius: 4px; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; text-decoration: none; text-align: center; transition: 0.3s; }
+        .btn { padding: 10px 15px; border-radius: 4px; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; text-decoration: none; text-align: center; transition: 0.3s; }
         .btn-amz { background: #FF9900; color: #000; }
-        .btn-amz:hover { background: #e68a00; box-shadow: 0 0 10px rgba(255, 153, 0, 0.5); }
+        .btn-amz:hover { background: #e68a00; box-shadow: 0 0 15px rgba(255, 153, 0, 0.4); }
         .btn-ali { background: #ff003c; color: #fff; }
-        .btn-ali:hover { background: #cc0030; box-shadow: 0 0 10px rgba(255, 0, 60, 0.5); }
+        .btn-ali:hover { background: #cc0030; box-shadow: 0 0 15px rgba(255, 0, 60, 0.4); }
 
-        /* TABELLE PARAMETRI */
-        .protocol-section h2 { color: var(--white); font-size: 1.8rem; text-transform: uppercase; margin: 60px 0 20px 0; border-bottom: 2px solid #333; padding-bottom: 10px; }
-        .table-wrapper { overflow-x: auto; margin-bottom: 40px; border-radius: 8px; border: 1px solid #333; }
-        table { width: 100%; border-collapse: collapse; background: #0a0a0a; min-width: 600px; }
-        th { background: #111; color: var(--danger); font-weight: 900; text-align: left; padding: 15px; text-transform: uppercase; border-bottom: 1px solid var(--danger); }
-        td { padding: 12px 15px; border-bottom: 1px solid #222; color: #ccc; font-size: 0.95rem; }
-        tr:hover td { background: rgba(255, 0, 60, 0.05); color: var(--white); }
+        /* TABELLE SETTINGS */
+        .table-wrapper { overflow-x: auto; margin-bottom: 40px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(10, 10, 10, 0.6); backdrop-filter: blur(5px);}
+        table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        th { background: rgba(0,0,0,0.8); color: var(--neon-blue); font-family: 'Orbitron', sans-serif; font-weight: 900; text-align: left; padding: 15px; text-transform: uppercase; border-bottom: 2px solid #333; font-size: 0.9rem;}
+        td { padding: 12px 15px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #ccc; font-size: 0.95rem; line-height: 1.5;}
         tr:last-child td { border-bottom: none; }
-        .val-highlight { color: var(--neon-blue); font-weight: bold; }
+        tr:hover td { background: rgba(0, 229, 255, 0.05); color: var(--white); }
+        .val-highlight { color: var(--neon-blue); font-weight: bold; text-shadow: 0 0 8px rgba(0,229,255,0.4);}
         .val-danger { color: var(--danger); font-weight: bold; }
 
-        /* GRIGLIE ERRORI E00 E09 */
-        .error-section-title { font-size: 1.3rem; color: var(--danger); text-transform: uppercase; margin-bottom: 15px; border-bottom: 1px dashed #444; padding-bottom: 10px; }
+        /* GRIGLIE ERRORI */
+        .error-section-title { font-size: 1.1rem; color: var(--danger); text-transform: uppercase; margin-bottom: 15px; border-bottom: 1px dashed #444; padding-bottom: 10px; font-family: 'Orbitron', sans-serif;}
         .diag-error-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 40px; }
-        .diag-error-card { background: #000; border-left: 4px solid var(--danger); padding: 15px; border-radius: 0 6px 6px 0; border-top: 1px solid #222; border-right: 1px solid #222; border-bottom: 1px solid #222; }
-        .diag-code { font-size: 1.3rem; color: var(--danger); font-weight: 900; margin: 0 0 5px 0; }
+        .diag-error-card { background: rgba(0,0,0,0.5); border-left: 4px solid var(--danger); padding: 15px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.05); }
+        .diag-code { font-size: 1.3rem; color: var(--danger); font-weight: 900; margin: 0 0 5px 0; font-family: 'Orbitron', sans-serif;}
         .diag-desc { margin: 0; color: #aaa; font-size: 0.9rem; line-height: 1.4; }
 
+        /* DISCLAIMER */
+        .scudo-legale-web { border-left: 5px solid var(--danger); padding: 25px; font-size: 0.8rem; color: #999; text-align: justify; margin-top: 50px;}
+        .scudo-legale-web h2 { color: var(--danger); font-size: 0.9rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
+
         /* FOOTER */
-        footer { background-color: var(--pure-black); border-top: 2px solid var(--danger); padding: 60px 20px 30px; margin-top: auto; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; text-align: left; }
-        .footer-col h4 { color: var(--danger); margin-bottom: 15px; text-transform: uppercase; font-size: 1rem; }
-        .footer-col p { color: #888; font-size: 0.85rem; line-height: 1.5; }
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 10px; }
-        .footer-col ul li a { color: #888; text-decoration: none; transition: 0.3s; font-size: 0.85rem; }
-        .footer-col ul li a:hover { color: var(--white); }
-        .legal-bottom { text-align: center; margin-top: 50px; padding-top: 25px; border-top: 1px solid #222; color: #444; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+        footer { background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); border-top: 1px solid #222; padding: 40px 20px; text-align: center; position: relative; z-index: 10; margin-top: auto;}
+        .footer-links { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin: 20px 0;}
+        .footer-links a { color: #777; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;}
+        .footer-links a:hover { color: var(--danger); }
 
         @media (max-width: 768px) {
+            .glass-box { padding: 20px; }
             .part-item { flex-direction: column; align-items: flex-start; gap: 15px; }
             .buy-buttons { width: 100%; flex-direction: column; }
-            .btn { width: 100%; }
+            .cc-alert-box { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
 
+<div class="fixed-skull-wrapper">
+    <div class="fixed-skull-img"></div>
+</div>
+
 <header>
-    <div class="header-content">
-        <img src="img/logo-header.png" alt="MONO DOOM" class="logo-header">
-        <p class="claim">RESURRECT THE BEAST.</p>
-    </div>
+    <div class="header-content"><a href="index.html"><img src="img/logo-header.png" alt="MONO DOOM" class="logo-header"></a><p class="claim">RESURRECT THE BEAST.</p></div>
 </header>
 
-<nav>
-    <a href="kaabo.html" class="back-btn"><span>&lt;&lt;</span> Ritorna al Garage Kaabo</a>
-</nav>
-
 <main>
+    <div class="back-nav"><a href="kaabo.html">⟵ Torna al Garage Kaabo</a></div>
+
     <div class="error-hero">
-        <span class="error-tag" style="background: var(--danger);">PROTOCOLLO ELETTRONICO</span>
+        <span class="error-tag">PROTOCOLLO ELETTRONICO</span>
         <h1>P-Settings & Sblocco Velocità</h1>
     </div>
 
-    <div class="video-section">
-        <div class="video-header">
-            <span class="video-title">Feed Video - P-Settings Guide</span>
-        </div>
+    <section class="glass-box video-box">
         <div class="cc-alert-box">
-            <span style="font-size: 1.2rem;">⚠️</span>
+            <span style="font-size: 1.5rem;">⚡</span>
             <span><strong>ATTIVA I SOTTOTITOLI ITA:</strong> Fai partire il video, poi clicca sull'icona <strong>[CC]</strong> o sull'ingranaggio <strong>(⚙️)</strong> in basso a destra.</span>
         </div>
         <div class="video-wrapper">
             <iframe src="https://www.youtube.com/embed/gUaUMV8OB2Q?cc_load_policy=1&cc_lang_pref=it&hl=it&rel=0&modestbranding=1" title="Configurazione Display Kaabo/Dualtron" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        
         <div class="terminal-log">
-            <h3>>> Log Dati Telemetrici (Trascrizione SEO per i bot)</h3>
+            <h3>>> Log Dati Telemetrici (OSINT)</h3>
             <div class="terminal-text">
                 <p>> Operazione: <strong>Accesso ai menu segreti e modifica P-Settings su Kaabo Mantis e Wolf Warrior.</strong></p>
                 <p>> Target: Sblocco limitatore di velocità, calibrazione diametro ruota, regolazione E-ABS e cut-off voltaggio batteria per aumento prestazioni.</p>
@@ -159,12 +201,14 @@
                 <p>> Diagnostica: Risoluzione codici <span class="highlight">Errore E00 (Comunicazione)</span> e Errore E09 (Controller Guasto).</p>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="arsenal-box">
+    <section class="glass-box arsenal-box">
+        <h2 class="box-title" style="color: var(--neon-blue); border: none; margin-top: 0;">Arsenale Ricambi</h2>
+        
         <div class="part-item">
             <div class="part-info">
-                <span class="part-name">1. Display Minimotors EY3 (Ricambio Diretto)</span>
+                <span class="part-name">1. Display Minimotors EY3</span>
                 <span class="part-desc">Se lo schermo dà costantemente Errore E00 o il grilletto si è spezzato, devi sostituirlo in blocco. Plug & Play per la maggior parte dei Kaabo e Dualtron.</span>
             </div>
             <div class="buy-buttons">
@@ -183,146 +227,132 @@
                 <a href="https://it.aliexpress.com/w/wholesale-lt01-display-scooter.html" target="_blank" class="btn btn-ali">AliExpress</a>
             </div>
         </div>
-    </div>
-
-    <div class="protocol-section">
-        <h2>1. Display EY3 (Minimotors)</h2>
-        
-        <div class="diagnosi-box">
-            <h3>🔓 Accesso & Sblocco</h3>
-            <p><strong>Per entrare nel menu:</strong> Accendi il monopattino. Tieni premuti contemporaneamente i tasti <strong>MODE + POWER</strong> per 3 secondi. Usa "Mode" per scorrere i P e "Power" per modificare il valore.</p>
-            <p><strong>Sblocco Velocità Massima:</strong> Scorri fino al parametro <strong>P8</strong> e impostalo su <strong class="val-highlight">100</strong>.</p>
-        </div>
-
-        <div class="table-wrapper">
-            <table>
-                <tr><th>Parametro</th><th>Descrizione</th><th>Settaggio Corretto</th></tr>
-                <tr><td>P0</td><td>Diametro Ruota (Pollici)</td><td>10.0 (Mantis) / 11.0 (Wolf)</td></tr>
-                <tr><td>P1</td><td>Voltaggio Cut-off (Batteria)</td><td>430 (48V) / 520 (60V) / 630 (72V)</td></tr>
-                <tr><td>P2</td><td>Poli Magnetici Motore</td><td>15</td></tr>
-                <tr><td>P3</td><td>Selezione Sensore Velocità</td><td>0</td></tr>
-                <tr><td>P4</td><td>Unità di Misura</td><td>0 (Km/h) / 1 (Mph)</td></tr>
-                <tr><td>P5</td><td>Zero Start (Partenza)</td><td>0 (Acceleratore immediato) / 1 (A spinta)</td></tr>
-                <tr><td>P6</td><td>Cruise Control</td><td>0 (Spento) / <span class="val-danger">1 (Acceso - Pericoloso)</span></td></tr>
-                <tr><td>P7</td><td>Spunto Iniziale (Accelerazione)</td><td><span class="val-highlight">0 (Brutale/Max)</span> / 5 (Lenta/Dolce)</td></tr>
-                <tr><td>P8</td><td>Limite Potenza Motore %</td><td><span class="val-highlight">100 (Sbloccato)</span></td></tr>
-                <tr><td>P9</td><td>Risparmio Energetico (Coppia)</td><td><span class="val-highlight">1 (Max Potenza)</span> / 2 (Media) / 3 (Eco)</td></tr>
-                <tr><td>PA</td><td>Forza Freno Elettrico (E-ABS)</td><td>0 (Spento) / 1 (Debole) / 5 (Massima)</td></tr>
-                <tr><td>PB</td><td>Luminosità Display</td><td>0 (Minima) / 5 (Massima)</td></tr>
-                <tr><td>PC</td><td>Auto Spegnimento (Minuti)</td><td>1 - 30</td></tr>
-                <tr><td>PD</td><td>ABS Elettronico</td><td>0 (Spento - Consigliato) / 1 (Acceso)</td></tr>
-            </table>
-        </div>
-
-        <h3 class="error-section-title">⚠️ Diagnostica Errori EY3</h3>
-        <div class="diag-error-grid">
-            <div class="diag-error-card"><div class="diag-code">E00 / E10</div><div class="diag-desc"><strong>Errore Comunicazione.</strong> Il display non rileva la centralina. Controlla il cavo principale che scende al manubrio. Se è sano, il display è andato.</div></div>
-            <div class="diag-error-card"><div class="diag-code">E06</div><div class="diag-desc"><strong>Low Voltage.</strong> Batteria sotto la soglia minima impostata in P1. Ricaricare o bilanciare le celle.</div></div>
-            <div class="diag-error-card"><div class="diag-code">E07</div><div class="diag-desc"><strong>Errore Motore.</strong> Cavi di fase (giallo/blu/verde) fusi nella scatola di derivazione in pedana, oppure sensore Hall bruciato.</div></div>
-            <div class="diag-error-card"><div class="diag-code">E08</div><div class="diag-desc"><strong>Errore Acceleratore.</strong> Sensore magnetico del grilletto guasto o cavetto interno scollegato.</div></div>
-            <div class="diag-error-card"><div class="diag-code">E09</div><div class="diag-desc"><strong>Controller Guasto.</strong> Mosfet esploso per surriscaldamento prolungato. La centralina deve essere sostituita.</div></div>
-        </div>
-
-        <h2>2. Display LT01 / QS-S4 (Base)</h2>
-        
-        <div class="diagnosi-box">
-            <h3>🔓 Accesso & PIN di Sicurezza</h3>
-            <p><strong>Accesso:</strong> Accendi il display. Tieni premuti contemporaneamente i due pulsanti frontali (Power + Mode) per 3 secondi.</p>
-            <p><strong>PIN di Sicurezza:</strong> Se ti viene richiesto un codice a 4 cifre per entrare (0000), usa i tasti per inserire <span class="pin-code">1500</span>, <span class="pin-code">9221</span> o <span class="pin-code">1111</span>.</p>
-            <p><strong>Sblocco Velocità:</strong> Scorri fino a <strong>P08</strong> e impostalo su <strong class="val-highlight">100</strong>.</p>
-        </div>
-
-        <div class="table-wrapper">
-            <table>
-                <tr><th>Parametro</th><th>Descrizione</th><th>Settaggio Corretto</th></tr>
-                <tr><td>P01</td><td>Luminosità Schermo</td><td>1 (Min) / 3 (Max)</td></tr>
-                <tr><td>P02</td><td>Unità di Misura</td><td>0 (Km) / 1 (Miglia)</td></tr>
-                <tr><td>P03</td><td>Voltaggio Impianto</td><td>48 / 60 (In base alla tua batteria)</td></tr>
-                <tr><td>P04</td><td>Timer Spegnimento (Minuti)</td><td>0 - 60</td></tr>
-                <tr><td>P06</td><td>Diametro Ruota (Pollici)</td><td>8.0 (Mantis 8) / 10.0 (Mantis 10)</td></tr>
-                <tr><td>P07</td><td>Magneti Motore</td><td>30 (Standard per questo display)</td></tr>
-                <tr><td>P08</td><td>Limite Velocità Max %</td><td><span class="val-highlight">100 (Sbloccato)</span></td></tr>
-                <tr><td>P09</td><td>Zero Start (Partenza)</td><td>0 (Gas immediato) / 1 (A spinta)</td></tr>
-                <tr><td>P11</td><td>Freno Rigenerativo Elettrico</td><td>0 (Spento) / 1 - 5 (Forza Massima)</td></tr>
-                <tr><td>P12</td><td>Spunto Iniziale (Accelerazione)</td><td>1 (Morbida/Lenta) / <span class="val-highlight">5 (Brutale/Max)</span></td></tr>
-                <tr><td>P15</td><td>Cut-off Voltaggio Minimo</td><td>39.0 (per i 48V) / 52.0 (per i 60V)</td></tr>
-                <tr><td>P16</td><td>Cruise Control</td><td>0 (Spento) / <span class="val-danger">1 (Acceso)</span></td></tr>
-            </table>
-        </div>
-
-        <h3 class="error-section-title">⚠️ Diagnostica Errori LT01 / QS-S4</h3>
-        <div class="diag-error-grid">
-            <div class="diag-error-card"><div class="diag-code">E01</div><div class="diag-desc"><strong>Errore Motore.</strong> Cavi di potenza fusi o sensore Hall danneggiato.</div></div>
-            <div class="diag-error-card"><div class="diag-code">E02</div><div class="diag-desc"><strong>Acceleratore Guasto.</strong> Molla rotta o magnete del grilletto fuori sede. Sostituire display.</div></div>
-            <div class="diag-error-card"><div class="diag-code">E03</div><div class="diag-desc"><strong>Errore Controller.</strong> Cortocircuito centralina. Da sostituire obbligatoriamente.</div></div>
-            <div class="diag-error-card"><div class="diag-code">E04</div><div class="diag-desc"><strong>Sensore Freno.</strong> La leva freno non torna indietro e blocca il motore per sicurezza. Scollega i cavi freno per testare.</div></div>
-            <div class="diag-error-card"><div class="diag-code">E05</div><div class="diag-desc"><strong>Low Voltage.</strong> Batteria scarica sotto la soglia critica.</div></div>
-            <div class="diag-error-card"><div class="diag-code">E06 / E07</div><div class="diag-desc"><strong>Comunicazione (RX/TX).</strong> Filo tranciato o spinotto lento tra display e centralina.</div></div>
-        </div>
-
-        <h2>3. Display TFT a Colori (Serie GT)</h2>
-        
-        <div class="diagnosi-box">
-            <h3>🔓 Accesso al Menu Segreto (Sblocco)</h3>
-            <p>I moderni Wolf King GT e Mantis King GT non usano i classici "P". Entra nelle impostazioni tramite i tasti freccia, seleziona <strong>Advanced Menu</strong> e inserisci uno di questi PIN di fabbrica:</p>
-            <div style="margin: 15px 0;">
-                <span class="pin-code">1500</span> <span class="pin-code">1111</span> <span class="pin-code">9221</span> <span class="pin-code">9999</span>
-            </div>
-            <p>Nel sottomenu che apparirà, cerca la voce <strong>Speed Limit</strong> e portala al <strong class="val-highlight">100%</strong>.</p>
-        </div>
-
-        <div class="table-wrapper">
-            <table>
-                <tr><th>Voce Menu Display TFT</th><th>Funzione</th><th>Come Impostarlo</th></tr>
-                <tr><td>Start Mode</td><td>Partenza con/senza spinta</td><td>Zero (Immediata) / Non-Zero (A spinta)</td></tr>
-                <tr><td>Speed Limit</td><td>Limitatore di Velocità</td><td><span class="val-highlight">100% per lo sblocco totale</span></td></tr>
-                <tr><td>Motor Torque</td><td>Coppia in accelerazione</td><td>Level 1 (Soft) a Level 5 (Aggressivo)</td></tr>
-                <tr><td>E-ABS / Regen</td><td>Frenata Elettromagnetica</td><td>0 (Spenta) a 5 (Molto forte)</td></tr>
-                <tr><td>Gear Ratio / Poles</td><td>Calibrazione Motore</td><td>Non modificare (Standard 30 o 15 in base al motore)</td></tr>
-                <tr><td>Battery Voltage</td><td>Impostazione Impianto</td><td>Scegli esattamente il tuo mezzo (60V o 72V)</td></tr>
-            </table>
-        </div>
-
-        <h3 class="error-section-title">⚠️ Diagnostica Errori TFT</h3>
-        <p style="color: #aaa; margin-bottom: 20px; font-size: 0.95rem;">I display TFT moderni scrivono l'errore direttamente a schermo in inglese in formato testuale, ma le logiche di base restano le stesse.</p>
-        <div class="diag-error-grid">
-            <div class="diag-error-card"><div class="diag-code">Comm. Fault</div><div class="diag-desc">Stesso problema dell'E00. Lo spinotto giallo (a 5 pin) del display è allentato dietro al manubrio.</div></div>
-            <div class="diag-error-card"><div class="diag-code">Motor Fault</div><div class="diag-desc">Surriscaldamento dei motori Sine-Wave o cavi tranciati. Controlla le scatole di derivazione sotto il deck.</div></div>
-            <div class="diag-error-card"><div class="diag-code">Controller Fault</div><div class="diag-desc">Spesso causato da frenate rigenerative troppo violente a batteria carica al 100%, che mandano in cortocircuito i mosfet.</div></div>
-        </div>
-    </div>
-</main>
-
-<section class="scudo-legale-web" style="max-width: 1200px; margin: 40px auto; padding: 25px; font-size: 0.85rem; color: #999; border: 1px solid #ff003c; border-left: 5px solid #ff003c; background: rgba(20, 0, 0, 0.4); border-radius: 6px;">
-        <h2 style="color: #ff003c; font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;">⚠️ Nota di Esclusione di Responsabilità (Disclaimer Specifico di Pagina)</h2>
-        <p>I dati metrologici, le segnature esadecimali, gli schemi elettrici di campionamento e i metodi di indagine meccanica riportati in questa pagina derivano da analisi teoriche OSINT e documentazione di pubblico dominio. Le informazioni sono destinate esclusivamente a scopo di studio e approfondimento scientifico per l'analisi forense e la ricostruzione dei sinistri.</p>
-        <p>L'applicazione pratica delle nozioni qui esposte su veicoli destinati alla circolazione stradale avviene sotto l'esclusiva responsabilità dell'utente. L'Editore non risponde di eventuali danni fisici, patrimoniali o sanzioni legali derivanti dall'uso improprio del materiale didattico fornito.</p>
     </section>
+
+    <h2 class="box-title">1. Display EY3 (Minimotors)</h2>
+    
+    <section class="glass-box diagnosi-box">
+        <h3>🔓 Accesso & Sblocco</h3>
+        <p><strong>Per entrare nel menu:</strong> Accendi il monopattino. Tieni premuti contemporaneamente i tasti <strong>MODE + POWER</strong> per 3 secondi. Usa "Mode" per scorrere i P e "Power" per modificare il valore.</p>
+        <p><strong>Sblocco Velocità Massima:</strong> Scorri fino al parametro <strong>P8</strong> e impostalo su <strong class="val-highlight">100</strong>.</p>
+    </section>
+
+    <div class="table-wrapper">
+        <table>
+            <tr><th>Parametro</th><th>Descrizione</th><th>Settaggio Corretto</th></tr>
+            <tr><td>P0</td><td>Diametro Ruota (Pollici)</td><td>10.0 (Mantis) / 11.0 (Wolf)</td></tr>
+            <tr><td>P1</td><td>Voltaggio Cut-off (Batteria)</td><td>430 (48V) / 520 (60V) / 630 (72V)</td></tr>
+            <tr><td>P2</td><td>Poli Magnetici Motore</td><td>15</td></tr>
+            <tr><td>P3</td><td>Selezione Sensore Velocità</td><td>0</td></tr>
+            <tr><td>P4</td><td>Unità di Misura</td><td>0 (Km/h) / 1 (Mph)</td></tr>
+            <tr><td>P5</td><td>Zero Start (Partenza)</td><td>0 (Acceleratore immediato) / 1 (A spinta)</td></tr>
+            <tr><td>P6</td><td>Cruise Control</td><td>0 (Spento) / <span class="val-danger">1 (Acceso - Pericoloso)</span></td></tr>
+            <tr><td>P7</td><td>Spunto Iniziale (Accelerazione)</td><td><span class="val-highlight">0 (Brutale/Max)</span> / 5 (Lenta/Dolce)</td></tr>
+            <tr><td>P8</td><td>Limite Potenza Motore %</td><td><span class="val-highlight">100 (Sbloccato)</span></td></tr>
+            <tr><td>P9</td><td>Risparmio Energetico (Coppia)</td><td><span class="val-highlight">1 (Max Potenza)</span> / 2 (Media) / 3 (Eco)</td></tr>
+            <tr><td>PA</td><td>Forza Freno Elettrico (E-ABS)</td><td>0 (Spento) / 1 (Debole) / 5 (Massima)</td></tr>
+            <tr><td>PB</td><td>Luminosità Display</td><td>0 (Minima) / 5 (Massima)</td></tr>
+            <tr><td>PC</td><td>Auto Spegnimento (Minuti)</td><td>1 - 30</td></tr>
+            <tr><td>PD</td><td>ABS Elettronico</td><td>0 (Spento - Consigliato) / 1 (Acceso)</td></tr>
+        </table>
+    </div>
+
+    <h3 class="error-section-title">⚠️ Diagnostica Errori EY3</h3>
+    <div class="diag-error-grid">
+        <div class="diag-error-card"><div class="diag-code">E00 / E10</div><div class="diag-desc"><strong>Errore Comunicazione.</strong> Il display non rileva la centralina. Controlla il cavo principale che scende al manubrio. Se è sano, il display è andato.</div></div>
+        <div class="diag-error-card"><div class="diag-code">E06</div><div class="diag-desc"><strong>Low Voltage.</strong> Batteria sotto la soglia minima impostata in P1. Ricaricare o bilanciare le celle.</div></div>
+        <div class="diag-error-card"><div class="diag-code">E07</div><div class="diag-desc"><strong>Errore Motore.</strong> Cavi di fase (giallo/blu/verde) fusi nella scatola di derivazione in pedana, oppure sensore Hall bruciato.</div></div>
+        <div class="diag-error-card"><div class="diag-code">E08</div><div class="diag-desc"><strong>Errore Acceleratore.</strong> Sensore magnetico del grilletto guasto o cavetto interno scollegato.</div></div>
+        <div class="diag-error-card"><div class="diag-code">E09</div><div class="diag-desc"><strong>Controller Guasto.</strong> Mosfet esploso per surriscaldamento prolungato. La centralina deve essere sostituita.</div></div>
+    </div>
+
+    <h2 class="box-title">2. Display LT01 / QS-S4 (Base)</h2>
+    
+    <section class="glass-box diagnosi-box">
+        <h3>🔓 Accesso & PIN di Sicurezza</h3>
+        <p><strong>Accesso:</strong> Accendi il display. Tieni premuti contemporaneamente i due pulsanti frontali (Power + Mode) per 3 secondi.</p>
+        <p><strong>PIN di Sicurezza:</strong> Se ti viene richiesto un codice a 4 cifre per entrare (0000), usa i tasti per inserire <span class="pin-code">1500</span>, <span class="pin-code">9221</span> o <span class="pin-code">1111</span>.</p>
+        <p><strong>Sblocco Velocità:</strong> Scorri fino a <strong>P08</strong> e impostalo su <strong class="val-highlight">100</strong>.</p>
+    </section>
+
+    <div class="table-wrapper">
+        <table>
+            <tr><th>Parametro</th><th>Descrizione</th><th>Settaggio Corretto</th></tr>
+            <tr><td>P01</td><td>Luminosità Schermo</td><td>1 (Min) / 3 (Max)</td></tr>
+            <tr><td>P02</td><td>Unità di Misura</td><td>0 (Km) / 1 (Miglia)</td></tr>
+            <tr><td>P03</td><td>Voltaggio Impianto</td><td>48 / 60 (In base alla tua batteria)</td></tr>
+            <tr><td>P04</td><td>Timer Spegnimento (Minuti)</td><td>0 - 60</td></tr>
+            <tr><td>P06</td><td>Diametro Ruota (Pollici)</td><td>8.0 (Mantis 8) / 10.0 (Mantis 10)</td></tr>
+            <tr><td>P07</td><td>Magneti Motore</td><td>30 (Standard per questo display)</td></tr>
+            <tr><td>P08</td><td>Limite Velocità Max %</td><td><span class="val-highlight">100 (Sbloccato)</span></td></tr>
+            <tr><td>P09</td><td>Zero Start (Partenza)</td><td>0 (Gas immediato) / 1 (A spinta)</td></tr>
+            <tr><td>P11</td><td>Freno Rigenerativo Elettrico</td><td>0 (Spento) / 1 - 5 (Forza Massima)</td></tr>
+            <tr><td>P12</td><td>Spunto Iniziale (Accelerazione)</td><td>1 (Morbida/Lenta) / <span class="val-highlight">5 (Brutale/Max)</span></td></tr>
+            <tr><td>P15</td><td>Cut-off Voltaggio Minimo</td><td>39.0 (per i 48V) / 52.0 (per i 60V)</td></tr>
+            <tr><td>P16</td><td>Cruise Control</td><td>0 (Spento) / <span class="val-danger">1 (Acceso)</span></td></tr>
+        </table>
+    </div>
+
+    <h3 class="error-section-title">⚠️ Diagnostica Errori LT01 / QS-S4</h3>
+    <div class="diag-error-grid">
+        <div class="diag-error-card"><div class="diag-code">E01</div><div class="diag-desc"><strong>Errore Motore.</strong> Cavi di potenza fusi o sensore Hall danneggiato.</div></div>
+        <div class="diag-error-card"><div class="diag-code">E02</div><div class="diag-desc"><strong>Acceleratore Guasto.</strong> Molla rotta o magnete del grilletto fuori sede. Sostituire display.</div></div>
+        <div class="diag-error-card"><div class="diag-code">E03</div><div class="diag-desc"><strong>Errore Controller.</strong> Cortocircuito centralina. Da sostituire obbligatoriamente.</div></div>
+        <div class="diag-error-card"><div class="diag-code">E04</div><div class="diag-desc"><strong>Sensore Freno.</strong> La leva freno non torna indietro e blocca il motore per sicurezza. Scollega i cavi freno per testare.</div></div>
+        <div class="diag-error-card"><div class="diag-code">E05</div><div class="diag-desc"><strong>Low Voltage.</strong> Batteria scarica sotto la soglia critica.</div></div>
+        <div class="diag-error-card"><div class="diag-code">E06 / E07</div><div class="diag-desc"><strong>Comunicazione (RX/TX).</strong> Filo tranciato o spinotto lento tra display e centralina.</div></div>
+    </div>
+
+    <h2 class="box-title">3. Display TFT a Colori (Serie GT)</h2>
+    
+    <section class="glass-box diagnosi-box">
+        <h3>🔓 Accesso al Menu Segreto (Sblocco)</h3>
+        <p>I moderni Wolf King GT e Mantis King GT non usano i classici "P". Entra nelle impostazioni tramite i tasti freccia, seleziona <strong>Advanced Menu</strong> e inserisci uno di questi PIN di fabbrica:</p>
+        <div style="margin: 15px 0;">
+            <span class="pin-code">1500</span> <span class="pin-code">1111</span> <span class="pin-code">9221</span> <span class="pin-code">9999</span>
+        </div>
+        <p>Nel sottomenu che apparirà, cerca la voce <strong>Speed Limit</strong> e portala al <strong class="val-highlight">100%</strong> per lo sblocco totale.</p>
+    </section>
+
+    <div class="table-wrapper">
+        <table>
+            <tr><th>Voce Menu Display TFT</th><th>Funzione</th><th>Come Impostarlo</th></tr>
+            <tr><td>Start Mode</td><td>Partenza con/senza spinta</td><td>Zero (Immediata) / Non-Zero (A spinta)</td></tr>
+            <tr><td>Speed Limit</td><td>Limitatore di Velocità</td><td><span class="val-highlight">100% per lo sblocco totale</span></td></tr>
+            <tr><td>Motor Torque</td><td>Coppia in accelerazione</td><td>Level 1 (Soft) a Level 5 (Aggressivo)</td></tr>
+            <tr><td>E-ABS / Regen</td><td>Frenata Elettromagnetica</td><td>0 (Spenta) a 5 (Molto forte)</td></tr>
+            <tr><td>Gear Ratio / Poles</td><td>Calibrazione Motore</td><td>Non modificare (Standard 30 o 15 in base al motore)</td></tr>
+            <tr><td>Battery Voltage</td><td>Impostazione Impianto</td><td>Scegli esattamente il tuo mezzo (60V o 72V)</td></tr>
+        </table>
+    </div>
+
+    <h3 class="error-section-title">⚠️ Diagnostica Errori TFT</h3>
+    <p style="color: #aaa; margin-bottom: 20px; font-size: 0.95rem;">I display TFT moderni scrivono l'errore direttamente a schermo in inglese in formato testuale, ma le logiche di base restano le stesse.</p>
+    <div class="diag-error-grid">
+        <div class="diag-error-card"><div class="diag-code">Comm. Fault</div><div class="diag-desc">Stesso problema dell'E00. Lo spinotto giallo (a 5 pin) del display è allentato dietro al manubrio.</div></div>
+        <div class="diag-error-card"><div class="diag-code">Motor Fault</div><div class="diag-desc">Surriscaldamento dei motori Sine-Wave o cavi tranciati. Controlla le scatole di derivazione sotto il deck.</div></div>
+        <div class="diag-error-card"><div class="diag-code">Controller Fault</div><div class="diag-desc">Spesso causato da frenate rigenerative troppo violente a batteria carica al 100%, che mandano in cortocircuito i mosfet.</div></div>
+    </div>
+
+    <section class="scudo-legale-web glass-box">
+        <h2>⚠️ Esclusione di Responsabilità</h2>
+        <p>I dati, gli schemi e i metodi di indagine riportati in questa pagina derivano da documentazione OSINT. Le informazioni sono destinate a scopo di studio e approfondimento tecnico. L'applicazione pratica delle nozioni qui espresse (come lo sblocco dei limitatori di velocità software) su veicoli destinati alla circolazione stradale avviene sotto l'esclusiva responsabilità dell'utente. L'Editore declina ogni responsabilità per sanzioni, danni fisici o sequestri derivanti dall'uso improprio di queste informazioni.</p>
+    </section>
+
 </main>
 
-<footer style="background-color: #000; border-top: 1px solid #222; padding: 40px 20px 20px; width: 100%;">
-    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
-        
-        <div style="display: flex; flex-direction: column; gap: 15px;">
-            
-            <a href="kaabo.html" style="text-decoration: none; display: flex; align-items: center; transition: 0.3s;">
-              <span style="color: #ff0022; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #ff0022; padding-bottom: 2px;">&larr; Torna al Garage Ducati</span>
-            
-            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; opacity: 0.7; transition: 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
-                <img src="img/logo-testo.png" alt="MONO DOOM Home" style="max-width: 120px;">
-                <span style="color: #777; font-size: 0.7rem; font-weight: bold; margin-left: 15px; text-transform: uppercase; letter-spacing: 1px;">Hub Centrale</span>
-            </a>
-        </div>
-
-        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-            <a href="privacy.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Privacy Policy</a>
-            <a href="cookie.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Cookie Policy</a>
-            <a href="termini.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Termini e Condizioni</a>
-            <a href="disclaimer.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Disclaimer Legale</a>
-        </div>
+<footer>
+    <img src="img/logo-testo.png" alt="MONO DOOM" style="max-width: 150px; opacity: 0.6; margin-bottom: 10px;">
+    <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="cookie.html">Cookie Policy</a>
+        <a href="termini.html">Termini e Condizioni</a>
+        <a href="disclaimer.html">Disclaimer Legale</a>
     </div>
-    
-    <div style="text-align: center; margin-top: 35px; padding-top: 20px; border-top: 1px solid #111; color: #333; font-size: 0.7rem; font-family: sans-serif;">
-        &copy; 2026 MONO DOOM. Tutti i diritti riservati. I marchi registrati appartengono ai rispettivi proprietari. Documentazione ad uso informativo e peritale.
+    <div style="color: #444; font-size: 0.65rem; margin-top: 15px;">
+        &copy; 2026 MONO DOOM. Tutti i diritti riservati.
     </div>
 </footer>
+
+</body>
+</html>

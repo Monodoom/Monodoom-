@@ -1,138 +1,294 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QGRVQ9N6N2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-QGRVQ9N6N2');
+    </script>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Hacking estremo: Modifica dello Shunt sul controller Kaabo per sbloccare gli Ampere nascosti e ottenere accelerazioni brutali.">
     <title>Shunt Mod: Overclock Hardware Kaabo | MONO DOOM</title>
+    
     <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <meta name="theme-color" content="#050505">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Come eseguire lo Shunt Mod su monopattino Kaabo",
+      "description": "Procedura di overclock hardware per bypassare il limite di Ampere del controller saldando lo shunt.",
+      "step": [
+        { "@type": "HowToStep", "name": "Estrazione", "text": "Estrai il controller dal deck e apri le paratie in alluminio per esporre la scheda madre e lo shunt." },
+        { "@type": "HowToStep", "name": "Saldatura", "text": "Applica una piccola goccia di stagno professionale solo su 1/4 della lunghezza dello shunt. Non riempirlo mai del tutto." },
+        { "@type": "HowToStep", "name": "Test", "text": "Richiudi il controller, ricollega la batteria ed effettua un test a vuoto monitorando le temperature." }
+      ]
+    }
+    </script>
+
     <style>
-        /* INCOLLA QUI IL CODICE CSS MASTER SE VUOI AGGIORNARE LA PAGINA */
-        :root{--bg-color:#050505;--text-color:#e0e0e0;--neon-blue:#00e5ff;--white:#ffffff;--pure-black:#000000;--danger:#ff003c;--hack:#5000ff;--card-bg:#111111;--terminal-green:#0f0}*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,sans-serif}body{background-color:var(--bg-color);color:var(--text-color);line-height:1.6;display:flex;flex-direction:column;min-height:100vh}header{background-color:var(--pure-black);border-bottom:2px solid var(--danger);padding:20px 0 10px;text-align:center}.header-content{display:flex;flex-direction:column;align-items:center;max-width:1200px;margin:0 auto}.logo-header{max-height:110px;width:auto;display:block}.claim{color:var(--white);font-weight:900;font-style:italic;letter-spacing:3px;font-size:1.05rem;margin-top:5px;text-transform:uppercase;text-shadow:0 0 5px var(--danger)}nav{background-color:var(--pure-black);padding:15px 25px;border-bottom:1px solid #333}.back-btn{display:inline-block;color:var(--text-color);text-decoration:none;font-weight:900;font-size:.9rem;text-transform:uppercase;transition:.3s;font-family:'Courier New',Courier,monospace}.back-btn span{color:var(--danger);margin-right:5px}.back-btn:hover{color:var(--white);text-shadow:0 0 10px var(--danger)}main{flex:1;max-width:850px;margin:40px auto;padding:0 20px;width:100%}.error-hero{text-align:center;margin-bottom:40px}.error-tag{background:var(--hack);color:#fff;padding:5px 15px;font-weight:900;border-radius:4px;display:inline-block;margin-bottom:10px;font-size:1.2rem;box-shadow:0 0 15px rgba(80,0,255,.4)}h1{font-size:2.5rem;color:var(--white);text-transform:uppercase;letter-spacing:-1px;line-height:1.2;margin-bottom:20px}.diagnosi-box{background:rgba(80,0,255,.05);border-left:4px solid var(--hack);padding:25px;margin-bottom:40px;border-radius:0 8px 8px 0;border:1px solid #333}.diagnosi-box h2{color:var(--hack);text-transform:uppercase;font-size:1.2rem;margin-bottom:10px}@keyframes pulse-danger{0%{box-shadow:inset 0 0 0 rgba(255,0,60,.4)}50%{box-shadow:inset 0 0 15px rgba(255,0,60,.2)}100%{box-shadow:inset 0 0 0 transparent}}.disclaimer-pista{background:#1a0004;border:2px solid #ff003c;padding:20px;border-radius:8px;margin-bottom:40px;text-align:center;animation:pulse-danger 2s infinite}.disclaimer-pista h3{color:#ff003c;text-transform:uppercase;margin-top:0;font-size:1.3rem;margin-bottom:10px}.disclaimer-pista p{color:#e0e0e0;margin:0;font-size:.95rem;line-height:1.5}.video-section{margin-bottom:50px;background:#000;border:1px solid #333;border-radius:8px;overflow:hidden;box-shadow:0 0 20px rgba(80,0,255,.1)}.video-header{background:#111;border-bottom:1px solid #333;padding:10px 20px;display:flex;justify-content:space-between;align-items:center}.video-title{color:var(--hack);font-weight:900;font-family:monospace;font-size:.9rem;text-transform:uppercase;letter-spacing:1px}.video-wrapper{position:relative;padding-bottom:56.25%;height:0}.video-wrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}.terminal-log{background:#050505;padding:20px;font-family:'Courier New',Courier,monospace;font-size:.85rem;border-top:1px solid #333}.terminal-log h3{color:#555;font-size:.8rem;text-transform:uppercase;margin-bottom:10px;border-bottom:1px dashed #333;padding-bottom:5px}.terminal-text p{color:#888;margin-bottom:10px;line-height:1.5}.terminal-text strong{color:var(--danger);font-weight:400}.terminal-text .highlight{color:var(--hack)}.arsenal-box{background:linear-gradient(145deg,#111,#0a0a0a);border:1px solid var(--hack);border-radius:12px;padding:30px;margin-bottom:50px;position:relative}.arsenal-box::before{content:"ARSENALE HACKING EXTREMO";position:absolute;top:-12px;left:20px;background:var(--bg-color);color:var(--hack);font-weight:900;padding:0 10px;text-transform:uppercase;letter-spacing:1px}.part-item{background:#000;border:1px solid #333;padding:20px;border-radius:8px;margin-bottom:15px;display:flex;justify-content:space-between;align-items:center;transition:.3s}.part-item:hover{border-color:#555}.part-info{flex:1;padding-right:20px}.part-name{font-weight:900;font-size:1.2rem;color:var(--white);display:block;margin-bottom:5px;text-transform:uppercase}.part-desc{font-size:.9rem;color:#aaa}.buy-buttons{display:flex;gap:10px;flex-shrink:0}.btn{padding:10px 15px;border-radius:4px;font-weight:700;font-size:.9rem;text-transform:uppercase;text-decoration:none;text-align:center;transition:.3s}.btn-amz{background:#f90;color:#000}.btn-amz:hover{background:#e68a00;box-shadow:0 0 10px rgba(255,153,0,.5)}.btn-ali{background:#ff003c;color:#fff}.btn-ali:hover{background:#cc0030;box-shadow:0 0 10px rgba(255,0,60,.5)}.protocol-section h2{color:var(--hack);text-transform:uppercase;margin-bottom:30px;border-bottom:1px solid #333;padding-bottom:10px}.step{position:relative;padding-left:50px;margin-bottom:40px}.step-num{position:absolute;left:0;top:0;width:35px;height:35px;background:var(--hack);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.2rem;box-shadow:0 0 10px rgba(80,0,255,.5)}.step h3{color:var(--white);text-transform:uppercase;margin-bottom:10px;font-size:1.2rem}.step p{color:#aaa}footer{background-color:var(--pure-black);border-top:2px solid var(--danger);padding:60px 20px 30px;margin-top:auto}.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px;max-width:1200px;margin:0 auto;text-align:left}.footer-col h4{color:var(--danger);margin-bottom:15px;text-transform:uppercase;font-size:1rem}.footer-col p{color:#888;font-size:.85rem;line-height:1.5}.footer-col ul{list-style:none}.footer-col ul li{margin-bottom:10px}.footer-col ul li a{color:#888;text-decoration:none;transition:.3s;font-size:.85rem}.footer-col ul li a:hover{color:var(--white)}.legal-bottom{text-align:center;margin-top:50px;padding-top:25px;border-top:1px solid #222;color:#444;font-size:.75rem;text-transform:uppercase;letter-spacing:1px}@media(max-width:768px){.part-item{flex-direction:column;align-items:flex-start;gap:15px}.buy-buttons{width:100%;flex-direction:column}.btn{width:100%}}
+        :root {
+            --bg-color: #050505; 
+            --text-color: #e0e0e0;
+            --danger: #ff003c;
+            --hack-color: #5000ff; /* Viola Hacking */
+            --terminal-green: #0f0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* TESCHIO CENTRATO E PULSANTE */
+        .fixed-skull-wrapper { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; z-index: 0; pointer-events: none; }
+        .fixed-skull-img { 
+            width: 90vw; max-width: 600px; height: 90vh; max-height: 600px; 
+            background-image: url('img/teschio.png'); background-size: contain; background-position: center; background-repeat: no-repeat; 
+            opacity: 0.35; animation: heartbeat-hack 3s infinite linear; 
+        }
+        @keyframes heartbeat-hack { 
+            0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(80,0,255,0.4)); } 
+            14% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(80,0,255,0.7)); } 
+            28% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(80,0,255,0.4)); } 
+            42% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(255,0,60,0.5)); } 
+            70% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(80,0,255,0.4)); } 
+        }
+
+        /* HEADER */
+        header { background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border-bottom: 2px solid var(--danger); padding: 10px 0; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .logo-header { max-width: 80vw; height: auto; max-height: 60px; object-fit: contain; display: block; margin: 0 auto 5px auto; }
+        .claim { color: #fff; font-weight: 900; font-style: italic; letter-spacing: 5px; font-size: 0.75rem; text-transform: uppercase; opacity: 0.7; }
+
+        /* MAIN CONTAINER */
+        main { flex: 1; padding: 30px 20px 60px; max-width: 900px; margin: 0 auto; width: 100%; position: relative; z-index: 10; }
+
+        /* BACK NAV */
+        .back-nav { margin-bottom: 30px; }
+        .back-nav a { display: inline-block; color: #aaa; text-decoration: none; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #aaa; padding-bottom: 3px; transition: 0.3s; }
+        .back-nav a:hover { color: #fff; border-color: #fff; text-shadow: 0 0 10px var(--hack-color); }
+
+        /* CLASSE UNIVERSALE VETRO */
+        .glass-box { 
+            background: rgba(10, 10, 10, 0.4); 
+            backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); 
+            border: 1px solid rgba(255,255,255,0.08); 
+            border-radius: 8px; padding: 30px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4); 
+            margin-bottom: 30px;
+        }
+
+        /* HERO HACKING */
+        .hack-hero { text-align: center; margin-bottom: 40px; }
+        .hack-tag { background: rgba(80, 0, 255, 0.15); color: #fff; border: 1px solid var(--hack-color); padding: 5px 15px; font-weight: 900; border-radius: 4px; display: inline-block; margin-bottom: 15px; font-size: 1.2rem; box-shadow: 0 0 15px rgba(80,0,255,0.3); letter-spacing: 1px; font-family: 'Orbitron', sans-serif;}
+        .hack-hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 5vw, 3rem); color: #fff; text-transform: uppercase; margin: 0; text-shadow: 0 0 20px rgba(80,0,255,0.3);}
+
+        /* TITOLI SEZIONE */
+        .box-title { color: #fff; text-transform: uppercase; font-size: 1.3rem; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-family: 'Orbitron', sans-serif;}
+        
+        .diagnosi-box { border-left: 4px solid var(--hack-color); }
+        .diagnosi-box p { color: #ccc; line-height: 1.7; font-size: 1.05rem; }
+
+        /* ALERT PERICOLO INCENDIO */
+        @keyframes pulse-danger {
+            0% { box-shadow: inset 0 0 0 rgba(255, 0, 60, 0.4), 0 0 0 rgba(255, 0, 60, 0.4); border-color: rgba(255, 0, 60, 0.5); }
+            50% { box-shadow: inset 0 0 20px rgba(255, 0, 60, 0.3), 0 0 15px rgba(255, 0, 60, 0.2); border-color: var(--danger); }
+            100% { box-shadow: inset 0 0 0 transparent, 0 0 0 transparent; border-color: rgba(255, 0, 60, 0.5); }
+        }
+        .disclaimer-pista { background: rgba(20, 0, 5, 0.8); border: 1px solid var(--danger); padding: 25px; border-radius: 8px; margin-bottom: 40px; text-align: center; animation: pulse-danger 2s infinite; }
+        .disclaimer-pista h3 { color: var(--danger); text-transform: uppercase; margin-top: 0; font-size: 1.2rem; margin-bottom: 10px; font-family: 'Orbitron', sans-serif; font-weight: 900;}
+        .disclaimer-pista p { color: #e0e0e0; margin: 0; font-size: 0.95rem; line-height: 1.5; }
+
+        /* VIDEO E ALERT */
+        .video-box { padding: 0; overflow: hidden; border: 1px solid #333; border-left: 4px solid var(--hack-color); }
+        .cc-alert-box { background: rgba(80, 0, 255, 0.1); color: #ccc; border-bottom: 1px solid #333; padding: 15px; font-size: 0.9rem; display: flex; align-items: center; gap: 12px; line-height: 1.5; }
+        .cc-alert-box strong { color: var(--hack-color); }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        /* TERMINALE OSINT */
+        .terminal-log { background: rgba(0,0,0,0.6); padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; border-top: 1px solid #333; }
+        .terminal-log h3 { color: #777; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; }
+        .terminal-text p { color: #888; margin-bottom: 8px; line-height: 1.5; }
+        .terminal-text strong { color: #fff; }
+        .highlight { color: var(--hack-color); text-shadow: 0 0 5px var(--hack-color); font-weight: bold;}
+
+        /* ARSENALE RICAMBI */
+        .arsenal-box { border-top: 4px solid var(--hack-color); }
+        .part-item { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 6px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .part-info { flex: 1; padding-right: 20px; }
+        .part-name { font-weight: 900; font-size: 1.1rem; color: var(--hack-color); display: block; margin-bottom: 5px; text-transform: uppercase; }
+        .part-desc { font-size: 0.9rem; color: #aaa; }
+        
+        .buy-buttons { display: flex; gap: 10px; flex-shrink: 0; }
+        .btn { padding: 10px 15px; border-radius: 4px; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; text-decoration: none; text-align: center; transition: 0.3s; }
+        .btn-amz { background: #FF9900; color: #000; }
+        .btn-amz:hover { background: #e68a00; box-shadow: 0 0 15px rgba(255, 153, 0, 0.4); }
+        .btn-ali { background: #ff003c; color: #fff; }
+        .btn-ali:hover { background: #cc0030; box-shadow: 0 0 15px rgba(255, 0, 60, 0.4); }
+
+        /* PROTOCOLLO STEPS */
+        .step-container { display: flex; gap: 15px; margin-bottom: 25px; }
+        .step-num { width: 40px; height: 40px; background: rgba(80, 0, 255, 0.1); color: var(--hack-color); border: 1px solid var(--hack-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.2rem; flex-shrink: 0; font-family: 'Orbitron', sans-serif;}
+        .step-content h3 { color: #fff; text-transform: uppercase; margin-bottom: 5px; font-size: 1.1rem; }
+        .step-content p { color: #aaa; line-height: 1.6; }
+
+        /* DISCLAIMER */
+        .scudo-legale-web { border-left: 5px solid var(--danger); padding: 25px; font-size: 0.8rem; color: #999; text-align: justify; margin-top: 50px;}
+        .scudo-legale-web h2 { color: var(--danger); font-size: 0.9rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
+
+        /* FOOTER */
+        footer { background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); border-top: 1px solid #222; padding: 40px 20px; text-align: center; position: relative; z-index: 10; margin-top: auto;}
+        .footer-links { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin: 20px 0;}
+        .footer-links a { color: #777; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;}
+        .footer-links a:hover { color: var(--danger); }
+
+        @media (max-width: 768px) {
+            .glass-box { padding: 20px; }
+            .part-item { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .buy-buttons { width: 100%; flex-direction: column; }
+            .cc-alert-box { flex-direction: column; text-align: center; }
+        }
     </style>
 </head>
 <body>
 
+<div class="fixed-skull-wrapper">
+    <div class="fixed-skull-img"></div>
+</div>
+
 <header>
-    <div class="header-content"><img src="img/logo-header.png" alt="MONO DOOM" class="logo-header"><p class="claim">RESURRECT THE BEAST.</p></div>
+    <div class="header-content"><a href="index.html"><img src="img/logo-header.png" alt="MONO DOOM" class="logo-header"></a><p class="claim">RESURRECT THE BEAST.</p></div>
 </header>
-<nav><a href="kaabo.html" class="back-btn"><span>&lt;&lt;</span> Ritorna al Garage Kaabo</a></nav>
 
 <main>
-    <div class="error-hero">
-        <span class="error-tag">HACKING EXTREMO</span>
+    <div class="back-nav"><a href="kaabo.html">⟵ Torna al Garage Kaabo</a></div>
+
+    <div class="hack-hero">
+        <span class="hack-tag">HACKING EXTREMO</span>
         <h1>Shunt Mod: Overclock Hardware</h1>
     </div>
 
     <div class="disclaimer-pista">
-        <h3>🛑 ATTENZIONE - PROTOCOLLO FUORILEGGE E RISCHIO INCENDIO</h3>
-        <p>Questa procedura invalida immediatamente la garanzia e rimuove i limiti fisici di sicurezza della centralina. <strong>ESCLUSIVAMENTE per uso in aree private.</strong> Aumentare l'amperaggio tramite saldatura può causare l'esplosione dei Mosfet e incendi se spinto oltre il limite termico. MONO DOOM non si assume alcuna responsabilità. Procedi a tuo rischio.</p>
+        <h3>🛑 ATTENZIONE - PROTOCOLLO FUORILEGGE / RISCHIO INCENDIO</h3>
+        <p>Questa procedura invalida immediatamente la garanzia e rimuove i limiti fisici di sicurezza della centralina. <strong>ESCLUSIVAMENTE per uso in aree private e circuiti chiusi.</strong> Aumentare l'amperaggio tramite saldatura può causare l'esplosione dei Mosfet e innescare un incendio chimico inestinguibile se spinto oltre il limite termico tollerabile. MONO DOOM non si assume alcuna responsabilità per danni. Procedi a tuo rischio e pericolo.</p>
     </div>
 
-    <div class="diagnosi-box">
-        <h2>Ingannare il Controller</h2>
-        <p>Cos'è uno Shunt? È un ponte di metallo a forma di "U" saldato sulla scheda madre della centralina. Il controller legge la resistenza elettrica di questo ponte per capire quanti Ampere sta mandando al motore e limitare la potenza. <strong>Il trucco:</strong> Aggiungendo dello stagno sullo shunt, abbassiamo la sua resistenza. La centralina crede di erogare 25A, ma in realtà ne sta spingendo 35A o 40A. Il risultato è un'accelerazione violenta che strappa le braccia.</p>
-    </div>
+    <section class="glass-box diagnosi-box">
+        <h2 class="box-title" style="color: var(--hack-color);">Ingannare il Controller</h2>
+        <p>Cos'è uno Shunt? È un ponte di metallo massiccio (spesso a forma di "U") saldato direttamente sulla scheda madre della centralina. Il controller legge costantemente la resistenza elettrica di questo ponte per capire quanti Ampere sta mandando al motore e, di conseguenza, limitare la potenza massima erogabile per non bruciare tutto. <br><strong>Il trucco:</strong> Aggiungendo dello stagno sullo shunt, andiamo ad abbassare artificialmente la sua resistenza. In questo modo la centralina crederà di erogare (ad esempio) i suoi 25A nominali, ma in realtà ne sta spingendo 35A o 40A verso il motore. Il risultato è un'accelerazione brutale e una coppia che letteralmente strappa le braccia.</p>
+    </section>
 
-    <div class="video-section">
-        <div class="video-header"><span class="video-title">Feed Video - Shunt Modding</span></div>
+    <section class="glass-box video-box">
+        <div class="cc-alert-box">
+            <span style="font-size: 1.5rem;">⚡</span>
+            <span><strong>ATTIVA I SOTTOTITOLI ITA:</strong> Fai partire il video, poi clicca sull'icona <strong>[CC]</strong> o sull'ingranaggio in basso a destra.</span>
+        </div>
         <div class="video-wrapper">
-          <iframe src="https://www.youtube.com/embed/TYiDS-MOtak?cc_load_policy=1&cc_lang_pref=it&hl=it&rel=0" title="Shunt Mod Electric Scooter" frameborder="0" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/TYiDS-MOtak?cc_load_policy=1&cc_lang_pref=it&hl=it&rel=0&modestbranding=1" title="Shunt Mod Electric Scooter" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="terminal-log">
-            <h3>>> Log Dati Telemetrici (Trascrizione SEO)</h3>
+            <h3>>> Log Dati Telemetrici (OSINT)</h3>
             <div class="terminal-text">
-                <p>> Operazione: <strong>Shunt Modding su controller Kaabo / Minimotors per aumento di coppia (Torque).</strong></p>
-                <p>> Pericolo: Cortocircuito. <span class="highlight">Mai ponticellare al 100% lo shunt.</span> Riempire massimo 1/4 della sua lunghezza con lo stagno.</p>
-                <p>> Risultato: Accelerazione brutale da fermo, maggior spunto in salita, potenziale riduzione della vita utile del motore Sine-Wave.</p>
+                <p>> Operazione: <strong>Shunt Modding (Overclock Elettrico) su controller OEM Kaabo / Minimotors per massimizzazione Torque.</strong></p>
+                <p>> Livello Pericolo: Cortocircuito estremo. <span class="highlight">Mai ponticellare o riempire al 100% lo shunt.</span> Riempire con la lega saldante al massimo 1/4 o 1/3 della sua intera lunghezza.</p>
+                <p>> Risultato: Accelerazione brutale da fermo (Drag race mode), aumento massiccio di spunto in pendenza, ma potenziale dimezzamento della vita utile termica del motore Sine-Wave e dei Mosfet.</p>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="arsenal-box">
+    <section class="glass-box arsenal-box">
+        <h2 class="box-title" style="color: var(--hack-color);">Arsenale Hacking Extremo</h2>
+        
         <div class="part-item">
             <div class="part-info">
-                <span class="part-name">Saldatore a Stagno Potente (80W - 100W)</span>
-                <span class="part-desc">Per sciogliere lo stagno sui massicci shunt in rame dei controller Kaabo serve calore istantaneo. I saldatorini USB da 15W si incolleranno al metallo rovinando la scheda.</span>
+                <span class="part-name">1. Saldatore a Stagno Potente (80W - 100W)</span>
+                <span class="part-desc">Per riuscire a sciogliere lo stagno sui massicci shunt in rame presenti nei controller Kaabo serve un apporto di calore elevato e istantaneo. I classici "saldatorini USB" da 15W si incolleranno al metallo freddo rischiando di strappare le piste della scheda.</span>
             </div>
             <div class="buy-buttons">
                 <a href="https://www.amazon.it/s?k=saldatore+stagno+100w" target="_blank" class="btn btn-amz">Amazon (24h)</a>
             </div>
         </div>
+
         <div class="part-item">
             <div class="part-info">
-                <span class="part-name">Stagno di Alta Qualità (con Flussante)</span>
-                <span class="part-desc">Senza una buona anima di flussante, lo stagno non aderirà allo shunt, creando "palline" fredde che salteranno via con le prime vibrazioni in strada.</span>
+                <span class="part-name">2. Stagno di Alta Qualità (con Flussante)</span>
+                <span class="part-desc">Senza una buona anima di pasta flussante integrata (o esterna), lo stagno non aderirà mai al metallo liscio dello shunt, creando "palline" fredde che salteranno via con le prime vibrazioni stradali generando cortocircuiti.</span>
             </div>
             <div class="buy-buttons">
                 <a href="https://www.amazon.it/s?k=stagno+saldatura+professionale" target="_blank" class="btn btn-amz">Vedi su Amazon</a>
             </div>
         </div>
+
         <div class="part-item">
             <div class="part-info">
-                <span class="part-name">Controller di Ricambio (Piano B)</span>
-                <span class="part-desc">Se esageri con lo stagno e fondi la centralina, dovrai comprarla nuova. Ecco i ricambi originali.</span>
+                <span class="part-name">3. Controller di Ricambio (Piano B)</span>
+                <span class="part-desc">Se inavvertitamente esageri con la quantità di stagno e finisci per fondere la centralina durante il primo test, dovrai obbligatoriamente comprarla nuova. Ecco i ricambi originali.</span>
             </div>
             <div class="buy-buttons">
                 <a href="https://it.aliexpress.com/w/wholesale-kaabo-controller.html" target="_blank" class="btn btn-ali">AliExpress</a>
             </div>
         </div>
-    </div>
-
-    <div class="protocol-section">
-        <h2>Protocollo Operativo Chirurgico</h2>
-        <div class="step">
-            <div class="step-num">1</div>
-            <h3>Estrazione e Nudità</h3>
-            <p>Stacca la batteria (FONDAMENTALE). Estrai il controller dal deck metallico. Svita le paratie laterali in alluminio del controller per esporre la scheda madre (PCB). Cerca i ponticelli in metallo a forma di "U" nuda vicino all'uscita dei cavi di fase spessi. Quelli sono gli shunt.</p>
-        </div>
-        <div class="step">
-            <div class="step-num">2</div>
-            <h3>La Saldatura (La regola del Quarto)</h3>
-            <p>Scalda bene lo shunt. Applica lo stagno <strong>solo su 1/4 o massimo 1/3 della lunghezza</strong> dello shunt (dal lato della saldatura alla scheda, a salire). <strong>REGOLA D'ORO: NON RIEMPIRE MAI TUTTA LA "U".</strong> Se l'arco di metallo viene completamente riempito di stagno, la resistenza andrà a zero: la centralina manderà Ampere infiniti e i Mosfet esploderanno in 5 secondi.</p>
-        </div>
-        <div class="step">
-            <div class="step-num">3</div>
-            <h3>Test e Chiusura</h3>
-            <p>Raffredda la zona. Isola di nuovo il controller, ricollega i cavi. Alza la ruota da terra e dai gas. Sentirai il motore urlare molto più ferocemente. Monitora le temperature del deck durante le prime due uscite: se non puoi tenerci la mano sopra per il calore, riapri tutto e rimuovi un po' di stagno con la trecciola dissaldante.</p>
-        </div>
-    </div>
-</main>
-
-<section class="scudo-legale-web" style="max-width: 1200px; margin: 40px auto; padding: 25px; font-size: 0.85rem; color: #999; border: 1px solid #ff003c; border-left: 5px solid #ff003c; background: rgba(20, 0, 0, 0.4); border-radius: 6px;">
-        <h2 style="color: #ff003c; font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;">⚠️ Nota di Esclusione di Responsabilità (Disclaimer Specifico di Pagina)</h2>
-        <p>I dati metrologici, le segnature esadecimali, gli schemi elettrici di campionamento e i metodi di indagine meccanica riportati in questa pagina derivano da analisi teoriche OSINT e documentazione di pubblico dominio. Le informazioni sono destinate esclusivamente a scopo di studio e approfondimento scientifico per l'analisi forense e la ricostruzione dei sinistri.</p>
-        <p>L'applicazione pratica delle nozioni qui esposte su veicoli destinati alla circolazione stradale avviene sotto l'esclusiva responsabilità dell'utente. L'Editore non risponde di eventuali danni fisici, patrimoniali o sanzioni legali derivanti dall'uso improprio del materiale didattico fornito.</p>
     </section>
+
+    <section class="glass-box">
+        <h2 class="box-title">Protocollo Operativo Chirurgico</h2>
+        
+        <div class="step-container">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h3>Estrazione e Nudità Hardware</h3>
+                <p>Prima operazione in assoluto: <strong>stacca il connettore principale della batteria</strong> (XT60). Estrai il controller dal deck di metallo per poterci lavorare comodamente sul banco. Svita le minuscole viti delle paratie laterali in alluminio del controller per sfilare ed esporre la scheda madre (PCB). Cerca i ponticelli in metallo a forma di "U" nuda, posizionati solitamente vicino all'uscita dei tre cavi di fase spessi (giallo, blu, verde). Quelli sono gli shunt che andremo a manipolare.</p>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h3>La Saldatura (La Regola del Quarto)</h3>
+                <p>Usa la punta larga del saldatore per scaldare bene una porzione dello shunt. Applica lo stagno <strong>solo ed esclusivamente su 1/4 o massimo 1/3 della lunghezza</strong> del ponticello metallico (partendo dal lato della saldatura originale sulla scheda, a salire). <br><strong style="color:var(--danger);">REGOLA DI SOPRAVVIVENZA: NON RIEMPIRE MAI TUTTA LA "U".</strong> Se l'arco di metallo viene completamente riempito e ponticellato di stagno, la resistenza andrà a zero: la centralina manderà Ampere infiniti e i Mosfet esploderanno nel giro di 5 secondi dal primo colpo di acceleratore.</p>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h3>Test Dinamico e Chiusura</h3>
+                <p>Lascia raffreddare la zona a temperatura ambiente. Isola nuovamente il controller chiudendo l'alluminio e ricollega tutti i cavi nel deck. Alza la ruota motrice da terra e dai gas a vuoto: sentirai il motore urlare molto più ferocemente rispetto a prima. Esci a fare un giro di test monitorando le temperature del deck: se dopo 10 minuti di guida sportiva non puoi tenerci la mano sopra per l'eccessivo calore, devi riaprire tutto e rimuovere obbligatoriamente un po' di stagno con l'apposita trecciola dissaldante in rame.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="scudo-legale-web glass-box">
+        <h2>⚠️ Esclusione di Responsabilità</h2>
+        <p>I dati, gli schemi elettronici e i metodi di indagine riportati in questa pagina derivano da documentazione OSINT. Le informazioni sono destinate esclusivamente a scopo di studio e approfondimento tecnico (Reverse Engineering). Interventi di overclock mal eseguiti su controller ad alta tensione causano esplosioni, distruzione hardware e inneschi di incendi. L'applicazione pratica delle nozioni qui esposte avviene sotto l'esclusiva responsabilità dell'utente. L'Editore declina ogni responsabilità civile o penale per danni a cose o persone.</p>
+    </section>
+
 </main>
 
-<footer style="background-color: #000; border-top: 1px solid #222; padding: 40px 20px 20px; width: 100%;">
-    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
-        
-        <div style="display: flex; flex-direction: column; gap: 15px;">
-            
-            <a href="kaabo.html" style="text-decoration: none; display: flex; align-items: center; transition: 0.3s;">
-              <span style="color: #ff0022; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #ff0022; padding-bottom: 2px;">&larr; Torna al Garage Ducati</span>
-            
-            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; opacity: 0.7; transition: 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
-                <img src="img/logo-testo.png" alt="MONO DOOM Home" style="max-width: 120px;">
-                <span style="color: #777; font-size: 0.7rem; font-weight: bold; margin-left: 15px; text-transform: uppercase; letter-spacing: 1px;">Hub Centrale</span>
-            </a>
-        </div>
-
-        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-            <a href="privacy.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Privacy Policy</a>
-            <a href="cookie.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Cookie Policy</a>
-            <a href="termini.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Termini e Condizioni</a>
-            <a href="disclaimer.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Disclaimer Legale</a>
-        </div>
+<footer>
+    <img src="img/logo-testo.png" alt="MONO DOOM" style="max-width: 150px; opacity: 0.6; margin-bottom: 10px;">
+    <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="cookie.html">Cookie Policy</a>
+        <a href="termini.html">Termini e Condizioni</a>
+        <a href="disclaimer.html">Disclaimer Legale</a>
     </div>
-    
-    <div style="text-align: center; margin-top: 35px; padding-top: 20px; border-top: 1px solid #111; color: #333; font-size: 0.7rem; font-family: sans-serif;">
-        &copy; 2026 MONO DOOM. Tutti i diritti riservati. I marchi registrati appartengono ai rispettivi proprietari. Documentazione ad uso informativo e peritale.
+    <div style="color: #444; font-size: 0.65rem; margin-top: 15px;">
+        &copy; 2026 MONO DOOM. Tutti i diritti riservati.
     </div>
 </footer>
+
+</body>
+</html>

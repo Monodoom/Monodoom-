@@ -1,414 +1,219 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QGRVQ9N6N2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-QGRVQ9N6N2');
+    </script>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Guida definitiva al Kaabo Mantis Single Motor 500W. Upgrade freni idraulici, sostituzione controller e sblocco motore 800W.">
     <title>Upgrade Kaabo Mantis 500W/Sport | MONO DOOM</title>
+    
     <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <meta name="theme-color" content="#050505">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Upgrade Freni e Motore Kaabo Mantis 500W",
+      "description": "Procedura di hacking e upgrade hardware per sbloccare la vera potenza del motore e installare freni full idraulici.",
+      "step": [
+        { "@type": "HowToStep", "name": "Upgrade Idraulica", "text": "Sostituzione dell'impianto frenante meccanico con kit full idraulico Zoom o Nutt." },
+        { "@type": "HowToStep", "name": "Prevenzione E09", "text": "Saldatura diretta dei cavi di fase per prevenire la fusione dei connettori e il cortocircuito del controller." }
+      ]
+    }
+    </script>
+
     <style>
         :root {
-            --bg-color: #050505;
+            --bg-color: #050505; 
             --text-color: #e0e0e0;
-            --neon-blue: #00e5ff;
-            --white: #ffffff;
-            --pure-black: #000000;
             --danger: #ff003c;
-            --hack: #5000ff;
-            --card-bg: #111111;
+            --hack-color: #5000ff; /* Viola Hacking */
             --terminal-green: #0f0;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* TESCHIO CENTRATO E PULSANTE */
+        .fixed-skull-wrapper { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; z-index: 0; pointer-events: none; }
+        .fixed-skull-img { 
+            width: 90vw; max-width: 600px; height: 90vh; max-height: 600px; 
+            background-image: url('img/teschio.png'); background-size: contain; background-position: center; background-repeat: no-repeat; 
+            opacity: 0.35; animation: heartbeat-hack 3s infinite linear; 
+        }
+        @keyframes heartbeat-hack { 
+            0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(80,0,255,0.4)); } 
+            14% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(80,0,255,0.7)); } 
+            28% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(80,0,255,0.4)); } 
+            42% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(255,0,60,0.5)); } 
+            70% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(80,0,255,0.4)); } 
         }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+        /* HEADER */
+        header { background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border-bottom: 2px solid var(--danger); padding: 10px 0; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .logo-header { max-width: 80vw; height: auto; max-height: 60px; object-fit: contain; display: block; margin: 0 auto 5px auto; }
+        .claim { color: #fff; font-weight: 900; font-style: italic; letter-spacing: 5px; font-size: 0.75rem; text-transform: uppercase; opacity: 0.7; }
 
-        header {
-            background-color: var(--pure-black);
-            border-bottom: 2px solid var(--danger);
-            padding: 20px 0 10px;
-            text-align: center;
-        }
+        /* MAIN CONTAINER */
+        main { flex: 1; padding: 30px 20px 60px; max-width: 900px; margin: 0 auto; width: 100%; position: relative; z-index: 10; }
 
-        .header-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        /* BACK NAV */
+        .back-nav { margin-bottom: 30px; }
+        .back-nav a { display: inline-block; color: #aaa; text-decoration: none; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #aaa; padding-bottom: 3px; transition: 0.3s; }
+        .back-nav a:hover { color: #fff; border-color: #fff; text-shadow: 0 0 10px var(--hack-color); }
 
-        .logo-header {
-            max-height: 110px;
-            width: auto;
-            display: block;
-        }
-
-        .claim {
-            color: var(--white);
-            font-weight: 900;
-            font-style: italic;
-            letter-spacing: 3px;
-            font-size: 1.05rem;
-            margin-top: 5px;
-            text-transform: uppercase;
-            text-shadow: 0 0 5px var(--danger);
-        }
-
-        nav {
-            background-color: var(--pure-black);
-            padding: 15px 25px;
-            border-bottom: 1px solid #333;
-        }
-
-        .back-btn {
-            display: inline-block;
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 900;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            transition: 0.3s;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        .back-btn span {
-            color: var(--danger);
-            margin-right: 5px;
-        }
-
-        .back-btn:hover {
-            color: var(--white);
-            text-shadow: 0 0 10px var(--danger);
-        }
-
-        main {
-            flex: 1;
-            max-width: 850px;
-            margin: 40px auto;
-            padding: 0 20px;
-            width: 100%;
-        }
-
-        .error-hero {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .error-tag {
-            background: var(--hack);
-            color: #fff;
-            padding: 5px 15px;
-            font-weight: 900;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-            box-shadow: 0 0 15px rgba(80, 0, 255, 0.4);
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            color: var(--white);
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-
-        .diagnosi-box {
-            background: rgba(0, 229, 255, 0.05);
-            border-left: 4px solid var(--neon-blue);
-            padding: 25px;
-            margin-bottom: 40px;
-            border-radius: 0 8px 8px 0;
-            border: 1px solid #333;
-        }
-
-        .diagnosi-box h2 {
-            color: var(--neon-blue);
-            text-transform: uppercase;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-
-        .arsenal-box {
-            background: linear-gradient(145deg, #111, #0a0a0a);
-            border: 1px solid var(--hack);
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 50px;
-            position: relative;
-        }
-
-        .arsenal-box::before {
-            content: "ARSENALE HACKING & UPGRADE";
-            position: absolute;
-            top: -12px;
-            left: 20px;
-            background: var(--bg-color);
-            color: var(--hack);
-            font-weight: 900;
-            padding: 0 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .part-item {
-            background: #000;
-            border: 1px solid #333;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: 0.3s;
-        }
-
-        .part-item:hover {
-            border-color: #555;
-        }
-
-        .part-info {
-            flex: 1;
-            padding-right: 20px;
-        }
-
-        .part-name {
-            font-weight: 900;
-            font-size: 1.2rem;
-            color: var(--white);
-            display: block;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        .part-desc {
-            font-size: 0.9rem;
-            color: #aaa;
-        }
-
-        .buy-buttons {
-            display: flex;
-            gap: 10px;
-            flex-shrink: 0;
-        }
-
-        .btn {
-            padding: 10px 15px;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            text-decoration: none;
-            text-align: center;
-            transition: 0.3s;
-        }
-
-        .btn-amz {
-            background: #f90;
-            color: #000;
-        }
-
-        .btn-amz:hover {
-            background: #e68a00;
-            box-shadow: 0 0 10px rgba(255, 153, 0, 0.5);
-        }
-
-        .btn-ali {
-            background: #ff003c;
-            color: #fff;
-        }
-
-        .btn-ali:hover {
-            background: #cc0030;
-            box-shadow: 0 0 10px rgba(255, 0, 60, 0.5);
-        }
-
-        .protocol-section h2 {
-            color: var(--hack);
-            text-transform: uppercase;
+        /* CLASSE UNIVERSALE VETRO */
+        .glass-box { 
+            background: rgba(10, 10, 10, 0.4); 
+            backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); 
+            border: 1px solid rgba(255,255,255,0.08); 
+            border-radius: 8px; padding: 30px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4); 
             margin-bottom: 30px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
         }
 
-        .step {
-            position: relative;
-            padding-left: 50px;
-            margin-bottom: 40px;
-        }
+        /* HERO HACKING */
+        .hack-hero { text-align: center; margin-bottom: 40px; }
+        .hack-tag { background: rgba(80, 0, 255, 0.15); color: #fff; border: 1px solid var(--hack-color); padding: 5px 15px; font-weight: 900; border-radius: 4px; display: inline-block; margin-bottom: 15px; font-size: 1.2rem; box-shadow: 0 0 15px rgba(80,0,255,0.3); letter-spacing: 1px; font-family: 'Orbitron', sans-serif;}
+        .hack-hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 5vw, 3rem); color: #fff; text-transform: uppercase; margin: 0; text-shadow: 0 0 20px rgba(80,0,255,0.3);}
 
-        .step-num {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 35px;
-            height: 35px;
-            background: var(--hack);
-            color: #fff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 1.2rem;
-            box-shadow: 0 0 10px rgba(80, 0, 255, 0.5);
-        }
+        /* TITOLI SEZIONE */
+        .box-title { color: #fff; text-transform: uppercase; font-size: 1.3rem; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-family: 'Orbitron', sans-serif;}
+        
+        .diagnosi-box { border-left: 4px solid var(--hack-color); }
+        .diagnosi-box p { color: #ccc; line-height: 1.7; font-size: 1.05rem; }
 
-        .step h3 {
-            color: var(--white);
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-
-        .step p {
-            color: #aaa;
-        }
-
-        footer {
-            background-color: var(--pure-black);
-            border-top: 2px solid var(--danger);
-            padding: 60px 20px 30px;
-            margin-top: auto;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: left;
-        }
-
-        .footer-col h4 {
-            color: var(--danger);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            font-size: 1rem;
-        }
-
-        .footer-col p {
-            color: #888;
-            font-size: 0.85rem;
-            line-height: 1.5;
-        }
-
-        .footer-col ul {
-            list-style: none;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-col ul li a {
-            color: #888;
-            text-decoration: none;
-            transition: 0.3s;
-            font-size: 0.85rem;
-        }
-
-        .footer-col ul li a:hover {
-            color: var(--white);
-        }
-
-        .legal-bottom {
-            text-align: center;
-            margin-top: 50px;
-            padding-top: 25px;
-            border-top: 1px solid #222;
-            color: #444;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
+        /* ALERT PERICOLO LEGALE */
         @keyframes pulse-danger {
-            0% { box-shadow: inset 0 0 0 rgba(255, 0, 60, 0.4); }
-            50% { box-shadow: inset 0 0 15px rgba(255, 0, 60, 0.2); }
-            100% { box-shadow: inset 0 0 0 transparent; }
+            0% { box-shadow: inset 0 0 0 rgba(255, 0, 60, 0.4), 0 0 0 rgba(255, 0, 60, 0.4); border-color: rgba(255, 0, 60, 0.5); }
+            50% { box-shadow: inset 0 0 20px rgba(255, 0, 60, 0.3), 0 0 15px rgba(255, 0, 60, 0.2); border-color: var(--danger); }
+            100% { box-shadow: inset 0 0 0 transparent, 0 0 0 transparent; border-color: rgba(255, 0, 60, 0.5); }
         }
+        .disclaimer-pista { background: rgba(20, 0, 5, 0.8); border: 1px solid var(--danger); padding: 25px; border-radius: 8px; margin-bottom: 40px; text-align: center; animation: pulse-danger 2s infinite; }
+        .disclaimer-pista h3 { color: var(--danger); text-transform: uppercase; margin-top: 0; font-size: 1.2rem; margin-bottom: 10px; font-family: 'Orbitron', sans-serif; font-weight: 900;}
+        .disclaimer-pista p { color: #e0e0e0; margin: 0; font-size: 0.95rem; line-height: 1.5; }
 
-        .disclaimer-pista {
-            background: #1a0004;
-            border: 2px solid #ff003c;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 40px;
-            text-align: center;
-            animation: pulse-danger 2s infinite;
-        }
+        /* VIDEO E ALERT */
+        .video-box { padding: 0; overflow: hidden; border: 1px solid #333; border-left: 4px solid var(--hack-color); }
+        .cc-alert-box { background: rgba(80, 0, 255, 0.1); color: #ccc; border-bottom: 1px solid #333; padding: 15px; font-size: 0.9rem; display: flex; align-items: center; gap: 12px; line-height: 1.5; }
+        .cc-alert-box strong { color: var(--hack-color); }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; background: #000;}
 
-        .disclaimer-pista h3 {
-            color: #ff003c;
-            text-transform: uppercase;
-            margin-top: 0;
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
+        /* TERMINALE OSINT */
+        .terminal-log { background: rgba(0,0,0,0.6); padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; border-top: 1px solid #333; }
+        .terminal-log h3 { color: #777; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; }
+        .terminal-text p { color: #888; margin-bottom: 8px; line-height: 1.5; }
+        .terminal-text strong { color: #fff; }
+        .highlight { color: var(--hack-color); text-shadow: 0 0 5px var(--hack-color); font-weight: bold;}
 
-        .disclaimer-pista p {
-            color: #e0e0e0;
-            margin: 0;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
+        /* ARSENALE RICAMBI */
+        .arsenal-box { border-top: 4px solid var(--hack-color); }
+        .part-item { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 6px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .part-info { flex: 1; padding-right: 20px; }
+        .part-name { font-weight: 900; font-size: 1.1rem; color: var(--hack-color); display: block; margin-bottom: 5px; text-transform: uppercase; }
+        .part-desc { font-size: 0.9rem; color: #aaa; }
+        
+        .buy-buttons { display: flex; gap: 10px; flex-shrink: 0; }
+        .btn { padding: 10px 15px; border-radius: 4px; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; text-decoration: none; text-align: center; transition: 0.3s; }
+        .btn-amz { background: #FF9900; color: #000; }
+        .btn-amz:hover { background: #e68a00; box-shadow: 0 0 15px rgba(255, 153, 0, 0.4); }
+        .btn-ali { background: #ff003c; color: #fff; }
+        .btn-ali:hover { background: #cc0030; box-shadow: 0 0 15px rgba(255, 0, 60, 0.4); }
 
-        @media(max-width: 768px) {
+        /* PROTOCOLLO STEPS */
+        .step-container { display: flex; gap: 15px; margin-bottom: 25px; }
+        .step-num { width: 40px; height: 40px; background: rgba(80, 0, 255, 0.1); color: var(--hack-color); border: 1px solid var(--hack-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.2rem; flex-shrink: 0; font-family: 'Orbitron', sans-serif;}
+        .step-content h3 { color: #fff; text-transform: uppercase; margin-bottom: 5px; font-size: 1.1rem; }
+        .step-content p { color: #aaa; line-height: 1.6; }
+
+        /* DISCLAIMER */
+        .scudo-legale-web { border-left: 5px solid var(--danger); padding: 25px; font-size: 0.8rem; color: #999; text-align: justify; margin-top: 50px;}
+        .scudo-legale-web h2 { color: var(--danger); font-size: 0.9rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
+
+        /* FOOTER */
+        footer { background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); border-top: 1px solid #222; padding: 40px 20px; text-align: center; position: relative; z-index: 10; margin-top: auto;}
+        .footer-links { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin: 20px 0;}
+        .footer-links a { color: #777; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;}
+        .footer-links a:hover { color: var(--danger); }
+
+        @media (max-width: 768px) {
+            .glass-box { padding: 20px; }
             .part-item { flex-direction: column; align-items: flex-start; gap: 15px; }
             .buy-buttons { width: 100%; flex-direction: column; }
-            .btn { width: 100%; }
+            .cc-alert-box { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
 
+<div class="fixed-skull-wrapper">
+    <div class="fixed-skull-img"></div>
+</div>
+
 <header>
-    <div class="header-content"><img src="img/logo-header.png" alt="MONO DOOM" class="logo-header"><p class="claim">RESURRECT THE BEAST.</p></div>
+    <div class="header-content"><a href="index.html"><img src="img/logo-header.png" alt="MONO DOOM" class="logo-header"></a><p class="claim">RESURRECT THE BEAST.</p></div>
 </header>
-<nav><a href="kaabo.html" class="back-btn"><span>&lt;&lt;</span> Ritorna al Garage Kaabo</a></nav>
 
 <main>
-    <div class="error-hero">
-        <span class="error-tag">HACKING & UPGRADE</span>
+    <div class="back-nav"><a href="kaabo.html">⟵ Torna al Garage Kaabo</a></div>
+
+    <div class="hack-hero">
+        <span class="hack-tag">HACKING EXTREMO</span>
         <h1>Mantis 500W: Segreti e Potenza</h1>
     </div>
 
     <div class="disclaimer-pista">
         <h3>🛑 ATTENZIONE - PROTOCOLLO FUORILEGGE</h3>
-        <p>Questa procedura e le informazioni di sblocco sono destinate <strong>ESCLUSIVAMENTE all'uso in aree private o circuiti chiusi</strong>. L'aumento della velocità o l'alterazione della potenza su strade pubbliche è illegale, comporta il sequestro del mezzo e fa decadere la garanzia. MONO DOOM non si assume responsabilità. Tu sei l'unico responsabile della tua bestia.</p>
+        <p>Questa procedura e le informazioni di sblocco sono destinate <strong>ESCLUSIVAMENTE all'uso in aree private o circuiti chiusi</strong>. L'aumento della velocità nominale o l'alterazione della potenza su strade pubbliche è illegale, comporta il sequestro immediato del mezzo e fa decadere la garanzia del costruttore. MONO DOOM non si assume responsabilità penali o civili. Tu sei l'unico responsabile della tua bestia.</p>
     </div>
 
-    <div class="diagnosi-box">
-        <h2>La Verità Tecnica sul Motore</h2>
-        <p>Sotto la scocca del tuo Mantis "Eco" da 500W batte un cuore da <strong>800W nominali</strong>. Kaabo utilizza esattamente lo stesso motore della serie Sport, limitandolo a 500W via centralina/software per rientrare nelle normative europee. Questo è un enorme vantaggio: il motore è sovradimensionato, lavora a temperature glaciali rispetto ai competitor ed è pronto a spingere oltre se gli sblocchi il controller.</p>
-    </div>
+    <section class="glass-box diagnosi-box">
+        <h2 class="box-title" style="color: var(--hack-color);">La Verità Tecnica sul Motore</h2>
+        <p>Sotto la scocca del tuo Mantis "Eco" da 500W batte in realtà un cuore da <strong>800W nominali</strong>. Kaabo utilizza per questioni di catena di montaggio esattamente lo stesso blocco motore della serie Sport, castrandolo artificialmente a 500W via centralina/software per rientrare nelle stringenti normative europee. Questo è un enorme vantaggio tattico: il motore è meccanicamente sovradimensionato, lavora a temperature glaciali rispetto ai competitor della stessa fascia ed è fisicamente pronto a spingere il doppio se gli sblocchi il controller.</p>
+    </section>
 
-    <div class="arsenal-box">
+    <section class="glass-box video-box">
+        <div class="cc-alert-box">
+            <span style="font-size: 1.5rem;">⚡</span>
+            <span><strong>ATTIVA I SOTTOTITOLI ITA:</strong> Fai partire il video sull'upgrade, poi clicca sull'icona <strong>[CC]</strong> o sull'ingranaggio in basso a destra.</span>
+        </div>
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/placeholder_video?cc_load_policy=1&cc_lang_pref=it&hl=it&rel=0&modestbranding=1" title="Upgrade Freni e Controller Kaabo Mantis" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="terminal-log">
+            <h3>>> Log Dati Telemetrici (OSINT)</h3>
+            <div class="terminal-text">
+                <p>> Target: <strong>Piattaforma Kaabo Mantis 10 Single Motor (Eco/Base 500W).</strong></p>
+                <p>> Discrepanza Rilevata: L'hardware del rotore posteriore è idoneo all'erogazione di 800W continui. L'assorbimento è limitato dal firmware del controller a 48V.</p>
+                <p>> Direttiva: <span class="highlight">Sostituzione dell'impianto frenante a cavo con idraulica pressurizzata (Zoom/Nutt) per gestire in sicurezza l'aumento delle prestazioni.</span> Prevenzione dell'Errore E09 tramite saldatura diretta delle fasi.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="glass-box arsenal-box">
+        <h2 class="box-title" style="color: var(--hack-color);">Arsenale Hacking & Upgrade</h2>
+        
         <div class="part-item">
             <div class="part-info">
-                <span class="part-name">Controller Originale Kaabo 48V (25A)</span>
-                <span class="part-desc">Ricambio vitale Plug&Play se la tua centralina è saltata per un cortocircuito sui cavi motore (Errore E09) a furia di spingere in salita.</span>
+                <span class="part-name">1. Controller Originale Kaabo 48V (25A)</span>
+                <span class="part-desc">Ricambio vitale Plug&Play se la tua centralina è saltata per un cortocircuito sui cavi motore (Errore E09) a furia di spingere il mezzo in salita al limite degli Ampere.</span>
             </div>
             <div class="buy-buttons">
                 <a href="https://it.aliexpress.com/w/wholesale-kaabo-mantis-controller-48v.html" target="_blank" class="btn btn-ali">Vedi su AliExpress</a>
@@ -417,60 +222,54 @@
 
         <div class="part-item">
             <div class="part-info">
-                <span class="part-name">Kit Freni Full Idraulici (Zoom o Nutt)</span>
-                <span class="part-desc">Impianto completo (Leve + Tubi olio + Pinze) con i sensori di frenata (plug) già cablati per Kaabo.</span>
+                <span class="part-name">2. Kit Freni Full Idraulici (Zoom o Nutt)</span>
+                <span class="part-desc">Impianto completo (Leve + Tubi pressurizzati ad olio + Pinze) con i sensori di frenata (plug) già cablati per il sistema elettrico Kaabo.</span>
             </div>
             <div class="buy-buttons">
                 <a href="https://it.aliexpress.com/w/wholesale-kaabo-mantis-hydraulic-brakes.html" target="_blank" class="btn btn-ali">AliExpress (-40%)</a>
             </div>
         </div>
-    </div>
-
-    <div class="protocol-section">
-        <h2>Upgrade e Risoluzione Guasti</h2>
-        <div class="step">
-            <div class="step-num">1</div>
-            <h3>L'Upgrade Definitivo: Freni Idraulici</h3>
-            <p>Il vero limite dei modelli 500W/Sport sono i freni a cavo meccanico o semi-idraulici. Il salto di qualità definitivo, specialmente in off-road, si fa installando un impianto Full Idraulico (Zoom o Nutt). Sostituirai leve e pinze: la frenata diventerà potentissima e gestibile con un solo dito.</p>
-        </div>
-        <div class="step">
-            <div class="step-num">2</div>
-            <h3>Salite estreme e Surriscaldamento (E09)</h3>
-            <p>Se vivi in collina e tieni il motore sbloccato a tutto gas, il controller da 48V/25A faticherà. Controlla periodicamente i cavi di fase (Giallo, Verde, Blu) dentro il deck: i connettori originali in plastica si sciolgono. Tagliali e salda i cavi direttamente per evitare l'Errore E09 (cortocircuito centralina).</p>
-        </div>
-    </div>
-</main>
-
-<section class="scudo-legale-web" style="max-width: 1200px; margin: 40px auto; padding: 25px; font-size: 0.85rem; color: #999; border: 1px solid #ff003c; border-left: 5px solid #ff003c; background: rgba(20, 0, 0, 0.4); border-radius: 6px;">
-        <h2 style="color: #ff003c; font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;">⚠️ Nota di Esclusione di Responsabilità (Disclaimer Specifico di Pagina)</h2>
-        <p>I dati metrologici, le segnature esadecimali, gli schemi elettrici di campionamento e i metodi di indagine meccanica riportati in questa pagina derivano da analisi teoriche OSINT e documentazione di pubblico dominio. Le informazioni sono destinate esclusivamente a scopo di studio e approfondimento scientifico per l'analisi forense e la ricostruzione dei sinistri.</p>
-        <p>L'applicazione pratica delle nozioni qui esposte su veicoli destinati alla circolazione stradale avviene sotto l'esclusiva responsabilità dell'utente. L'Editore non risponde di eventuali danni fisici, patrimoniali o sanzioni legali derivanti dall'uso improprio del materiale didattico fornito.</p>
     </section>
+
+    <section class="glass-box">
+        <h2 class="box-title">Upgrade e Risoluzione Guasti</h2>
+        
+        <div class="step-container">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h3>L'Upgrade Definitivo: Freni Idraulici</h3>
+                <p>Il vero limite dinamico dei modelli Mantis da 500W non è il motore, ma sono i freni a cavo meccanico (o semi-idraulici) di fabbrica. Il salto di qualità definitivo, specialmente se guidi nel traffico o in off-road, si fa installando un impianto Full Idraulico (Zoom o Nutt). Sostituirai leve, cavi e pinze: la frenata diventerà incredibilmente potente, modulabile e gestibile bloccando la ruota con l'uso di un solo dito.</p>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h3>Salite Estreme e Surriscaldamento (E09)</h3>
+                <p>Se vivi in collina e tieni il motore sempre sbloccato a tutto gas, il controller base da 48V/25A faticherà a dissipare il calore. Controlla periodicamente i tre cavi di fase (Giallo, Verde, Blu) all'interno del deck: i connettori originali a proiettile in plastica tendono a sciogliersi. Per azzerare la resistenza, tagliali e salda i cavi direttamente isolandoli bene. Questa operazione previene in modo definitivo l'Errore E09 (cortocircuito letale della centralina).</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="scudo-legale-web glass-box">
+        <h2>⚠️ Esclusione di Responsabilità</h2>
+        <p>I dati, gli schemi elettrici e i metodi di indagine meccanica riportati in questa pagina derivano da documentazione OSINT. Le informazioni sono destinate esclusivamente a scopo di studio tecnico. L'applicazione pratica delle nozioni qui espresse (come la saldatura dei cavi di fase e l'overclock del controller) su veicoli destinati alla circolazione stradale avviene sotto l'esclusiva responsabilità dell'utente. L'Editore declina ogni responsabilità per cortocircuiti, danni fisici, hardware o sanzioni legali derivanti dall'uso improprio di queste informazioni.</p>
+    </section>
+
 </main>
 
-<footer style="background-color: #000; border-top: 1px solid #222; padding: 40px 20px 20px; width: 100%;">
-    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
-        
-        <div style="display: flex; flex-direction: column; gap: 15px;">
-            
-            <a href="kaabo.html" style="text-decoration: none; display: flex; align-items: center; transition: 0.3s;">
-              <span style="color: #ff0022; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #ff0022; padding-bottom: 2px;">&larr; Torna al Garage Ducati</span>
-            
-            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; opacity: 0.7; transition: 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
-                <img src="img/logo-testo.png" alt="MONO DOOM Home" style="max-width: 120px;">
-                <span style="color: #777; font-size: 0.7rem; font-weight: bold; margin-left: 15px; text-transform: uppercase; letter-spacing: 1px;">Hub Centrale</span>
-            </a>
-        </div>
-
-        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-            <a href="privacy.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Privacy Policy</a>
-            <a href="cookie.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Cookie Policy</a>
-            <a href="termini.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Termini e Condizioni</a>
-            <a href="disclaimer.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#ff003c'" onmouseout="this.style.color='#555'">Disclaimer Legale</a>
-        </div>
+<footer>
+    <img src="img/logo-testo.png" alt="MONO DOOM" style="max-width: 150px; opacity: 0.6; margin-bottom: 10px;">
+    <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="cookie.html">Cookie Policy</a>
+        <a href="termini.html">Termini e Condizioni</a>
+        <a href="disclaimer.html">Disclaimer Legale</a>
     </div>
-    
-    <div style="text-align: center; margin-top: 35px; padding-top: 20px; border-top: 1px solid #111; color: #333; font-size: 0.7rem; font-family: sans-serif;">
-        &copy; 2026 MONO DOOM. Tutti i diritti riservati. I marchi registrati appartengono ai rispettivi proprietari. Documentazione ad uso informativo e peritale.
+    <div style="color: #444; font-size: 0.65rem; margin-top: 15px;">
+        &copy; 2026 MONO DOOM. Tutti i diritti riservati.
     </div>
 </footer>
+
+</body>
+</html>
