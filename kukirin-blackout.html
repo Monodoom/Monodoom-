@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QGRVQ9N6N2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-QGRVQ9N6N2');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Il tuo KuKirin si spegne sotto sforzo o non si ricarica? Riparazione del blackout e sostituzione della porta di ricarica fusa (GX16).">
+    <title>Kukirin: Blackout e Porta Ricarica Fusa | MONO DOOM</title>
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    
+    <meta name="theme-color" content="#050505">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Riparazione Blackout e Porta Ricarica KuKirin (M4, G3)",
+      "description": "Procedura per la diagnosi di spegnimento improvviso e la sostituzione della porta di ricarica fusa (GX16) sui monopattini KuKirin.",
+      "step": [
+        { "@type": "HowToStep", "name": "Prevenzione Scintilla", "text": "Collega sempre prima il caricatore alla presa a muro (220V), attendi la spia verde e poi collegalo al monopattino." },
+        { "@type": "HowToStep", "name": "Sostituzione Porta", "text": "Taglia i fili rosso e nero uno per volta (per evitare cortocircuiti), spelali e saldali alla nuova porta GX16 isolandoli con guaina termorestringente." }
+      ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg-color: #050505; 
+            --text-color: #e0e0e0;
+            --danger: #ff003c; 
+            --kukirin-orange: #ff8c00; /* Arancione KuKirin */
+            --terminal-green: #0f0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* TESCHIO CENTRATO E PULSANTE */
+        .fixed-skull-wrapper { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; z-index: 0; pointer-events: none; }
+        .fixed-skull-img { 
+            width: 90vw; max-width: 600px; height: 90vh; max-height: 600px; 
+            background-image: url('img/teschio.png'); background-size: contain; background-position: center; background-repeat: no-repeat; 
+            opacity: 0.35; animation: heartbeat-kukirin 3s infinite linear; 
+        }
+        @keyframes heartbeat-kukirin { 
+            0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255,140,0,0.3)); } 
+            14% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(255,140,0,0.6)); } 
+            28% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255,140,0,0.3)); } 
+            42% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(255,140,0,0.5)); } 
+            70% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255,140,0,0.3)); } 
+        }
+
+        /* HEADER */
+        header { background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border-bottom: 2px solid var(--kukirin-orange); padding: 10px 0; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .logo-header { max-width: 80vw; height: auto; max-height: 60px; object-fit: contain; display: block; margin: 0 auto 5px auto; }
+        .claim { color: #fff; font-weight: 900; font-style: italic; letter-spacing: 5px; font-size: 0.75rem; text-transform: uppercase; opacity: 0.7; }
+
+        /* MAIN CONTAINER */
+        main { flex: 1; padding: 30px 20px 60px; max-width: 900px; margin: 0 auto; width: 100%; position: relative; z-index: 10; }
+
+        /* BACK NAV */
+        .back-nav { margin-bottom: 30px; }
+        .back-nav a { display: inline-block; color: #aaa; text-decoration: none; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #aaa; padding-bottom: 3px; transition: 0.3s; }
+        .back-nav a:hover { color: #fff; border-color: #fff; text-shadow: 0 0 10px var(--kukirin-orange); }
+
+        /* CLASSE UNIVERSALE VETRO */
+        .glass-box { 
+            background: rgba(10, 10, 10, 0.4); 
+            backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); 
+            border: 1px solid rgba(255,255,255,0.08); 
+            border-radius: 8px; padding: 30px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4); 
+            margin-bottom: 30px;
+        }
+
+        /* HERO HARDWARE */
+        .hw-hero { text-align: center; margin-bottom: 40px; }
+        .hw-tag { background: rgba(255, 140, 0, 0.15); color: var(--kukirin-orange); border: 1px solid var(--kukirin-orange); padding: 5px 15px; font-weight: 900; border-radius: 4px; display: inline-block; margin-bottom: 15px; font-size: 1.2rem; box-shadow: 0 0 15px rgba(255,140,0,0.3); letter-spacing: 1px; font-family: 'Orbitron', sans-serif;}
+        .hw-hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 5vw, 3rem); color: #fff; text-transform: uppercase; margin: 0; text-shadow: 0 0 20px rgba(255,140,0,0.3);}
+
+        /* TITOLI SEZIONE */
+        .box-title { color: #fff; text-transform: uppercase; font-size: 1.3rem; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-family: 'Orbitron', sans-serif;}
+        
+        .diagnosi-box { border-left: 4px solid var(--kukirin-orange); }
+        .diagnosi-box p { color: #ccc; line-height: 1.7; font-size: 1.05rem; }
+
+        /* VIDEO E ALERT */
+        .video-box { padding: 0; overflow: hidden; border: 1px solid #333; border-left: 4px solid var(--kukirin-orange); }
+        @keyframes pulse-orange {
+            0% { box-shadow: inset 0 0 0 rgba(255, 140, 0, 0.4); border-color: rgba(255, 140, 0, 0.5); }
+            50% { box-shadow: inset 0 0 15px rgba(255, 140, 0, 0.2); border-color: var(--kukirin-orange); }
+            100% { box-shadow: inset 0 0 0 transparent; border-color: rgba(255, 140, 0, 0.5); }
+        }
+        .cc-alert-box { background: rgba(255, 140, 0, 0.05); color: #ccc; border-bottom: 1px solid #333; padding: 15px; font-size: 0.9rem; display: flex; align-items: center; gap: 12px; line-height: 1.5; animation: pulse-orange 2s infinite;}
+        .cc-alert-box strong { color: var(--kukirin-orange); }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; background: #000;}
+
+        /* TERMINALE OSINT */
+        .terminal-log { background: rgba(0,0,0,0.6); padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; border-top: 1px solid #333; }
+        .terminal-log h3 { color: #777; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; }
+        .terminal-text p { color: #888; margin-bottom: 8px; line-height: 1.5; }
+        .terminal-text strong { color: #fff; }
+        .highlight { color: var(--kukirin-orange); text-shadow: 0 0 5px var(--kukirin-orange); font-weight: bold;}
+
+        /* ARSENALE RICAMBI */
+        .arsenal-box { border-top: 4px solid var(--kukirin-orange); }
+        .part-item { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 6px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .part-info { flex: 1; padding-right: 20px; }
+        .part-name { font-weight: 900; font-size: 1.1rem; color: var(--kukirin-orange); display: block; margin-bottom: 5px; text-transform: uppercase; }
+        .part-desc { font-size: 0.9rem; color: #aaa; }
+        
+        .buy-buttons { display: flex; gap: 10px; flex-shrink: 0; }
+        .btn { padding: 10px 15px; border-radius: 4px; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; text-decoration: none; text-align: center; transition: 0.3s; }
+        .btn-amz { background: #FF9900; color: #000; }
+        .btn-amz:hover { background: #e68a00; box-shadow: 0 0 15px rgba(255, 153, 0, 0.4); }
+        .btn-ali { background: #ff003c; color: #fff; }
+        .btn-ali:hover { background: #cc0030; box-shadow: 0 0 15px rgba(255, 0, 60, 0.4); }
+
+        /* PROTOCOLLO STEPS */
+        .step-container { display: flex; gap: 15px; margin-bottom: 25px; }
+        .step-num { width: 40px; height: 40px; background: rgba(255, 140, 0, 0.1); color: var(--kukirin-orange); border: 1px solid var(--kukirin-orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.2rem; flex-shrink: 0; font-family: 'Orbitron', sans-serif;}
+        .step-content h3 { color: #fff; text-transform: uppercase; margin-bottom: 5px; font-size: 1.1rem; }
+        .step-content p { color: #aaa; line-height: 1.6; }
+
+        /* DISCLAIMER */
+        .scudo-legale-web { border-left: 5px solid var(--danger); padding: 25px; font-size: 0.8rem; color: #999; text-align: justify; margin-top: 50px;}
+        .scudo-legale-web h2 { color: var(--danger); font-size: 0.9rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
+
+        /* FOOTER */
+        footer { background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); border-top: 1px solid #222; padding: 40px 20px; text-align: center; position: relative; z-index: 10; margin-top: auto;}
+        .footer-links { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin: 20px 0;}
+        .footer-links a { color: #777; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;}
+        .footer-links a:hover { color: var(--kukirin-orange); }
+
+        @media (max-width: 768px) {
+            .glass-box { padding: 20px; }
+            .part-item { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .buy-buttons { width: 100%; flex-direction: column; }
+            .cc-alert-box { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="fixed-skull-wrapper">
+    <div class="fixed-skull-img"></div>
+</div>
+
+<header>
+    <div class="header-content"><a href="index.html"><img src="img/logo-header.png" alt="MONO DOOM" class="logo-header"></a><p class="claim">RESURRECT THE BEAST.</p></div>
+</header>
+
+<main>
+    <div class="back-nav"><a href="kukirin.html">⟵ Torna al Garage KuKirin</a></div>
+
+    <div class="hw-hero">
+        <span class="hw-tag">PROTOCOLLO HARDWARE</span>
+        <h1>KuKirin: Blackout e Porta Ricarica</h1>
+    </div>
+
+    <section class="glass-box diagnosi-box">
+        <h2 class="box-title" style="color: var(--kukirin-orange);">Spegnimento Improvviso o Mancata Ricarica</h2>
+        <p>Se il tuo KuKirin (specialmente i modelli M4 e G3) si spegne di colpo durante una salita o in forte accelerazione e non si riaccende più finché non lo attacchi al caricatore per qualche secondo, il BMS (Battery Management System) è andato in protezione per un calo anomalo di tensione. Se invece il monopattino non accetta del tutto la carica, il colpevole primario è quasi sempre la <strong>porta di ricarica fusa</strong>, distrutta da un arco voltaico (scintilla) o da un falso contatto interno ai pin.</p>
+    </section>
+
+    <section class="glass-box video-box">
+        <div class="cc-alert-box">
+            <span style="font-size: 1.5rem;">⚡</span>
+            <span><strong>ATTIVA I SOTTOTITOLI ITA:</strong> Fai partire il video, poi clicca sull'icona <strong>[CC]</strong> o sull'ingranaggio in basso a destra.</span>
+        </div>
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/xl6uvXIBLKA?cc_load_policy=1&cc_lang_pref=it&hl=it&rel=0&modestbranding=1" title="Kukirin Charging Port Fix" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="terminal-log">
+            <h3>>> Log Dati Telemetrici (OSINT)</h3>
+            <div class="terminal-text">
+                <p>> Problema Rilevato: <strong>Il monopattino non accetta la carica o si è fusa la porta di innesco.</strong></p>
+                <p>> Componenti Analizzati: Porta di ricarica circolare GX16 (3 Pin) e cablaggio diretto della batteria.</p>
+                <p>> Procedura d'Intervento: <span class="highlight">Apertura deck, rimozione dado bloccaggio porta, tranciatura fili bruciati in sicurezza e saldatura del nuovo connettore rispettando rigorosamente le polarità rosso/nero.</span></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="glass-box arsenal-box">
+        <h2 class="box-title" style="color: var(--kukirin-orange);">Arsenale Necessario</h2>
+        
+        <div class="part-item">
+            <div class="part-info">
+                <span class="part-name">1. Porta di Ricarica GX16 a 3 Pin</span>
+                <span class="part-desc">Ricambio elettronico standard per la stragrande maggioranza dei KuKirin. Spesso include i cavi rosso e nero già spelati pronti per la saldatura o lo spinotto rapido.</span>
+            </div>
+            <div class="buy-buttons">
+                <a href="https://www.amazon.it/s?k=porta+ricarica+monopattino+3+pin+gx16" target="_blank" class="btn btn-amz">Amazon (24h)</a>
+            </div>
+        </div>
+
+        <div class="part-item">
+            <div class="part-info">
+                <span class="part-name">2. Caricabatterie 48V KuKirin</span>
+                <span class="part-desc">Se la porta sul monopattino risulta intatta visivamente ma il mezzo continua a non caricare, nel 90% dei casi è il trasformatore (il "mattone" nero) ad essere saltato internamente.</span>
+            </div>
+            <div class="buy-buttons">
+                <a href="https://it.aliexpress.com/w/wholesale-kukirin-charger-48v.html" target="_blank" class="btn btn-ali">AliExpress</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="glass-box">
+        <h2 class="box-title">Protocollo Operativo di Ripristino</h2>
+        
+        <div class="step-container">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h3>Prevenzione Scintilla (Arco Voltaico)</h3>
+                <p>Per evitare di bruciare nuovamente la porta, la regola d'oro obbligatoria per ogni mezzo elettrico è questa: <strong>collega SEMPRE prima il caricatore alla presa del muro (220V)</strong>, aspetta che la spia verde si accenda (così i condensatori interni si caricano e si livellano), e SOLO DOPO infila lo spinotto metallico nel monopattino. Seguendo questo ordine eviterai il micidiale arco voltaico che frigge i pin in ottone.</p>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h3>Sostituzione Porta Fusa</h3>
+                <p>Metti in sicurezza il mezzo e apri la pedana metallica. Trova i fili rosso e nero che vanno dalla porta danneggiata direttamente alla batteria. <br><strong style="color:var(--danger);">ATTENZIONE CRITICA:</strong> Non tagliare mai i fili rosso e nero contemporaneamente con la stessa pinza metallica o genererai un cortocircuito spaventoso che distruggerà il BMS. Tagliali uno per volta, spelali, saldali ai terminali della nuova porta GX16 (rispettando il Rosso sul Positivo e il Nero sul Negativo) e isolali in modo impeccabile con della guaina termorestringente prima di riaccendere l'impianto.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="scudo-legale-web glass-box">
+        <h2>⚠️ Esclusione di Responsabilità</h2>
+        <p>I dati, gli schemi elettrici di derivazione e i metodi di indagine elettronica riportati in questa pagina derivano da documentazione OSINT. Le informazioni sono destinate esclusivamente a scopo di studio e approfondimento tecnico. L'applicazione pratica delle nozioni qui esposte su batterie al litio in tensione viva avviene sotto l'esclusiva responsabilità dell'utente. L'Editore declina ogni responsabilità per cortocircuiti, incendi, danni patrimoniali o fisici derivanti dall'errata esecuzione delle manovre descritte.</p>
+    </section>
+
+</main>
+
+<footer>
+    <img src="img/logo-testo.png" alt="MONO DOOM" style="max-width: 150px; opacity: 0.6; margin-bottom: 10px;">
+    <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="cookie.html">Cookie Policy</a>
+        <a href="termini.html">Termini e Condizioni</a>
+        <a href="disclaimer.html">Disclaimer Legale</a>
+    </div>
+    <div style="color: #444; font-size: 0.65rem; margin-top: 15px;">
+        &copy; 2026 MONO DOOM. Tutti i diritti riservati.
+    </div>
+</footer>
+
+</body>
+</html>
