@@ -1,194 +1,278 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QGRVQ9N6N2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-QGRVQ9N6N2');
+    </script>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Guida allo spurgo idraulico (Bleed) dei freni Nutt e Zoom sui monopattini Dualtron. Risoluzione leva spugnosa e manutenzione.">
     <title>Spurgo Freni Dualtron | MONO DOOM</title>
+    
+    <!-- FIX FAVICON -->
     <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <meta name="theme-color" content="#050505">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+
+    <!-- SEO STRUCTURED DATA -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Spurgo Freni Idraulici (Nutt/Zoom) su Dualtron",
+      "description": "Procedura meccanica per rimuovere l'aria dal circuito frenante idraulico utilizzando olio minerale e kit di sfiato (Bleed) sui monopattini Dualtron.",
+      "step": [
+        { "@type": "HowToStep", "name": "Messa in Sicurezza", "text": "Metti in piano la leva del freno, rimuovi tassativamente le pastiglie dalla pinza e inserisci lo spessore giallo (Bleed block)." },
+        { "@type": "HowToStep", "name": "Connessione Circuito", "text": "Avvita la siringa piena di olio minerale sulla pinza inferiore e l'imbuto di sfiato vuoto sulla leva superiore." },
+        { "@type": "HowToStep", "name": "Sfiato Push & Pull", "text": "Spingi l'olio dalla siringa inferiore verso l'alto finché nell'imbuto non esce fluido pulito senza bolle d'aria." }
+      ]
+    }
+    </script>
+
     <style>
         :root {
-            --bg-color: #050505;
+            --bg-color: #050505; 
             --text-color: #e0e0e0;
-            --white: #ffffff;
-            --pure-black: #000000;
-            --danger: #ff003c;
-            --acid-green: #00ff66;
-            --card-bg: #111111;
+            --danger: #ff003c; 
+            --acid-green: #00ff66; /* Verde Minimotors / Dualtron */
             --terminal-green: #0f0;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* TESCHIO CENTRATO E PULSANTE */
+        .fixed-skull-wrapper { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; z-index: 0; pointer-events: none; }
+        .fixed-skull-img { 
+            width: 90vw; max-width: 600px; height: 90vh; max-height: 600px; 
+            background-image: url('img/teschio.png'); background-size: contain; background-position: center; background-repeat: no-repeat; 
+            opacity: 0.35; animation: heartbeat-dualtron 3s infinite linear; 
+        }
+        @keyframes heartbeat-dualtron { 
+            0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(0, 255, 102, 0.3)); } 
+            14% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(0, 255, 102, 0.6)); } 
+            28% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(0, 255, 102, 0.3)); } 
+            42% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(0, 255, 102, 0.5)); } 
+            70% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(0, 255, 102, 0.3)); } 
+        }
+
+        /* HEADER */
+        header { background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border-bottom: 2px solid var(--acid-green); padding: 10px 0; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .logo-header { max-width: 80vw; height: auto; max-height: 60px; object-fit: contain; display: block; margin: 0 auto 5px auto; }
+        .claim { color: #fff; font-weight: 900; font-style: italic; letter-spacing: 5px; font-size: 0.75rem; text-transform: uppercase; opacity: 0.7; }
+
+        /* MAIN CONTAINER */
+        main { flex: 1; padding: 30px 20px 60px; max-width: 900px; margin: 0 auto; width: 100%; position: relative; z-index: 10; }
+
+        /* BACK NAV */
+        .back-nav { margin-bottom: 30px; }
+        .back-nav a { display: inline-block; color: #aaa; text-decoration: none; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #aaa; padding-bottom: 3px; transition: 0.3s; }
+        .back-nav a:hover { color: #fff; border-color: #fff; text-shadow: 0 0 10px var(--acid-green); }
+
+        /* CLASSE UNIVERSALE VETRO */
+        .glass-box { 
+            background: rgba(10, 10, 10, 0.4); 
+            backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); 
+            border: 1px solid rgba(255,255,255,0.08); 
+            border-radius: 8px; padding: 30px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4); 
+            margin-bottom: 30px;
+        }
+
+        /* HERO MECCANICA */
+        .mech-hero { text-align: center; margin-bottom: 40px; }
+        .mech-tag { background: rgba(0, 255, 102, 0.15); color: var(--acid-green); border: 1px solid var(--acid-green); padding: 5px 15px; font-weight: 900; border-radius: 4px; display: inline-block; margin-bottom: 15px; font-size: 1.2rem; box-shadow: 0 0 15px rgba(0,255,102,0.3); letter-spacing: 1px; font-family: 'Orbitron', sans-serif;}
+        .mech-hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 5vw, 3rem); color: #fff; text-transform: uppercase; margin: 0; text-shadow: 0 0 20px rgba(0,255,102,0.3);}
+
+        /* TITOLI SEZIONE */
+        .box-title { color: #fff; text-transform: uppercase; font-size: 1.3rem; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-family: 'Orbitron', sans-serif;}
         
-        header { background-color: var(--pure-black); border-bottom: 2px solid var(--acid-green); padding: 20px 0 10px; text-align: center; }
-        .header-content { display: flex; flex-direction: column; align-items: center; max-width: 1200px; margin: 0 auto; }
-        .logo-header { max-height: 65px; width: auto; display: block; }
-        .claim { color: var(--white); font-weight: 900; font-style: italic; letter-spacing: 3px; font-size: 1.05rem; margin-top: 5px; text-transform: uppercase; text-shadow: 0 0 5px var(--acid-green); }
-        
-        nav { background-color: var(--pure-black); padding: 15px 25px; border-bottom: 1px solid #333; }
-        .back-btn { display: inline-block; color: var(--text-color); text-decoration: none; font-weight: 900; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; font-family: 'Courier New', Courier, monospace; }
-        .back-btn span { color: var(--acid-green); margin-right: 5px; }
-        .back-btn:hover { color: var(--white); text-shadow: 0 0 10px var(--acid-green); }
+        .diagnosi-box { border-left: 4px solid var(--acid-green); }
+        .diagnosi-box p { color: #ccc; line-height: 1.7; font-size: 1.05rem; }
 
-        main { flex: 1; max-width: 850px; margin: 40px auto; padding: 0 20px; width: 100%; }
-
-        .error-hero { text-align: center; margin-bottom: 40px; }
-        .error-tag { background: #333; color: var(--acid-green); padding: 5px 15px; font-weight: 900; border-radius: 4px; display: inline-block; margin-bottom: 10px; font-size: 1.2rem; border: 1px solid var(--acid-green); }
-        h1 { font-size: 2.5rem; color: var(--white); text-transform: uppercase; letter-spacing: -1px; line-height: 1.2; margin-bottom: 20px; }
-
-        .diagnosi-box { background: rgba(0, 255, 102, 0.05); border-left: 4px solid var(--acid-green); padding: 25px; margin-bottom: 40px; border-radius: 0 8px 8px 0; border: 1px solid #333; }
-        .diagnosi-box h2 { color: var(--acid-green); text-transform: uppercase; font-size: 1.2rem; margin-bottom: 10px; }
-
-        .video-section { margin-bottom: 50px; background: #000; border: 1px solid #333; border-radius: 8px; overflow: hidden; box-shadow: 0 0 20px rgba(0, 255, 102, 0.05); }
-        .video-header { background: #111; border-bottom: 1px solid #333; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
-        .video-title { color: var(--danger); font-weight: 900; font-family: monospace; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
-        
+        /* VIDEO E ALERT */
+        .video-box { padding: 0; overflow: hidden; border: 1px solid #333; border-left: 4px solid var(--acid-green); }
+        @keyframes pulse-green {
+            0% { box-shadow: inset 0 0 0 rgba(0, 255, 102, 0.4); border-color: rgba(0, 255, 102, 0.5); }
+            50% { box-shadow: inset 0 0 15px rgba(0, 255, 102, 0.2); border-color: var(--acid-green); }
+            100% { box-shadow: inset 0 0 0 transparent; border-color: rgba(0, 255, 102, 0.5); }
+        }
+        .cc-alert-box { background: rgba(0, 255, 102, 0.05); color: #ccc; border-bottom: 1px solid #333; padding: 15px; font-size: 0.9rem; display: flex; align-items: center; gap: 12px; line-height: 1.5; animation: pulse-green 2s infinite;}
+        .cc-alert-box strong { color: var(--acid-green); }
         .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; background: #000;}
 
-        .terminal-log { background: #050505; padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; border-top: 1px solid #333; }
-        .terminal-log h3 { color: #555; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; border-bottom: 1px dashed #333; padding-bottom: 5px; }
-        .terminal-text p { color: #888; margin-bottom: 10px; line-height: 1.5; }
-        .terminal-text .highlight { color: var(--terminal-green); font-weight: bold;}
+        /* TERMINALE OSINT */
+        .terminal-log { background: rgba(0,0,0,0.6); padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; border-top: 1px solid #333; }
+        .terminal-log h3 { color: #777; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; }
+        .terminal-text p { color: #888; margin-bottom: 8px; line-height: 1.5; }
+        .terminal-text strong { color: #fff; }
+        .highlight { color: var(--acid-green); text-shadow: 0 0 5px var(--acid-green); font-weight: bold;}
 
-        /* ARSENALE CON BOTTONI STILE VETRINA (AMAZON / ALIEXPRESS) */
-        .arsenal-box { background: linear-gradient(145deg, #111, #0a0a0a); border: 1px solid var(--acid-green); border-radius: 12px; padding: 30px; margin-bottom: 50px; position: relative; }
-        .arsenal-box::before { content: "ARSENALE NECESSARIO"; position: absolute; top: -12px; left: 20px; background: var(--bg-color); color: var(--acid-green); font-weight: 900; padding: 0 10px; text-transform: uppercase; letter-spacing: 1px; }
-        .part-item { background: #000; border: 1px solid #333; padding: 20px; border-radius: 8px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
-        .part-item:hover { border-color: #555; }
+        /* ARSENALE RICAMBI */
+        .arsenal-box { border-top: 4px solid var(--acid-green); }
+        .part-item { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 6px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
         .part-info { flex: 1; padding-right: 20px; }
-        .part-name { font-weight: 900; font-size: 1.2rem; color: var(--white); display: block; margin-bottom: 5px; text-transform: uppercase; }
+        .part-name { font-weight: 900; font-size: 1.1rem; color: var(--acid-green); display: block; margin-bottom: 5px; text-transform: uppercase; }
         .part-desc { font-size: 0.9rem; color: #aaa; }
         
         .buy-buttons { display: flex; gap: 10px; flex-shrink: 0; }
-        .btn { padding: 10px 15px; border-radius: 4px; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; text-decoration: none; text-align: center; transition: 0.3s; }
+        .btn { padding: 10px 15px; border-radius: 4px; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; text-decoration: none; text-align: center; transition: 0.3s; }
         .btn-amz { background: #FF9900; color: #000; }
-        .btn-amz:hover { background: #e68a00; box-shadow: 0 0 10px rgba(255, 153, 0, 0.5); }
-        .btn-ali { background: #ff003c; color: #fff; }
-        .btn-ali:hover { background: #cc0030; box-shadow: 0 0 10px rgba(255, 0, 60, 0.5); }
+        .btn-amz:hover { background: #e68a00; box-shadow: 0 0 15px rgba(255, 153, 0, 0.4); }
+        .btn-ali { background: #333; color: #fff; border: 1px solid #555;}
+        .btn-ali:hover { background: #fff; color: #000; border-color: #fff; box-shadow: 0 0 15px rgba(255, 255, 255, 0.4); }
 
-        .protocol-section h2 { color: var(--white); text-transform: uppercase; margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .step { position: relative; padding-left: 50px; margin-bottom: 40px; }
-        .step-num { position: absolute; left: 0; top: 0; width: 35px; height: 35px; background: var(--acid-green); color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.2rem; box-shadow: 0 0 10px rgba(0, 255, 102, 0.5); }
-        .step h3 { color: var(--white); text-transform: uppercase; margin-bottom: 10px; font-size: 1.2rem; }
-        .step p { color: #aaa; }
+        /* PROTOCOLLO STEPS */
+        .step-container { display: flex; gap: 15px; margin-bottom: 25px; }
+        .step-num { width: 40px; height: 40px; background: rgba(0, 255, 102, 0.1); color: var(--acid-green); border: 1px solid var(--acid-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.2rem; flex-shrink: 0; font-family: 'Orbitron', sans-serif;}
+        .step-content h3 { color: #fff; text-transform: uppercase; margin-bottom: 5px; font-size: 1.1rem; }
+        .step-content p { color: #aaa; line-height: 1.6; }
 
-        .scudo-legale-web { background: rgba(20, 0, 0, 0.4); border: 1px solid var(--danger); border-left: 5px solid var(--danger); padding: 25px; border-radius: 6px; margin-top: 40px; margin-bottom: 20px; font-size: 0.85rem; color: #999; }
-        .scudo-legale-web h2 { color: var(--danger); font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
+        /* DISCLAIMER */
+        .scudo-legale-web { border-left: 5px solid var(--danger); padding: 25px; font-size: 0.8rem; color: #999; text-align: justify; margin-top: 50px;}
+        .scudo-legale-web h2 { color: var(--danger); font-size: 0.9rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
 
-        @media(max-width: 768px) { .part-item { flex-direction: column; align-items: flex-start; gap: 15px; } .buy-buttons { width: 100%; flex-direction: column; } .btn { width: 100%; } }
+        /* FOOTER */
+        footer { background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); border-top: 1px solid #222; padding: 40px 20px; text-align: center; position: relative; z-index: 10; margin-top: auto;}
+        .footer-links { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin: 20px 0;}
+        .footer-links a { color: #777; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;}
+        .footer-links a:hover { color: var(--acid-green); }
+
+        @media (max-width: 768px) {
+            .glass-box { padding: 20px; }
+            .part-item { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .buy-buttons { width: 100%; flex-direction: column; }
+            .cc-alert-box { flex-direction: column; text-align: center; }
+        }
     </style>
 </head>
 <body>
 
+<div class="fixed-skull-wrapper">
+    <div class="fixed-skull-img"></div>
+</div>
+
 <header>
-    <div class="header-content"><img src="img/logo-header.png" alt="MONO DOOM" class="logo-header"><p class="claim">RESURRECT THE BEAST.</p></div>
+    <div class="header-content"><a href="index.html"><img src="img/logo-header.png" alt="MONO DOOM" class="logo-header"></a><p class="claim">RESURRECT THE BEAST.</p></div>
 </header>
-<nav><a href="dualtron.html" class="back-btn"><span>&lt;&lt;</span> Ritorna al Garage Dualtron</a></nav>
 
 <main>
-    <div class="error-hero">
-        <span class="error-tag">PROTOCOLLO MECCANICO</span>
+    <div class="back-nav"><a href="dualtron.html">⟵ Torna al Garage Dualtron</a></div>
+
+    <div class="mech-hero">
+        <span class="mech-tag">PROTOCOLLO MECCANICO</span>
         <h1>Spurgo Freni Idraulici (Nutt)</h1>
     </div>
 
-    <div class="diagnosi-box">
-        <h2>Leva Freno a Fondo Corsa</h2>
-        <p>I modelli Dualtron di fascia alta (Victor, Thunder, Storm) montano impianti idraulici Nutt o Zoom. Nel tempo, l'aria penetra nel circuito dal serbatoio della leva, rendendo la frenata "spugnosa" e inefficace. Un veicolo da 3000W senza mordente idraulico è un proiettile fuori controllo.</p>
-    </div>
+    <section class="glass-box diagnosi-box">
+        <h2 class="box-title" style="color: var(--acid-green);">Leva Freno a Fondo Corsa</h2>
+        <p>I modelli Dualtron di fascia alta (Victor, Thunder, Storm, Achilleus) montano di serie impianti idraulici potenti (Nutt o Zoom). Nel tempo, a causa dell'usura e delle micro-vibrazioni, l'aria penetra nel circuito dal serbatoio della leva, rendendo la frenata "spugnosa" e inefficace. Un veicolo da oltre 3000W di picco senza un mordente idraulico perfetto è un proiettile fuori controllo. Lo spurgo (Bleed) è manutenzione vitale.</p>
+    </section>
 
-    <div class="video-section">
-        <div class="video-header"><span class="video-title">Feed Video - Nutt Brake Bleed</span></div>
+    <section class="glass-box video-box">
+        <div class="cc-alert-box">
+            <span style="font-size: 1.5rem;">⚠️</span>
+            <span><strong>ATTIVA I SOTTOTITOLI ITA:</strong> Fai partire il video sull'intervento, poi clicca sull'icona <strong>[CC]</strong> o sull'ingranaggio in basso a destra.</span>
+        </div>
         <div class="video-wrapper">
-            <iframe src="https://www.youtube.com/embed/d4OY8q4Ymks?rel=0" title="Dualtron Nutt Brakes Bleed" frameborder="0" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/d4OY8q4Ymks?rel=0&modestbranding=1" title="Dualtron Nutt Brakes Bleed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="terminal-log">
-            <h3>>> Log Dati Telemetrici (Trascrizione Forense)</h3>
+            <h3>>> Log Dati Telemetrici (OSINT / Forense)</h3>
             <div class="terminal-text">
-                <p>> Impianto: <strong>Nutt / Zoom Full Hydraulic</strong></p>
-                <p>> Target: <span class="highlight">Espulsione aria dal circuito e ripristino pressione barica interna.</span></p>
-                <p>> Warning Catastrofico: Utilizzare ESCLUSIVAMENTE Olio Minerale. L'immissione di fluido DOT fonderà gli O-ring interni dell'impianto in meno di 48 ore.</p>
+                <p>> Impianto Analizzato: <strong>Nutt / Zoom Full Hydraulic Brakes</strong></p>
+                <p>> Target Operativo: <span class="highlight">Espulsione sacche d'aria dal circuito e ripristino della pressione barica interna.</span></p>
+                <p>> Warning Catastrofico: Utilizzare ESCLUSIVAMENTE Olio Minerale. L'immissione accidentale di fluido DOT (da auto/moto) scioglierà gli O-ring e le guarnizioni interne dell'impianto in meno di 48 ore distruggendolo.</p>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="arsenal-box">
+    <section class="glass-box arsenal-box">
+        <h2 class="box-title" style="color: var(--acid-green);">Arsenale Necessario</h2>
+        
         <div class="part-item">
             <div class="part-info">
-                <span class="part-name">Kit Spurgo Idraulico Universale</span>
-                <span class="part-desc">Include siringhe, tubi al silicone e raccordi filettati in ottone adatti ai serbatoi Nutt e Zoom.</span>
+                <span class="part-name">1. Kit Spurgo Idraulico Universale</span>
+                <span class="part-desc">Include tutto il necessario: siringhe ad alta pressione, tubi in silicone trasparente, raccordi filettati in ottone adatti ai serbatoi Nutt e Zoom, e l'imbuto di sfiato.</span>
             </div>
             <div class="buy-buttons">
-                <a href="https://www.google.com/search?q=kit+spurgo+freni+bici+nutt" target="_blank" class="btn btn-amz">Vedi su Amazon</a>
+                <a href="https://www.google.com/search?q=kit+spurgo+freni+bici+nutt" target="_blank" class="btn btn-amz">Cerca su Amazon</a>
                 <a href="https://www.google.com/search?q=hydraulic+bleed+kit+scooter" target="_blank" class="btn btn-ali">AliExpress</a>
             </div>
         </div>
+
         <div class="part-item">
             <div class="part-info">
-                <span class="part-name">Olio Minerale Idraulico (Shimano / Magura)</span>
-                <span class="part-desc">Fluido a base minerale per circuiti ciclistici e micromobilità.</span>
+                <span class="part-name">2. Olio Minerale Idraulico (Shimano / Magura)</span>
+                <span class="part-desc">Fluido a base minerale specifico per circuiti ciclistici e micromobilità. Spesso venduto in colore rosso brillante (Shimano) o blu (Magura).</span>
             </div>
             <div class="buy-buttons">
-                <a href="https://www.google.com/search?q=olio+minerale+freni+shimano" target="_blank" class="btn btn-amz">Vedi su Amazon</a>
+                <a href="https://www.google.com/search?q=olio+minerale+freni+shimano" target="_blank" class="btn btn-amz">Cerca su Amazon</a>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="protocol-section">
-        <h2>Protocollo Spurgo (Push & Pull)</h2>
-        <div class="step">
+    <section class="glass-box">
+        <h2 class="box-title">Protocollo Spurgo (Push & Pull)</h2>
+        
+        <div class="step-container">
             <div class="step-num">1</div>
-            <h3>Preparazione e Sicurezza Ferodo</h3>
-            <p>Allenta le viti della leva del freno sul manubrio e ruotala fino a renderla perfettamente orizzontale al terreno. <strong>Rimuovi obbligatoriamente le pastiglie</strong> dalla pinza freno e inserisci lo spessore giallo (Bleed Block). Una sola goccia d'olio minerale sulle pastiglie le contaminerà irrimediabilmente.</p>
+            <div class="step-content">
+                <h3>Preparazione e Sicurezza Ferodo</h3>
+                <p>Allenta le viti della leva del freno sul manubrio e ruotala fino a rendere il coperchietto del serbatoio perfettamente orizzontale al terreno. Sulla ruota, <strong>rimuovi tassativamente le pastiglie</strong> dalla pinza freno ed estraile dal raggio d'azione. Inserisci lo spessore giallo (Bleed Block) in plastica tra i pistoncini. Se una sola goccia d'olio minerale cade sulle pastiglie, le contaminerà irrimediabilmente annullando l'attrito.</p>
+            </div>
         </div>
-        <div class="step">
-            <div class="step-num">2</div>
-            <h3>Connessione del Circuito</h3>
-            <p>Riempi a metà la siringa principale con l'olio minerale, eliminando l'aria. Svita la vite di spurgo (Bleed Port) sulla pinza e avvita il tubo della siringa. Svita la vite del serbatoio sulla leva e avvita l'imbuto di sfiato vuoto (o la seconda siringa vuota).</p>
-        </div>
-        <div class="step">
-            <div class="step-num">3</div>
-            <h3>Sfiato e Sigillatura</h3>
-            <p>Spingi delicatamente lo stantuffo della siringa in basso. L'olio sporco e le bolle d'aria risaliranno fino a sfogare nell'imbuto. Esegui "pinzate" a vuoto con la leva per smuovere l'aria. Quando l'imbuto riceve solo olio limpido, tappalo, richiudi la vite sul manubrio e infine quella sulla pinza. Pulisci tutto con alcol isopropilico.</p>
-        </div>
-    </div>
 
-   <section class="scudo-legale-web" style="max-width: 1200px; margin: 40px auto; padding: 25px; font-size: 0.85rem; color: #999; border: 1px solid #ff003c; border-left: 5px solid #ff003c; background: rgba(20, 0, 0, 0.4); border-radius: 6px;">
-    <h2 style="color: #ff003c; font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;">⚠️ Nota di Esclusione di Responsabilità (Disclaimer Specifico di Pagina)</h2>
-    <p>I dati metrologici, le segnature esadecimali, gli schemi elettrici di campionamento e i metodi di indagine meccanica riportati in questa pagina derivano da analisi teoriche OSINT e documentazione di pubblico dominio. Le informazioni sono destinate esclusivamente a scopo di studio e approfondimento scientifico per l'analisi forense e la ricostruzione dei sinistri.</p>
-    <p>L'applicazione pratica delle nozioni qui esposte su veicoli destinati alla circolazione stradale avviene sotto l'esclusiva responsabilità dell'utente. L'Editore non risponde di eventuali danni fisici, patrimoniali o sanzioni legali derivanti dall'uso improprio del materiale didattico fornito.</p>
-</section>
+        <div class="step-container">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h3>Connessione del Circuito</h3>
+                <p>Riempi a metà la siringa principale con l'olio minerale, spingendo in alto lo stantuffo per eliminare tutta l'aria (come un'iniezione). Svita la piccola vite di spurgo (Bleed Port) situata sulla pinza in basso e avvitaci saldamente il tubo della siringa. Ora passa al manubrio: svita la vite di sfiato posta sopra il serbatoio della leva e avvita l'imbutino vuoto (o usa la seconda siringa senza lo stantuffo) del kit.</p>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h3>Sfiato e Sigillatura Impianto</h3>
+                <p>Spingi delicatamente ma costantemente lo stantuffo della siringa in basso. L'olio sporco e le microscopiche bolle d'aria risaliranno lungo l'impianto fino a sfogare e "gorgogliare" nell'imbuto in alto. Esegui brevi e ritmiche "pinzate" a vuoto con la leva del freno per smuovere l'aria intrappolata nel pompante. Quando nell'imbuto superiore esce solo olio limpido e senza la minima bolla d'aria, il circuito è pieno. Inserisci lo spillo (tappo) nell'imbuto, svitalo, richiudi la vite sul manubrio e infine quella sulla pinza in basso. Pulisci tutto con alcol isopropilico prima di rimettere le pastiglie.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="scudo-legale-web glass-box">
+        <h2>⚠️ Esclusione di Responsabilità</h2>
+        <p>I dati, gli schemi e i metodi di indagine meccanica ed idraulica riportati in questa pagina derivano da analisi teoriche OSINT. Le informazioni sono destinate esclusivamente a scopo di studio, manutenzione e approfondimento tecnico. L'applicazione pratica delle nozioni qui espresse sull'impianto frenante di veicoli destinati alla circolazione stradale avviene sotto l'esclusiva responsabilità dell'utente. L'Editore declina ogni responsabilità per sinistri, mancati arresti del veicolo, danni fisici o patrimoniali derivanti dall'errata esecuzione del protocollo.</p>
+    </section>
+
 </main>
 
-<footer style="background-color: #000; border-top: 1px solid #222; padding: 40px 20px 20px; width: 100%;">
-    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
-        
-        <div style="display: flex; flex-direction: column; gap: 15px;">
-            
-            <a href="dualtron.html" style="text-decoration: none; display: flex; align-items: center; transition: 0.3s;">
-              <span style="color: #00ff66; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #00ff66; padding-bottom: 2px;">&larr; Torna al Garage Dualtron</span>
-            </a>
-            
-            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; opacity: 0.7; transition: 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
-                <img src="img/logo-testo.png" alt="MONO DOOM Home" style="max-width: 120px;">
-                <span style="color: #777; font-size: 0.7rem; font-weight: bold; margin-left: 15px; text-transform: uppercase; letter-spacing: 1px;">Hub Centrale</span>
-            </a>
-        </div>
-
-        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-            <a href="privacy.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#00ff66'" onmouseout="this.style.color='#555'">Privacy Policy</a>
-            <a href="cookie.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#00ff66'" onmouseout="this.style.color='#555'">Cookie Policy</a>
-            <a href="termini.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#00ff66'" onmouseout="this.style.color='#555'">Termini e Condizioni</a>
-            <a href="disclaimer.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#00ff66'" onmouseout="this.style.color='#555'">Disclaimer Legale</a>
-        </div>
+<footer>
+    <img src="img/logo-testo.png" alt="MONO DOOM" style="max-width: 150px; opacity: 0.6; margin-bottom: 10px;">
+    <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="cookie.html">Cookie Policy</a>
+        <a href="termini.html">Termini e Condizioni</a>
+        <a href="disclaimer.html">Disclaimer Legale</a>
     </div>
-    
-    <div style="text-align: center; margin-top: 35px; padding-top: 20px; border-top: 1px solid #111; color: #333; font-size: 0.7rem; font-family: sans-serif;">
-        &copy; 2026 MONO DOOM. Tutti i diritti riservati. I marchi registrati appartengono ai rispettivi proprietari. Documentazione ad uso informativo e peritale.
+    <div style="color: #444; font-size: 0.65rem; margin-top: 15px;">
+        &copy; 2026 MONO DOOM. Tutti i diritti riservati.
     </div>
 </footer>
+
+</body>
+</html>

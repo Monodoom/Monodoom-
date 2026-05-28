@@ -1,193 +1,278 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QGRVQ9N6N2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-QGRVQ9N6N2');
+    </script>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Lista completa dei codici errore EY3 per monopattini Dualtron e Minimotors. Diagnostica forense e risoluzione guasti.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Lista completa dei codici errore EY3 per monopattini Dualtron e Minimotors. Diagnostica forense e risoluzione guasti (E2, E6, E7, E9).">
     <title>Codici Errore EY3 Dualtron | MONO DOOM</title>
+    
     <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <meta name="theme-color" content="#050505">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Codici Errore EY3 Dualtron (Diagnostica)",
+      "description": "Lista completa dei codici di errore del display Minimotors EY3 (E2, E6, E7, E9) e procedure di risoluzione hardware per monopattini Dualtron.",
+      "articleSection": "Diagnostica Elettronica"
+    }
+    </script>
+
     <style>
         :root {
-            --bg-color: #050505;
+            --bg-color: #050505; 
             --text-color: #e0e0e0;
-            --white: #ffffff;
-            --pure-black: #000000;
-            --danger: #ff003c;
-            --acid-green: #00ff66;
-            --card-bg: #111111;
+            --danger: #ff003c; 
+            --acid-green: #00ff66; /* Verde Minimotors / Dualtron */
             --terminal-green: #0f0;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
-        
-        header { background-color: var(--pure-black); border-bottom: 2px solid var(--acid-green); padding: 20px 0 10px; text-align: center; }
-        .header-content { display: flex; flex-direction: column; align-items: center; max-width: 1200px; margin: 0 auto; }
-        .logo-header { max-height: 65px; width: auto; display: block; }
-        .claim { color: var(--white); font-weight: 900; font-style: italic; letter-spacing: 3px; font-size: 1.05rem; margin-top: 5px; text-transform: uppercase; text-shadow: 0 0 5px var(--acid-green); }
-        
-        nav { background-color: var(--pure-black); padding: 15px 25px; border-bottom: 1px solid #333; }
-        .back-btn { display: inline-block; color: var(--text-color); text-decoration: none; font-weight: 900; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; font-family: 'Courier New', Courier, monospace; }
-        .back-btn span { color: var(--acid-green); margin-right: 5px; }
-        .back-btn:hover { color: var(--white); text-shadow: 0 0 10px var(--acid-green); }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
 
-        main { flex: 1; max-width: 850px; margin: 40px auto; padding: 0 20px; width: 100%; }
+        /* TESCHIO CENTRATO E PULSANTE */
+        .fixed-skull-wrapper { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; z-index: 0; pointer-events: none; }
+        .fixed-skull-img { 
+            width: 90vw; max-width: 600px; height: 90vh; max-height: 600px; 
+            background-image: url('img/teschio.png'); background-size: contain; background-position: center; background-repeat: no-repeat; 
+            opacity: 0.35; animation: heartbeat-dualtron 3s infinite linear; 
+        }
+        @keyframes heartbeat-dualtron { 
+            0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(0,255,102,0.3)); } 
+            14% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(0,255,102,0.6)); } 
+            28% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(0,255,102,0.3)); } 
+            42% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(0,255,102,0.5)); } 
+            70% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(0,255,102,0.3)); } 
+        }
 
+        /* HEADER */
+        header { background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border-bottom: 2px solid var(--acid-green); padding: 10px 0; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .logo-header { max-width: 80vw; height: auto; max-height: 60px; object-fit: contain; display: block; margin: 0 auto 5px auto; }
+        .claim { color: #fff; font-weight: 900; font-style: italic; letter-spacing: 5px; font-size: 0.75rem; text-transform: uppercase; opacity: 0.7; }
+
+        /* MAIN CONTAINER */
+        main { flex: 1; padding: 30px 20px 60px; max-width: 900px; margin: 0 auto; width: 100%; position: relative; z-index: 10; }
+
+        /* BACK NAV */
+        .back-nav { margin-bottom: 30px; }
+        .back-nav a { display: inline-block; color: #aaa; text-decoration: none; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #aaa; padding-bottom: 3px; transition: 0.3s; }
+        .back-nav a:hover { color: #fff; border-color: #fff; text-shadow: 0 0 10px var(--acid-green); }
+
+        /* CLASSE UNIVERSALE VETRO */
+        .glass-box { 
+            background: rgba(10, 10, 10, 0.4); 
+            backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); 
+            border: 1px solid rgba(255,255,255,0.08); 
+            border-radius: 8px; padding: 30px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4); 
+            margin-bottom: 30px;
+        }
+
+        /* HERO DIAGNOSTICA */
         .error-hero { text-align: center; margin-bottom: 40px; }
-        .error-tag { background: #333; color: var(--acid-green); padding: 5px 15px; font-weight: 900; border-radius: 4px; display: inline-block; margin-bottom: 10px; font-size: 1.2rem; border: 1px solid var(--acid-green); }
-        h1 { font-size: 2.5rem; color: var(--white); text-transform: uppercase; letter-spacing: -1px; line-height: 1.2; margin-bottom: 20px; }
+        .error-tag { background: rgba(0, 255, 102, 0.15); color: var(--acid-green); border: 1px solid var(--acid-green); padding: 5px 15px; font-weight: 900; border-radius: 4px; display: inline-block; margin-bottom: 15px; font-size: 1.2rem; box-shadow: 0 0 15px rgba(0,255,102,0.3); letter-spacing: 1px; font-family: 'Orbitron', sans-serif;}
+        .error-hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 5vw, 3rem); color: #fff; text-transform: uppercase; margin: 0; text-shadow: 0 0 20px rgba(0,255,102,0.3);}
 
-        .diagnosi-box { background: rgba(0, 255, 102, 0.05); border-left: 4px solid var(--acid-green); padding: 25px; margin-bottom: 40px; border-radius: 0 8px 8px 0; border: 1px solid #333; }
-        .diagnosi-box h2 { color: var(--acid-green); text-transform: uppercase; font-size: 1.2rem; margin-bottom: 10px; }
-
-        .video-section { margin-bottom: 50px; background: #000; border: 1px solid #333; border-radius: 8px; overflow: hidden; box-shadow: 0 0 20px rgba(0, 255, 102, 0.05); }
-        .video-header { background: #111; border-bottom: 1px solid #333; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
-        .video-title { color: var(--danger); font-weight: 900; font-family: monospace; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        /* TITOLI SEZIONE */
+        .box-title { color: #fff; text-transform: uppercase; font-size: 1.3rem; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-family: 'Orbitron', sans-serif;}
         
+        .diagnosi-box { border-left: 4px solid var(--acid-green); }
+        .diagnosi-box p { color: #ccc; line-height: 1.7; font-size: 1.05rem; }
+
+        /* VIDEO E ALERT */
+        .video-box { padding: 0; overflow: hidden; border: 1px solid #333; border-left: 4px solid var(--acid-green); }
+        @keyframes pulse-green {
+            0% { box-shadow: inset 0 0 0 rgba(0, 255, 102, 0.4); border-color: rgba(0, 255, 102, 0.5); }
+            50% { box-shadow: inset 0 0 15px rgba(0, 255, 102, 0.2); border-color: var(--acid-green); }
+            100% { box-shadow: inset 0 0 0 transparent; border-color: rgba(0, 255, 102, 0.5); }
+        }
+        .cc-alert-box { background: rgba(0, 255, 102, 0.05); color: #ccc; border-bottom: 1px solid #333; padding: 15px; font-size: 0.9rem; display: flex; align-items: center; gap: 12px; line-height: 1.5; animation: pulse-green 2s infinite;}
+        .cc-alert-box strong { color: var(--acid-green); }
         .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; background: #000;}
 
-        .terminal-log { background: #050505; padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; border-top: 1px solid #333; }
-        .terminal-log h3 { color: #555; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; border-bottom: 1px dashed #333; padding-bottom: 5px; }
-        .terminal-text p { color: #888; margin-bottom: 10px; line-height: 1.5; }
-        .terminal-text .highlight { color: var(--terminal-green); font-weight: bold;}
+        /* TERMINALE OSINT */
+        .terminal-log { background: rgba(0,0,0,0.6); padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; border-top: 1px solid #333; }
+        .terminal-log h3 { color: #777; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; }
+        .terminal-text p { color: #888; margin-bottom: 8px; line-height: 1.5; }
+        .terminal-text strong { color: #fff; }
+        .highlight { color: var(--acid-green); text-shadow: 0 0 5px var(--acid-green); font-weight: bold;}
 
-        .arsenal-box { background: linear-gradient(145deg, #111, #0a0a0a); border: 1px solid var(--acid-green); border-radius: 12px; padding: 30px; margin-bottom: 50px; position: relative; }
-        .arsenal-box::before { content: "ARSENALE NECESSARIO"; position: absolute; top: -12px; left: 20px; background: var(--bg-color); color: var(--acid-green); font-weight: 900; padding: 0 10px; text-transform: uppercase; letter-spacing: 1px; }
-        .part-item { background: #000; border: 1px solid #333; padding: 20px; border-radius: 8px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
+        /* ARSENALE RICAMBI */
+        .arsenal-box { border-top: 4px solid var(--acid-green); }
+        .part-item { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 6px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
         .part-info { flex: 1; padding-right: 20px; }
-        .part-name { font-weight: 900; font-size: 1.2rem; color: var(--white); display: block; margin-bottom: 5px; text-transform: uppercase; }
+        .part-name { font-weight: 900; font-size: 1.1rem; color: var(--acid-green); display: block; margin-bottom: 5px; text-transform: uppercase; }
         .part-desc { font-size: 0.9rem; color: #aaa; }
+        
         .buy-buttons { display: flex; gap: 10px; flex-shrink: 0; }
-        .btn { padding: 10px 15px; border-radius: 4px; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; text-decoration: none; text-align: center; transition: 0.3s; background: #333; color: #fff; border: 1px solid #555; }
-        .btn:hover { background: #fff; color: #000; border-color: #fff; }
+        .btn { padding: 10px 15px; border-radius: 4px; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; text-decoration: none; text-align: center; transition: 0.3s; }
+        .btn-amz { background: #FF9900; color: #000; }
+        .btn-amz:hover { background: #e68a00; box-shadow: 0 0 15px rgba(255, 153, 0, 0.4); }
+        .btn-ali { background: #333; color: #fff; border: 1px solid #555;}
+        .btn-ali:hover { background: #fff; color: #000; border-color: #fff; box-shadow: 0 0 15px rgba(255, 255, 255, 0.4); }
 
-        .protocol-section h2 { color: var(--white); text-transform: uppercase; margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .step { position: relative; padding-left: 50px; margin-bottom: 40px; }
-        .step-num { position: absolute; left: 0; top: 0; width: 35px; height: 35px; background: var(--acid-green); color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.2rem; box-shadow: 0 0 10px rgba(0, 255, 102, 0.5); }
-        .step h3 { color: var(--white); text-transform: uppercase; margin-bottom: 10px; font-size: 1.2rem; }
-        .step p { color: #aaa; }
+        /* PROTOCOLLO STEPS (USATI COME LISTA ERRORI) */
+        .step-container { display: flex; gap: 15px; margin-bottom: 25px; }
+        .step-num { width: 45px; height: 45px; background: rgba(0, 255, 102, 0.1); color: var(--acid-green); border: 1px solid var(--acid-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.1rem; flex-shrink: 0; font-family: 'Orbitron', sans-serif;}
+        .step-content h3 { color: #fff; text-transform: uppercase; margin-bottom: 5px; font-size: 1.1rem; }
+        .step-content p { color: #aaa; line-height: 1.6; }
 
-        /* SCUDO LEGALE WEB */
-        .scudo-legale-web { background: rgba(20, 0, 0, 0.4); border: 1px solid var(--danger); border-left: 5px solid var(--danger); padding: 25px; border-radius: 6px; margin-top: 40px; margin-bottom: 20px; font-size: 0.85rem; color: #999; }
-        .scudo-legale-web h2 { color: var(--danger); font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
+        /* DISCLAIMER */
+        .scudo-legale-web { border-left: 5px solid var(--danger); padding: 25px; font-size: 0.8rem; color: #999; text-align: justify; margin-top: 50px;}
+        .scudo-legale-web h2 { color: var(--danger); font-size: 0.9rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
 
-        @media(max-width: 768px) { .part-item { flex-direction: column; align-items: flex-start; gap: 15px; } .buy-buttons { width: 100%; } .btn { width: 100%; } }
+        /* FOOTER */
+        footer { background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); border-top: 1px solid #222; padding: 40px 20px; text-align: center; position: relative; z-index: 10; margin-top: auto;}
+        .footer-links { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin: 20px 0;}
+        .footer-links a { color: #777; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;}
+        .footer-links a:hover { color: var(--acid-green); }
+
+        @media (max-width: 768px) {
+            .glass-box { padding: 20px; }
+            .part-item { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .buy-buttons { width: 100%; flex-direction: column; }
+            .cc-alert-box { flex-direction: column; text-align: center; }
+        }
     </style>
 </head>
 <body>
 
+<div class="fixed-skull-wrapper">
+    <div class="fixed-skull-img"></div>
+</div>
+
 <header>
-    <div class="header-content"><img src="img/logo-header.png" alt="MONO DOOM" class="logo-header"><p class="claim">RESURRECT THE BEAST.</p></div>
+    <div class="header-content"><a href="index.html"><img src="img/logo-header.png" alt="MONO DOOM" class="logo-header"></a><p class="claim">RESURRECT THE BEAST.</p></div>
 </header>
-<nav><a href="dualtron.html" class="back-btn"><span>&lt;&lt;</span> Ritorna al Garage Dualtron</a></nav>
 
 <main>
+    <div class="back-nav"><a href="dualtron.html">⟵ Torna al Garage Dualtron</a></div>
+
     <div class="error-hero">
         <span class="error-tag">ANALISI DIAGNOSTICA</span>
         <h1>Codici Errore EY3</h1>
     </div>
 
-    <div class="diagnosi-box">
-        <h2>Il Cervello Minimotors in Protezione</h2>
-        <p>Quando il display LCD EY3 lampeggia mostrando un codice di errore, il controller ha tagliato l'erogazione di potenza per prevenire incendi o danni catastrofici ai MOSFET. Ignorare questi avvisi o tentare bypass software porta alla distruzione del pacco batteria.</p>
-    </div>
+    <section class="glass-box diagnosi-box">
+        <h2 class="box-title" style="color: var(--acid-green);">Il Cervello Minimotors in Protezione</h2>
+        <p>Quando il display LCD EY3 lampeggia mostrando un codice di errore fisso, il controller interno ha tagliato chirurgicamente l'erogazione di potenza ai motori per prevenire incendi strutturali o danni catastrofici all'inverter (MOSFET). Ignorare questi avvisi forzando la marcia o tentare bypass software senza risolvere il problema hardware porta invariabilmente alla distruzione irreversibile del pacco batteria.</p>
+    </section>
 
-    <div class="video-section">
-        <div class="video-header"><span class="video-title">Feed Video - EY3 Diagnostics</span></div>
+    <section class="glass-box video-box">
+        <div class="cc-alert-box">
+            <span style="font-size: 1.5rem;">⚡</span>
+            <span><strong>ATTIVA I SOTTOTITOLI ITA:</strong> Fai partire il video, poi clicca sull'icona <strong>[CC]</strong> o sull'ingranaggio in basso a destra.</span>
+        </div>
         <div class="video-wrapper">
-            <iframe src="https://www.youtube.com/embed/z5D_D6H_kKc?rel=0" title="Dualtron EY3 Error Codes" frameborder="0" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/z5D_D6H_kKc?rel=0&modestbranding=1" title="Dualtron EY3 Error Codes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="terminal-log">
-            <h3>>> Log Dati Telemetrici (Trascrizione Forense)</h3>
+            <h3>>> Log Dati Telemetrici (OSINT / Forense)</h3>
             <div class="terminal-text">
-                <p>> Modulo: <strong>EY3 LCD Display / Controller Communication</strong></p>
-                <p>> Target: <span class="highlight">Isolamento del guasto hardware tramite lettura telemetrica.</span></p>
-                <p>> Warning: Scollegare sempre il connettore principale della batteria (XT90/XT150) prima di ispezionare la cavetteria interna al deck per evitare archi voltaici.</p>
+                <p>> Modulo Analizzato: <strong>EY3 LCD Display / Controller Communication Bridge</strong></p>
+                <p>> Target Operativo: <span class="highlight">Isolamento del guasto hardware tramite decodifica della lettura telemetrica.</span></p>
+                <p>> Warning Vitale: Scollegare SEMPRE il connettore principale della batteria (XT90 o XT150) all'interno del deck prima di ispezionare fisicamente la cavetteria e le centraline per evitare archi voltaici fatali.</p>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="arsenal-box">
+    <section class="glass-box arsenal-box">
+        <h2 class="box-title" style="color: var(--acid-green);">Arsenale Necessario</h2>
+        
         <div class="part-item">
             <div class="part-info">
-                <span class="part-name">Display EY3 (Ricambio Originale)</span>
-                <span class="part-desc">Sostituzione necessaria in caso di Errore E08 (Sensore Hall acceleratore bruciato) o infiltrazioni d'acqua nello schermo.</span>
+                <span class="part-name">1. Display EY3 (Ricambio Originale)</span>
+                <span class="part-desc">Sostituzione necessaria e inevitabile in caso di Errore E08 (Sensore Hall magnetico dell'acceleratore a dito bruciato) o a seguito di infiltrazioni d'acqua persistenti nello schermo LCD.</span>
             </div>
             <div class="buy-buttons">
-                <a href="https://www.google.com/search?q=display+ey3+minimotors+dualtron+ricambio" target="_blank" class="btn">Cerca Online</a>
+                <a href="https://www.google.com/search?q=display+ey3+minimotors+dualtron+ricambio" target="_blank" class="btn btn-ali">Cerca Online</a>
             </div>
         </div>
+
         <div class="part-item">
             <div class="part-info">
-                <span class="part-name">Multimetro Digitale</span>
-                <span class="part-desc">Strumento forense indispensabile per tracciare la continuità dei cavi in caso di Errore E10.</span>
+                <span class="part-name">2. Multimetro Digitale</span>
+                <span class="part-desc">Strumento forense indispensabile per tracciare la continuità elettrica dei cavi in caso di Errore E10 (comunicazione interrotta) o per testare il voltaggio dei pin del controller.</span>
             </div>
             <div class="buy-buttons">
-                <a href="https://www.google.com/search?q=multimetro+digitale+tester+cavi" target="_blank" class="btn">Cerca Online</a>
+                <a href="https://www.google.com/search?q=multimetro+digitale+tester+cavi" target="_blank" class="btn btn-ali">Cerca Online</a>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="protocol-section">
-        <h2>Tabella Forense Codici Errore</h2>
-        <div class="step">
+    <section class="glass-box">
+        <h2 class="box-title">Tabella Forense Codici Errore</h2>
+        
+        <div class="step-container">
             <div class="step-num">E2</div>
-            <h3>System Error / Brake Sensor</h3>
-            <p>Il sensore magnetico della leva freno è bloccato. La centralina pensa che tu stia frenando e taglia il gas. <strong>Soluzione:</strong> Controlla il cavetto che esce dalla leva del freno. Spesso basta riposizionare il piccolo magnete interno o scollegare il sensore per tornare a casa.</p>
+            <div class="step-content">
+                <h3>System Error / Brake Sensor</h3>
+                <p>Il sensore magnetico della leva freno è bloccato fisicamente in posizione di lettura. La centralina pensa che tu stia frenando e, per sicurezza, taglia l'erogazione del gas (cut-off). <strong>Soluzione:</strong> Controlla il piccolo cavetto che esce dalla leva del freno sul manubrio. Spesso basta riposizionare il micro-magnete interno, lubrificare la leva per farla tornare in posizione o, in emergenza, scollegare del tutto lo spinotto del sensore per poter tornare a casa.</p>
+            </div>
         </div>
-        <div class="step">
-            <div class="step-num">E6</div>
-            <h3>Battery Undervoltage</h3>
-            <p>La tensione della batteria è scesa sotto la soglia di sicurezza impostata nel parametro P1. <strong>Soluzione:</strong> Carica il veicolo. Se l'errore persiste a batteria carica, il BMS ha isolato un gruppo di celle sbilanciate o una pista del pacco batterie si è dissaldata.</p>
-        </div>
-        <div class="step">
-            <div class="step-num">E7</div>
-            <h3>Motor Malfunction (Sensori Hall)</h3>
-            <p>Il controller non rileva la posizione del rotore. <strong>Soluzione:</strong> Controlla il connettore a 5/6 pin (cavi sottili) che va dal motore alla centralina. Se i cavi sono integri, i sensori di Hall dentro il motore sono fusi per surriscaldamento e vanno dissaldati e sostituiti.</p>
-        </div>
-        <div class="step">
-            <div class="step-num">E9</div>
-            <h3>Controller Error</h3>
-            <p>Mancata comunicazione tra il display EY3 e la centralina nel deck. <strong>Soluzione:</strong> Al 90% il cavo principale che corre lungo il piantone dello sterzo si è tranciato o schiacciato piegando il monopattino. Ispeziona fisicamente il cavo nero spesso.</p>
-        </div>
-    </div>
 
-   <section class="scudo-legale-web" style="max-width: 1200px; margin: 40px auto; padding: 25px; font-size: 0.85rem; color: #999; border: 1px solid #ff003c; border-left: 5px solid #ff003c; background: rgba(20, 0, 0, 0.4); border-radius: 6px;">
-    <h2 style="color: #ff003c; font-size: 1rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;">⚠️ Nota di Esclusione di Responsabilità (Disclaimer Specifico di Pagina)</h2>
-    <p>I dati metrologici, le segnature esadecimali, gli schemi elettrici di campionamento e i metodi di indagine meccanica riportati in questa pagina derivano da analisi teoriche OSINT e documentazione di pubblico dominio. Le informazioni sono destinate esclusivamente a scopo di studio e approfondimento scientifico per l'analisi forense e la ricostruzione dei sinistri.</p>
-    <p>L'applicazione pratica delle nozioni qui esposte su veicoli destinati alla circolazione stradale avviene sotto l'esclusiva responsabilità dell'utente. L'Editore non risponde di eventuali danni fisici, patrimoniali o sanzioni legali derivanti dall'uso improprio del materiale didattico fornito.</p>
-</section>
+        <div class="step-container">
+            <div class="step-num">E6</div>
+            <div class="step-content">
+                <h3>Battery Undervoltage</h3>
+                <p>La tensione del pacco batteria è scesa in modo anomalo sotto la soglia di sicurezza minima impostata nel parametro P1 del display. <strong>Soluzione:</strong> Metti in carica il veicolo. Se l'errore persiste a batteria formalmente carica, significa che il BMS (Battery Management System) ha isolato un gruppo di celle fortemente sbilanciate, oppure che una lamella in nichel all'interno del pacco batterie si è dissaldata con le vibrazioni.</p>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <div class="step-num">E7</div>
+            <div class="step-content">
+                <h3>Motor Malfunction (Sensori Hall)</h3>
+                <p>Il controller non riesce più a rilevare la posizione esatta del rotore magnetico all'interno del motore. <strong>Soluzione:</strong> Apri il deck e controlla il connettore a 5/6 pin (cavi sottili) che collega il motore alla centralina. Se i cavi sono integri e ben connessi, i sensori di Hall all'interno del mozzo motore sono fusi a causa di un grave surriscaldamento: andranno dissaldati e sostituiti manualmente, oppure sarà necessario sostituire l'intero blocco statore.</p>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <div class="step-num">E9</div>
+            <div class="step-content">
+                <h3>Controller Communication Error</h3>
+                <p>Mancata comunicazione seriale tra il display EY3 sul manubrio e la centralina posta all'interno del deck. <strong>Soluzione:</strong> Al 90% il cavo principale che corre lungo il piantone dello sterzo si è tranciato internamente, stirato, o schiacciato ripetutamente piegando il monopattino. Ispeziona fisicamente l'intero percorso del cavo nero spesso, verificando in primis l'integrità del grosso connettore posizionato appena sotto lo snodo di chiusura.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="scudo-legale-web glass-box">
+        <h2>⚠️ Esclusione di Responsabilità</h2>
+        <p>I dati, gli schemi di indagine elettronica e le logiche di decodifica riportati in questa pagina derivano da analisi teoriche OSINT, manuali ufficiali e reverse engineering. Le informazioni sono destinate esclusivamente a scopo di studio e approfondimento tecnico. L'applicazione pratica delle nozioni qui espresse su cablaggi in alta tensione avviene sotto l'esclusiva responsabilità dell'utente. L'Editore declina ogni responsabilità per cortocircuiti, folgorazioni o danni irreversibili ai controller derivanti da una diagnostica errata.</p>
+    </section>
+
 </main>
 
-<footer style="background-color: #000; border-top: 1px solid #222; padding: 40px 20px 20px; width: 100%;">
-    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
-        
-        <div style="display: flex; flex-direction: column; gap: 15px;">
-            
-            <a href="dualtron.html" style="text-decoration: none; display: flex; align-items: center; transition: 0.3s;">
-              <span style="color: #00ff66; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #00ff66; padding-bottom: 2px;">&larr; Torna al Garage Dualtron</span>
-            </a>
-            
-            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; opacity: 0.7; transition: 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
-                <img src="img/logo-testo.png" alt="MONO DOOM Home" style="max-width: 120px;">
-                <span style="color: #777; font-size: 0.7rem; font-weight: bold; margin-left: 15px; text-transform: uppercase; letter-spacing: 1px;">Hub Centrale</span>
-            </a>
-        </div>
-
-        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-            <a href="privacy.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#00ff66'" onmouseout="this.style.color='#555'">Privacy Policy</a>
-            <a href="cookie.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#00ff66'" onmouseout="this.style.color='#555'">Cookie Policy</a>
-            <a href="termini.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#00ff66'" onmouseout="this.style.color='#555'">Termini e Condizioni</a>
-            <a href="disclaimer.html" style="color: #555; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#00ff66'" onmouseout="this.style.color='#555'">Disclaimer Legale</a>
-        </div>
+<footer>
+    <img src="img/logo-testo.png" alt="MONO DOOM" style="max-width: 150px; opacity: 0.6; margin-bottom: 10px;">
+    <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="cookie.html">Cookie Policy</a>
+        <a href="termini.html">Termini e Condizioni</a>
+        <a href="disclaimer.html">Disclaimer Legale</a>
     </div>
-    
-    <div style="text-align: center; margin-top: 35px; padding-top: 20px; border-top: 1px solid #111; color: #333; font-size: 0.7rem; font-family: sans-serif;">
-        &copy; 2026 MONO DOOM. Tutti i diritti riservati. I marchi registrati appartengono ai rispettivi proprietari. Documentazione ad uso informativo e peritale.
+    <div style="color: #444; font-size: 0.65rem; margin-top: 15px;">
+        &copy; 2026 MONO DOOM. Tutti i diritti riservati.
     </div>
 </footer>
+
+</body>
+</html>
