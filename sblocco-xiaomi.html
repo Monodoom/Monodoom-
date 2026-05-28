@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QGRVQ9N6N2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QGRVQ9N6N2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-QGRVQ9N6N2');
-</script>
+      gtag('config', 'G-QGRVQ9N6N2');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Come sbloccare la velocità dello Xiaomi a 35 km/h, montare il display del PRO e flashare il firmware modificato (CFW).">
     <title>Hacking Xiaomi: Sblocco Velocità e Display PRO | MONO DOOM</title>
     
     <link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    
     <meta name="theme-color" content="#050505">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,14 +56,14 @@
         .fixed-skull-img { 
             width: 90vw; max-width: 600px; height: 90vh; max-height: 600px; 
             background-image: url('img/teschio.png'); background-size: contain; background-position: center; background-repeat: no-repeat; 
-            opacity: 0.45; animation: heartbeat 3s infinite linear; 
+            opacity: 0.35; animation: heartbeat-hack 3s infinite linear; 
         }
-        @keyframes heartbeat { 
-            0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255,0,60,0.4)); } 
-            14% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(255,0,60,0.7)); } 
-            28% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255,0,60,0.4)); } 
-            42% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(0,229,255,0.7)); } 
-            70% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255,0,60,0.4)); } 
+        @keyframes heartbeat-hack { 
+            0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(80,0,255,0.4)); } 
+            14% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(80,0,255,0.7)); } 
+            28% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(80,0,255,0.4)); } 
+            42% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(0,229,255,0.6)); } 
+            70% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(80,0,255,0.4)); } 
         }
 
         /* HEADER */
@@ -74,7 +77,7 @@
         /* BACK NAV */
         .back-nav { margin-bottom: 30px; }
         .back-nav a { display: inline-block; color: #aaa; text-decoration: none; font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #aaa; padding-bottom: 3px; transition: 0.3s; }
-        .back-nav a:hover { color: #fff; border-color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        .back-nav a:hover { color: #fff; border-color: #fff; text-shadow: 0 0 10px var(--hack-color); }
 
         /* CLASSE UNIVERSALE VETRO */
         .glass-box { 
@@ -90,6 +93,16 @@
         .hack-tag { background: rgba(80, 0, 255, 0.15); color: #fff; border: 1px solid var(--hack-color); padding: 5px 15px; font-weight: 900; border-radius: 4px; display: inline-block; margin-bottom: 15px; font-size: 1.2rem; box-shadow: 0 0 15px rgba(80,0,255,0.3); letter-spacing: 1px; font-family: 'Orbitron', sans-serif;}
         .hack-hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 5vw, 3rem); color: #fff; text-transform: uppercase; margin: 0; text-shadow: 0 0 20px rgba(80,0,255,0.3);}
 
+        /* ALERT PERICOLO LEGALE (PROTOCOLLO FUORILEGGE) */
+        @keyframes pulse-danger {
+            0% { box-shadow: inset 0 0 0 rgba(255, 0, 60, 0.4), 0 0 0 rgba(255, 0, 60, 0.4); border-color: rgba(255, 0, 60, 0.5); }
+            50% { box-shadow: inset 0 0 20px rgba(255, 0, 60, 0.3), 0 0 15px rgba(255, 0, 60, 0.2); border-color: var(--danger); }
+            100% { box-shadow: inset 0 0 0 transparent, 0 0 0 transparent; border-color: rgba(255, 0, 60, 0.5); }
+        }
+        .disclaimer-pista { background: rgba(20, 0, 5, 0.8); border: 1px solid var(--danger); padding: 25px; border-radius: 8px; margin-bottom: 40px; text-align: center; animation: pulse-danger 2s infinite; }
+        .disclaimer-pista h3 { color: var(--danger); text-transform: uppercase; margin-top: 0; font-size: 1.2rem; margin-bottom: 10px; font-family: 'Orbitron', sans-serif; font-weight: 900;}
+        .disclaimer-pista p { color: #e0e0e0; margin: 0; font-size: 0.95rem; line-height: 1.5; }
+
         /* TITOLI SEZIONE */
         .box-title { color: #fff; text-transform: uppercase; font-size: 1.3rem; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; font-family: 'Orbitron', sans-serif;}
         
@@ -97,19 +110,18 @@
         .diagnosi-box p { color: #ccc; line-height: 1.7; font-size: 1.05rem; }
 
         /* VIDEO E ALERT */
-        .video-box { padding: 0; overflow: hidden; border: 1px solid #333; }
-        @keyframes pulse-hack { 0% { box-shadow: inset 0 0 0 rgba(80, 0, 255, 0.4); } 50% { box-shadow: inset 0 0 15px rgba(80, 0, 255, 0.2); } 100% { box-shadow: inset 0 0 0 rgba(80, 0, 255, 0); } }
-        .cc-alert-box { background: #08001a; color: #8a2be2; border-bottom: 1px solid #333; padding: 15px; font-size: 0.9rem; animation: pulse-hack 2s infinite; display: flex; align-items: center; gap: 12px; line-height: 1.5; }
-        .cc-alert-box strong { color: var(--white); }
+        .video-box { padding: 0; overflow: hidden; border: 1px solid #333; border-left: 4px solid var(--hack-color); }
+        .cc-alert-box { background: rgba(80, 0, 255, 0.1); color: #ccc; border-bottom: 1px solid #333; padding: 15px; font-size: 0.9rem; display: flex; align-items: center; gap: 12px; line-height: 1.5; }
+        .cc-alert-box strong { color: var(--hack-color); }
         .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; background: #000;}
 
         /* TERMINALE */
         .terminal-log { background: rgba(0,0,0,0.6); padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; border-top: 1px solid #333; }
-        .terminal-log h3 { color: #777; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; }
+        .terminal-log h3 { color: #777; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; border-bottom: 1px dashed #333; padding-bottom: 5px; }
         .terminal-text p { color: #888; margin-bottom: 8px; line-height: 1.5; }
         .terminal-text strong { color: #fff; }
-        .highlight { color: var(--terminal-green); text-shadow: 0 0 5px var(--terminal-green); }
+        .highlight { color: var(--hack-color); text-shadow: 0 0 5px var(--hack-color); font-weight: bold;}
 
         /* ARSENALE RICAMBI */
         .arsenal-box { border-top: 4px solid var(--hack-color); }
@@ -131,7 +143,7 @@
         .step-content h3 { color: #fff; text-transform: uppercase; margin-bottom: 5px; font-size: 1.1rem; }
         .step-content p { color: #aaa; line-height: 1.6; }
 
-        /* DISCLAIMER */
+        /* DISCLAIMER BOTTOM */
         .scudo-legale-web { border-left: 5px solid var(--danger); padding: 25px; font-size: 0.8rem; color: #999; text-align: justify; margin-top: 50px;}
         .scudo-legale-web h2 { color: var(--danger); font-size: 0.9rem; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
 
@@ -167,25 +179,30 @@
         <h1>Sblocco Velocità & Display PRO</h1>
     </div>
 
+    <div class="disclaimer-pista">
+        <h3>🛑 ATTENZIONE - PROTOCOLLO FUORILEGGE</h3>
+        <p>L'installazione di firmware modificati (CFW) per bypassare i blocchi del costruttore e superare i 20/25 km/h rende il veicolo <strong>illegale per la circolazione su strada pubblica</strong> in Italia e in Europa. Questa procedura è documentata <strong>ESCLUSIVAMENTE per test e uso in aree private o circuiti chiusi</strong>. MONO DOOM declina ogni responsabilità penale o civile per sanzioni, incidenti o confische derivanti dall'alterazione delle prestazioni del mezzo.</p>
+    </div>
+
     <section class="glass-box diagnosi-box">
         <h2 class="box-title" style="color: var(--hack-color);">Perché Sbloccare la Bestia?</h2>
-        <p>Il vecchio Xiaomi M365 (quello con 4 pallini batteria) e l'Essential sono castrati via software a 20 o 25 km/h. Per sprigionare la vera potenza del motore, serve installare il cruscotto digitale del modello PRO e iniettare un firmware custom (CFW) per sbloccare l'amperaggio in salita e spingere la velocità fino a 30-35 km/h.</p>
+        <p>Il vecchio Xiaomi M365 (quello con 4 pallini batteria) e il modello Essential sono castrati via software a 20 o 25 km/h. Per sprigionare la vera potenza del motore e attivare funzioni nascoste, serve installare il cruscotto digitale del modello PRO e iniettare un firmware custom (CFW) per sbloccare l'amperaggio in salita e spingere la velocità fino a 30-35 km/h effettivi.</p>
     </section>
 
     <section class="glass-box video-box">
         <div class="cc-alert-box">
-            <span style="font-size: 1.5rem;">⚠️</span>
-            <span><strong>ATTIVA I SOTTOTITOLI ITA:</strong> Fai partire il video, poi clicca sull'icona <strong>[CC]</strong> o sull'ingranaggio <strong>(⚙️)</strong> in basso a destra nel player per leggere le istruzioni operative.</span>
+            <span style="font-size: 1.5rem;">⚡</span>
+            <span><strong>ATTIVA I SOTTOTITOLI ITA:</strong> Fai partire il video, poi clicca sull'icona <strong>[CC]</strong> o sull'ingranaggio in basso a destra nel player per leggere le istruzioni operative.</span>
         </div>
         <div class="video-wrapper">
             <iframe src="https://www.youtube.com/embed/JimwSqCTp6M?cc_load_policy=1&cc_lang_pref=it&hl=it&rel=0&modestbranding=1" title="Upgrade Display Xiaomi" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="terminal-log">
-            <h3>>> Log Dati Telemetrici (OSINT)</h3>
+            <h3>>> Log Dati Telemetrici (OSINT / Forense)</h3>
             <div class="terminal-text">
-                <p>> Operazione: <strong>Montaggio Display PRO su Xiaomi M365 e Sblocco Firmware.</strong></p>
-                <p>> Target: Aumento limite velocità, <span class="highlight">disattivazione KERS</span>, potenza maggiorata in pendenza tramite modifica dei parametri Ampere.</p>
-                <p>> Requisiti: App Android "M365 Downg" per flashare il file .BIN creato su piattaforme esterne come bot.m365.cfw o Xiaoflasher.</p>
+                <p>> Operazione: <strong>Montaggio Display PRO su Xiaomi M365 (Retrofit) e Iniezione Firmware Custom.</strong></p>
+                <p>> Target Operativo: Aumento drastico limite velocità, <span class="highlight">disattivazione forzata del KERS (recupero energia)</span> e potenza maggiorata in pendenza tramite modifica dei parametri Ampere.</p>
+                <p>> Requisiti Software: App Android "M365 Downg" (o ScooterHacking Utility) per flashare il file .BIN creato su piattaforme esterne come bot.m365.cfw o Xiaoflasher.</p>
             </div>
         </div>
     </section>
@@ -195,8 +212,8 @@
         
         <div class="part-item">
             <div class="part-info">
-                <span class="part-name">Cruscotto Display Xiaomi PRO (Ricambio)</span>
-                <span class="part-desc">Scheda BLE compatibile per il plug&play. Sostituisce i 4 led con il tachimetro digitale, abilitando la corretta ricezione dei firmware modificati via Bluetooth.</span>
+                <span class="part-name">1. Cruscotto Display Xiaomi PRO (Ricambio)</span>
+                <span class="part-desc">Scheda BLE compatibile per il montaggio plug&play. Sostituisce i vecchi 4 led con il tachimetro digitale, abilitando la corretta ricezione dei firmware modificati via Bluetooth.</span>
             </div>
             <div class="buy-buttons">
                 <a href="https://www.amazon.it/s?k=display+xiaomi+m365+pro" target="_blank" class="btn btn-amz">Amazon (24h)</a>
@@ -212,7 +229,7 @@
             <div class="step-num">1</div>
             <div class="step-content">
                 <h3>Rimozione Limitazioni Fisiche</h3>
-                <p>Rimuovi la plastica adesiva del vecchio cruscotto e svita le 3 viti superiori con un cacciavite di precisione. Estrai delicatamente la vecchia scheda a 4 led e stacca i 3 connettori. Inserisci il nuovo Display PRO, riattacca i fili (rispettando rigorosamente i colori) e accendi il monopattino. Se emetterà dei bip d'errore è normale: sta aspettando il firmware compatibile.</p>
+                <p>Metti in sicurezza il monopattino. Rimuovi la plastica adesiva protettiva del vecchio cruscotto e svita le 3 viti superiori con un cacciavite di precisione. Estrai delicatamente la vecchia scheda a 4 led tirandola verso l'alto e stacca i 3 connettori. Inserisci il nuovo Display PRO compatibile, riattacca i fili (rispettando rigorosamente i colori dei cablaggi) e accendi il monopattino. Se emetterà dei bip d'errore costanti è del tutto normale: sta aspettando di ricevere il firmware compatibile con la nuova interfaccia.</p>
             </div>
         </div>
 
@@ -220,7 +237,7 @@
             <div class="step-num">2</div>
             <div class="step-content">
                 <h3>Connessione Telemetrica (Android)</h3>
-                <p>L'ecosistema iOS è bloccato per queste operazioni. Accendi il Bluetooth sul tuo smartphone Android e apri l'app gratuita "M365 Downg". Clicca "Connect", seleziona il tuo scooter dalla lista e premi una volta il pulsante fisico sul cruscotto del monopattino per autorizzare la connessione. Clicca "Check Version".</p>
+                <p>L'ecosistema iOS (Apple) è pesantemente bloccato per queste operazioni di flashing. Accendi il Bluetooth sul tuo smartphone Android e apri l'app gratuita "M365 Downg" (oppure "ScooterHacking Utility"). Clicca il pulsante "Connect", seleziona il tuo scooter dalla lista Bluetooth e premi una volta il pulsante fisico sul cruscotto del monopattino per autorizzare la connessione. Una volta collegato, clicca "Check Version".</p>
             </div>
         </div>
 
@@ -228,14 +245,14 @@
             <div class="step-num">3</div>
             <div class="step-content">
                 <h3>Flash Firmware Custom (CFW)</h3>
-                <p>Devi flashare prima il file BLE del display (generalmente versione 073, 074 o 090) premendo "Open Bin" e poi "Flash Bin". Solo successivamente potrai flashare un firmware custom (CFW) generato online (tramite Xiaoflasher o Mi365.bot) per bypassare il limitatore di fabbrica e sbloccare la velocità a 30 km/h. Riavvia la bestia una volta terminato il caricamento al 100%.</p>
+                <p>Per sbloccare il cruscotto, devi prima flashare il file BLE del display (generalmente si usa la versione 073, 074 o 090) premendo "Open Bin" e successivamente "Flash Bin". Solo dopo che lo schermo smetterà di bippare, potrai flashare un firmware custom (DRV / CFW) generato online (tramite Xiaoflasher o Mi365.bot) appositamente per bypassare il limitatore di fabbrica e sbloccare l'erogazione degli Ampere. Mantieni il telefono vicino al display durante l'aggiornamento. Riavvia la bestia una volta terminato il caricamento al 100%.</p>
             </div>
         </div>
     </section>
 
     <section class="scudo-legale-web glass-box">
         <h2>⚠️ Esclusione di Responsabilità</h2>
-        <p>I dati, gli schemi e i metodi di indagine riportati in questa pagina derivano da documentazione OSINT. Le informazioni sono destinate a scopo di studio e approfondimento tecnico. Modificare i parametri di limitazione della velocità o potenza di un veicolo elettrico può violare le norme del Codice della Strada del paese di utilizzo, rendendolo illegale per la circolazione su suolo pubblico. L'applicazione pratica delle nozioni qui esposte avviene sotto l'esclusiva responsabilità dell'utente. L'Editore declina ogni responsabilità per sanzioni legali, danni fisici o hardware derivanti dall'uso di queste informazioni.</p>
+        <p>I dati, i file e i metodi di indagine elettronica riportati in questa pagina derivano da documentazione OSINT. Le informazioni sono destinate esclusivamente a scopo di studio e reverse engineering. Modificare il firmware per alterare i parametri di limitazione della velocità o potenza di un veicolo elettrico viola le norme del Codice della Strada in vigore in Europa, rendendolo illegale per la circolazione su suolo pubblico. L'applicazione pratica delle nozioni qui esposte, compresa l'alterazione del software di bordo (Flashing), avviene sotto l'esclusiva responsabilità dell'utente. L'Editore declina ogni responsabilità per sanzioni legali, danni fisici, incendi della batteria o blocco (brick) hardware derivanti dall'uso di queste informazioni.</p>
     </section>
 
 </main>
