@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QGRVQ9N6N2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QGRVQ9N6N2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-QGRVQ9N6N2');
-</script>
+      gtag('config', 'G-QGRVQ9N6N2');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
@@ -94,25 +95,23 @@
         /* CONTENITORE PRINCIPALE SOPRA IL TESCHIO */
         main { position: relative; z-index: 10; padding: 20px; max-width: 1200px; margin: 0 auto; width: 100%; }
 
-        /* TESTO TITOLO FLUIDO (Mai più sbavature) */
+        /* TESTO TITOLO FLUIDO */
         .hero-section { text-align: center; margin: 6vh 0 8vh 0; }
         .hero-content h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(1.8rem, 7vw, 3.8rem); /* Si adatta matematicamente */
+            font-size: clamp(2rem, 8vw, 4.5rem); /* Ridimensionamento fluido e più grande */
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             line-height: 1.2;
             text-shadow: 2px 2px 0px #000, -2px -2px 0px #000, 2px -2px 0px #000, -2px 2px 0px #000, 0px 10px 30px rgba(0,0,0,0.9);
-            background: transparent; /* Forza la rimozione del box nero */
+            color: var(--danger);
         }
-        .gold-text { color: var(--store-gold); }
-        .red-text { color: var(--danger); }
 
         .section-title { font-size: 1.5rem; color: #fff; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; text-align: center; text-shadow: 0 2px 5px #000; }
 
         /* CLASSE UNIVERSALE EFFETTO VETRO (GLASSMORPHISM) */
         .glass-box {
-            background: rgba(15, 15, 15, 0.4) !important; /* Molto trasparente */
+            background: rgba(15, 15, 15, 0.4) !important;
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
             border: 1px solid rgba(255,255,255,0.08);
@@ -180,9 +179,7 @@
         .swipe-hint { display: none; text-align: center; font-size: 0.75rem; color: var(--accent-blue); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; animation: blink 2s infinite; font-weight: bold;}
         @keyframes blink { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
 
-        /* ========================================================= */
         /* MAGIA MOBILE: ATTIVAZIONE SWIPE SU TUTTE LE GRIGLIE */
-        /* ========================================================= */
         @media(max-width: 768px) {
             .swipe-hint { display: block; }
             
@@ -190,17 +187,15 @@
                 display: flex; flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x mandatory; 
                 gap: 15px; padding-bottom: 15px; margin-bottom: 40px;
                 -webkit-overflow-scrolling: touch;
-                scrollbar-width: thin; scrollbar-color: var(--accent-blue) #111; /* Barra visibile Firefox */
+                scrollbar-width: thin; scrollbar-color: var(--accent-blue) #111;
             }
             
-            /* Stile della barra scorrevole per iOS/Chrome */
             .grid-container::-webkit-scrollbar { height: 6px; }
             .grid-container::-webkit-scrollbar-track { background: rgba(0,0,0,0.5); border-radius: 10px; }
             .grid-container::-webkit-scrollbar-thumb { background: var(--accent-blue); border-radius: 10px; }
             
-            /* Elementi interni alla griglia su mobile */
             .grid-container > * { 
-                min-width: 80vw; /* Sporge un po' per far capire che si scorre */
+                min-width: 80vw;
                 scroll-snap-align: center; flex: 0 0 auto; 
             }
         }
@@ -221,10 +216,7 @@
 <main>
     <section class="hero-section">
         <div class="hero-content">
-            <h1>
-                <span class="gold-text">IL PRIMO DATABASE IN ITALIA<br>PER</span>
-                <span class="red-text">MONOPATTINI ELETTRICI</span>
-            </h1>
+            <h1>MONOPATTINI ELETTRICI</h1>
         </div>
     </section>
 
