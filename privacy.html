@@ -121,7 +121,7 @@
             background: rgba(5, 5, 5, 0.95);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-top: 2px solid var(--danger);
+            border-top: 2px solid #ff003c;
             z-index: 9999;
             padding: 25px 20px;
             display: flex;
@@ -146,7 +146,7 @@
         }
 
         .md-cookie-text strong {
-            color: var(--danger);
+            color: #ff003c;
             font-family: 'Orbitron', sans-serif;
             letter-spacing: 1px;
             display: block;
@@ -174,14 +174,14 @@
         }
 
         .md-btn-accept {
-            background: var(--accent-blue);
+            background: #00e5ff;
             color: #000;
-            border: 1px solid var(--accent-blue);
+            border: 1px solid #00e5ff;
         }
 
         .md-btn-accept:hover {
             background: transparent;
-            color: var(--accent-blue);
+            color: #00e5ff;
             box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
         }
 
@@ -197,9 +197,9 @@
         }
 
         .md-cookie-link {
-            color: var(--store-gold);
+            color: #ffcc00;
             text-decoration: none;
-            border-bottom: 1px dashed var(--store-gold);
+            border-bottom: 1px dashed #ffcc00;
             transition: 0.3s;
         }
 
@@ -224,9 +224,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             const banner = document.getElementById('md-cookie-banner');
             
-            // Controlla se l'utente ha già fatto una scelta salvata nel browser
             if (!localStorage.getItem('monodoom_cookie_status')) {
-                // Aspetta 1 secondo prima di farlo comparire dal basso (effetto terminale)
                 setTimeout(() => {
                     banner.classList.add('show');
                 }, 1000);
@@ -234,13 +232,9 @@
         });
 
         function handleCookieConsent(status) {
-            // Salva la scelta nella memoria locale del browser
             localStorage.setItem('monodoom_cookie_status', status);
-            
-            // Nasconde il banner facendolo scivolare in basso
             document.getElementById('md-cookie-banner').classList.remove('show');
         }
     </script>
-    ```
-</body>
+    </body>
 </html>
