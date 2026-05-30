@@ -260,6 +260,130 @@
         &copy; 2026 MONO DOOM. Tutti i diritti riservati.
     </div>
 </footer>
+<style>
+        #md-cookie-banner {
+            position: fixed;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-top: 2px solid #ff003c;
+            z-index: 9999;
+            padding: 25px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: bottom 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 -10px 30px rgba(255, 0, 60, 0.15);
+        }
+        
+        #md-cookie-banner.show {
+            bottom: 0;
+        }
 
+        .md-cookie-text {
+            color: #ccc;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+
+        .md-cookie-text strong {
+            color: #ff003c;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        .md-cookie-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .md-btn {
+            padding: 10px 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: 0.3s;
+            letter-spacing: 1px;
+        }
+
+        .md-btn-accept {
+            background: #00e5ff;
+            color: #000;
+            border: 1px solid #00e5ff;
+        }
+
+        .md-btn-accept:hover {
+            background: transparent;
+            color: #00e5ff;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+        }
+
+        .md-btn-reject {
+            background: transparent;
+            color: #888;
+            border: 1px solid #555;
+        }
+
+        .md-btn-reject:hover {
+            color: #fff;
+            border-color: #fff;
+        }
+
+        .md-cookie-link {
+            color: #ffcc00;
+            text-decoration: none;
+            border-bottom: 1px dashed #ffcc00;
+            transition: 0.3s;
+        }
+
+        .md-cookie-link:hover {
+            color: #fff;
+            border-color: #fff;
+        }
+    </style>
+
+    <div id="md-cookie-banner">
+        <div class="md-cookie-text">
+            <strong>PROTOCOLLO TELEMETRIA ATTIVO</strong> 
+            Questo terminale utilizza i cookie per analizzare il traffico (Google Analytics) e garantirti la migliore esperienza OSINT. Accettando, consenti la raccolta dei dati di navigazione. Leggi la <a href="cookie.html" class="md-cookie-link">Cookie Policy</a> per i dettagli.
+        </div>
+        <div class="md-cookie-buttons">
+            <button class="md-btn md-btn-reject" onclick="handleCookieConsent('rejected')">Rifiuta</button>
+            <button class="md-btn md-btn-accept" onclick="handleCookieConsent('accepted')">Accetta Protocollo</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const banner = document.getElementById('md-cookie-banner');
+            
+            if (!localStorage.getItem('monodoom_cookie_status')) {
+                setTimeout(() => {
+                    banner.classList.add('show');
+                }, 1000);
+            }
+        });
+
+        function handleCookieConsent(status) {
+            localStorage.setItem('monodoom_cookie_status', status);
+            document.getElementById('md-cookie-banner').classList.remove('show');
+        }
+    </script>
+   
 </body>
 </html>
